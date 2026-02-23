@@ -28,13 +28,13 @@
     <div class="layout">
       <aside class="sidebar">
         <p class="eyebrow">XXXAURORA.COM</p>
-        <h1>XXX Aurora</h1>
+        <h1>菜单</h1>
         <p class="intro" data-i18n="intro">
-          AI student at King's College London. Build first, understand later.
+          大家好我是xxxaurora
         </p>
 
         <nav aria-label="Homepage navigation">
-          <a href="#hello" data-i18n="navHello">Hello</a>
+          <a href="#hello" data-i18n="navHello">Intro</a>
           <a href="#projects" data-i18n="navProjects">Projects</a>
           <a href="#playground" data-i18n="navPlayground">Playground</a>
           <a href="#contact" data-i18n="navContact">Contact</a>
@@ -48,13 +48,14 @@
 
       <main class="content">
         <section id="hello" class="panel hero">
-          <h2 data-i18n="heroTitle">Hi, I'm Max (Yuzhen Yang).</h2>
+          <h2 data-i18n="heroTitle">Hi everyone, welcome to my website.</h2>
           <p data-i18n="heroBody">
-            I study Artificial Intelligence at King's College London, and I enjoy
-            building all kinds of AI projects, from game AI and autonomous agents to
-            weird but fun experiments. I believe the best way to learn is: build first,
-            understand later. If you ever find me, I'm probably coding, thinking about a
-            new project, or playing strategy games.
+            Hi everyone, welcome to my website. Here you can check out projects of all
+            sizes, from AI to autonomous systems, plus some small websites I build just
+            for fun. By the way, I'm Max, an Artificial Intelligence student at King's
+            College London. Most of the time I turn ideas in my head into projects big
+            and small, and make weird but fun experiments. I believe the best way to
+            learn is build first, understand later.
           </p>
           <div class="hero-actions home-actions">
             <a class="button" href="#projects" data-i18n="heroBtnProjects">View projects</a>
@@ -72,52 +73,46 @@
 
           <div class="project-grid">
             <article class="card project-card" aria-label="Project Potemkin">
-              <h4 data-i18n="potemkinTitle">Project Potemkin</h4>
-              <p class="project-tag" data-i18n="potemkinTag">AI Agent &amp; Memory Systems</p>
-              <p data-i18n="potemkinBody">
-                An AI companion system with persistent memory and autonomous behavior,
-                exploring long-term human-AI interaction and intelligent agents that
-                evolve over time.
-              </p>
-              <p class="project-note" data-i18n="potemkinNote">
-                Framed as an AI companion system that can grow with families, with
-                unified memory and long-term interaction capabilities.
-              </p>
-              <div class="card-actions">
+              <div class="project-main">
+                <h4 data-i18n="potemkinTitle">Project Potemkin</h4>
+                <p class="project-tag" data-i18n="potemkinTag">AI Agent &amp; Memory Systems</p>
+                <p class="project-summary" data-i18n="potemkinBody">
+                  An AI companion system with persistent memory and autonomous behavior,
+                  exploring long-term human-AI interaction and intelligent agents that
+                  evolve over time.
+                </p>
+              </div>
+              <div class="card-actions project-actions">
                 <a class="button button-sm" href="project-potemkin.html" data-i18n="viewDetails">View details</a>
                 <a class="ghost button-sm" href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer">GitHub</a>
               </div>
             </article>
 
             <article class="card project-card" aria-label="StarMax">
-              <h4 data-i18n="starmaxTitle">StarMax</h4>
-              <p class="project-tag" data-i18n="starmaxTag">Game AI / StarCraft Strategy Coach</p>
-              <p data-i18n="starmaxBody">
-                A real-time strategy coaching AI that analyzes gameplay states and
-                provides decision recommendations, focused on complex decision-making
-                and human-AI collaboration.
-              </p>
-              <p class="project-note" data-i18n="starmaxNote">
-                Research focus: RTS decision prediction, game-state modeling, and
-                practical co-pilot support for players.
-              </p>
-              <div class="card-actions">
+              <div class="project-main">
+                <h4 data-i18n="starmaxTitle">StarMax</h4>
+                <p class="project-tag" data-i18n="starmaxTag">SC2 Macro Coach / Human-AI Collaboration</p>
+                <p class="project-summary" data-i18n="starmaxBody">
+                  A human-AI collaborative macro coaching system for StarCraft II,
+                  focused on interpretable state abstractions and actionable suggestions.
+                </p>
+              </div>
+              <div class="card-actions project-actions">
                 <a class="button button-sm" href="starmax.html" data-i18n="viewDetails">View details</a>
+                <a class="ghost button-sm" href="https://github.com/XxXaurora0821/StarMax" target="_blank" rel="noreferrer">GitHub</a>
               </div>
             </article>
 
             <article class="card project-card" aria-label="Quick-Aid">
-              <h4 data-i18n="quickAidTitle">Quick-Aid</h4>
-              <p class="project-tag" data-i18n="quickAidTag">Emergency Navigation AI</p>
-              <p data-i18n="quickAidBody">
-                An emergency navigation app that helps users choose the fastest suitable
-                A&amp;E by combining urgency, insurance access, travel time, and expected waits.
-              </p>
-              <p class="project-note" data-i18n="quickAidNote">
-                Built for international students and newcomers navigating the UK emergency
-                care system.
-              </p>
-              <div class="card-actions">
+              <div class="project-main">
+                <h4 data-i18n="quickAidTitle">Quick-Aid</h4>
+                <p class="project-tag" data-i18n="quickAidTag">Emergency Navigation AI</p>
+                <p class="project-summary" data-i18n="quickAidBody">
+                  An emergency navigation app that helps users choose the fastest suitable
+                  A&amp;E by combining urgency, insurance access, travel time, and expected waits.
+                </p>
+              </div>
+              <div class="card-actions project-actions">
                 <a class="button button-sm" href="quick-aid.html" data-i18n="viewDetails">View details</a>
                 <a class="ghost button-sm" href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer">GitHub</a>
               </div>
@@ -185,22 +180,23 @@
       </main>
     </div>
 
+    <script src="page-transition.js"></script>
     <script>
       (function () {
         const i18n = {
           en: {
             pageTitle: "XXX Aurora",
             pageDescription: "XXX Aurora personal gateway: project overview and contact.",
-            intro: "AI student at King's College London. Build first, understand later.",
-            navHello: "Hello",
+            intro: "Hi, I'm xxxaurora.",
+            navHello: "Intro",
             navProjects: "Projects",
             navPlayground: "Playground",
             navContact: "Contact",
             status: "Currently building in public.",
             githubHome: "My GitHub Homepage",
-            heroTitle: "Hi, I'm Max (Yuzhen Yang).",
+            heroTitle: "Hi everyone, welcome to my website.",
             heroBody:
-              "I study Artificial Intelligence at King's College London, and I enjoy building all kinds of AI projects, from game AI and autonomous agents to weird but fun experiments. I believe the best way to learn is: build first, understand later. If you ever find me, I'm probably coding, thinking about a new project, or playing strategy games.",
+              "Hi everyone, welcome to my website. Here you can check out projects of all sizes, from AI to autonomous systems, plus some small websites I build just for fun. By the way, I'm Max, an Artificial Intelligence student at King's College London. Most of the time I turn ideas in my head into projects big and small, and make weird but fun experiments. I believe the best way to learn is build first, understand later.",
             heroBtnProjects: "View projects",
             heroBtnPlayground: "See playground",
             projectsTitle: "Projects Overview",
@@ -212,11 +208,11 @@
             potemkinNote:
               "Framed as an AI companion system that can grow with families, with unified memory and long-term interaction capabilities.",
             starmaxTitle: "StarMax",
-            starmaxTag: "Game AI / StarCraft Strategy Coach",
+            starmaxTag: "SC2 Macro Coach / Human-AI Collaboration",
             starmaxBody:
-              "A real-time strategy coaching AI that analyzes gameplay states and provides decision recommendations, focused on complex decision-making and human-AI collaboration.",
+              "A human-AI collaborative macro coaching system for StarCraft II, focused on interpretable state abstractions and actionable suggestions.",
             starmaxNote:
-              "Research focus: RTS decision prediction, game-state modeling, and practical co-pilot support for players.",
+              "The current repo already includes replay-to-dataset extraction, multi-label training, and live top-k in-game recommendations.",
             quickAidTitle: "Quick-Aid",
             quickAidTag: "Emergency Navigation AI",
             quickAidBody:
@@ -250,16 +246,16 @@
           zh: {
             pageTitle: "XXX Aurora 个人导航",
             pageDescription: "XXX Aurora 的个人导航页：项目总览与联系方式。",
-            intro: "King's College London 人工智能学生。build first, understand later.",
-            navHello: "你好",
+            intro: "大家好我是xxxaurora",
+            navHello: "简介",
             navProjects: "项目",
             navPlayground: "游乐场",
             navContact: "联系",
             status: "正在公开构建中。",
             githubHome: "我的 GitHub 主页",
-            heroTitle: "你好，我是 Max（Yuzhen Yang）。",
+            heroTitle: "大家好，欢迎来到我的网站。",
             heroBody:
-              "我在 King's College London 学 Artificial Intelligence，平时喜欢做各种 AI 项目，从游戏 AI 到 autonomous agents，再到一些奇怪但有趣的实验。我相信最好的学习方式是：build first, understand later. 如果你看到我，大概率在写代码、想新项目，或者打策略游戏。",
+              "大家好，欢迎来到我的网站，在这里你可以看到我的大大小小的项目，从 AI 到 autonomous，以及一些自己做着玩的小网站。对了我叫 Max，是一名 King's College London Artificial Intelligence 的学生，平时会把脑海里的一些想法做成大大小小的项目，搞一些奇奇怪怪但是有趣的实验。我相信最好的学习方式就是 build first, understand later。",
             heroBtnProjects: "查看项目",
             heroBtnPlayground: "查看游乐场",
             projectsTitle: "项目总览",
@@ -271,11 +267,11 @@
             potemkinNote:
               "项目被描述为一个“随家庭成长的 AI 伴侣系统”，强调统一记忆与长期交互能力。",
             starmaxTitle: "StarMax",
-            starmaxTag: "游戏 AI / 星际争霸策略教练",
+            starmaxTag: "SC2 宏观教练 / 人机协作",
             starmaxBody:
-              "一个实时策略游戏辅助 AI，分析游戏状态并提供决策建议，研究复杂决策环境中的 AI 行为与人机协作。",
+              "一个面向星际争霸 II 的人机协作宏观教练系统，强调可解释的游戏状态抽象和可执行建议。",
             starmaxNote:
-              "研究重点包括 RTS 决策预测、游戏状态建模与实时人机协同建议。",
+              "当前仓库已包含回放转数据集、多标签训练流程，以及实时对局 top-k 推荐能力。",
             quickAidTitle: "Quick-Aid",
             quickAidTag: "应急就医导航 AI",
             quickAidBody:
@@ -309,6 +305,44 @@
         };
 
         const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function initModuleMotion() {
+          const targets = [
+            ...new Set(
+              Array.from(
+                document.querySelectorAll(
+                  ".sidebar, .content > .panel, .project-card, .quick-jump"
+                )
+              )
+            )
+          ];
+
+          if (!targets.length) {
+            return;
+          }
+
+          targets.forEach((node, index) => {
+            node.classList.add("reveal");
+            node.style.setProperty("--reveal-delay", `${Math.min(index * 60, 360)}ms`);
+          });
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            {
+              threshold: 0.16,
+              rootMargin: "0px 0px -8% 0px"
+            }
+          );
+
+          targets.forEach((node) => observer.observe(node));
+        }
 
         function applyLang(lang) {
           const dict = i18n[lang] || i18n.en;
@@ -357,6 +391,7 @@
         }
 
         applyLang(initialLang);
+        initModuleMotion();
       })();
     </script>
   </body>

@@ -7,7 +7,7 @@
     <meta
       id="meta-description"
       name="description"
-      content="StarMax: a real-time strategy coaching AI for StarCraft decision support."
+      content="StarMax: a human-AI collaborative macro coaching system for StarCraft II."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,101 +29,137 @@
       <main class="content">
         <section class="panel hero detail-header">
           <h2 data-i18n="title">StarMax</h2>
-          <p class="detail-sub" data-i18n="subtitle">StarCraft AI Coach</p>
+          <p class="detail-sub" data-i18n="subtitle">SC2 Macro Coaching System</p>
           <p data-i18n="intro">
-            StarMax is a real-time AI coaching system designed for strategy games.
+            StarMax is a human-AI collaborative macro coaching system for StarCraft II,
+            built on the SC2 API and designed for interpretable decision support.
           </p>
           <div class="hero-actions detail-actions">
             <a class="button" href="index.html#projects" data-i18n="back">Back to projects</a>
+            <a
+              class="ghost"
+              href="https://github.com/XxXaurora0821/StarMax"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="repoBtn"
+              >Open GitHub Repo</a
+            >
           </div>
         </section>
 
         <section class="panel">
-          <h3 data-i18n="overviewTitle">Overview</h3>
-          <p data-i18n="overviewBody">
-            It analyzes game states and predicts optimal macro decisions, assisting
-            players during gameplay.
+          <h3 data-i18n="overviewTitle">Project Overview</h3>
+          <p data-i18n="overviewBody1">
+            这个项目是我的个人项目，想法来自于我和我的老师 Dr Mike Cook，我们在讨论
+            RTS 游戏的时候我就产生了 StarMax 的想法（了解 SC2 的朋友应该知道这名字其实是抄
+            AlphaStar）。
+          </p>
+          <p data-i18n="overviewBody2">
+            这个项目是我第一次训练自己的模型，我认为效果还算不错，主要使用的是多标签训练模型，
+            现在模型已经能正确读取游戏状态，并且给出合理的宏观建议。
+          </p>
+          <p data-i18n="overviewBody3">
+            做这个项目的时候我也学到了很多训练模型的相关知识，正如 Mike 说的，很多东西是你干着干着学会的。
+            这个项目还在开发中，感谢 Mike 给了我很多指导，完成后我也会发布相关 Demo 演示。
           </p>
         </section>
 
         <section class="panel">
-          <h3 data-i18n="focusTitle">Research Focus</h3>
+          <h3 data-i18n="pipelineTitle">Current Usable Pipeline</h3>
           <ul class="key-list">
-            <li data-i18n="focus1">Decision prediction in RTS environments</li>
-            <li data-i18n="focus2">Human-AI collaboration</li>
-            <li data-i18n="focus3">Real-time recommendation systems</li>
-            <li data-i18n="focus4">Game state modeling</li>
+            <li data-i18n="pipeline1">Multi-label macro recommendation (main path)</li>
+            <li data-i18n="pipeline2">Replay-to-dataset extraction from .SC2Replay</li>
+            <li data-i18n="pipeline3">Model training and joblib export</li>
+            <li data-i18n="pipeline4">Live in-game top-k macro suggestions</li>
+            <li data-i18n="pipeline5">Optional desktop UI for live suggestions</li>
           </ul>
         </section>
 
-        <section class="panel">
-          <h3 data-i18n="roleTitle">My Role</h3>
+      <section class="panel">
+          <h3 data-i18n="notesTitle">Important Notes</h3>
           <ul class="key-list">
-            <li data-i18n="role1">Dataset processing from game replays</li>
-            <li data-i18n="role2">Machine learning model training</li>
-            <li data-i18n="role3">Feature engineering</li>
-            <li data-i18n="role4">System pipeline development</li>
+            <li data-i18n="note1">Requires StarCraft II and an available map.</li>
+            <li data-i18n="note2">SC2 path is configurable via SC2PATH.</li>
+            <li data-i18n="note3">Single-label scripts are kept for legacy compatibility.</li>
+            <li data-i18n="note4">Best suited for research/prototyping at current stage.</li>
           </ul>
         </section>
 
         <section class="panel">
           <h3 data-i18n="techTitle">Technologies</h3>
           <p class="tech-line" data-i18n="techBody">
-            Python · Machine Learning · Game Data Parsing · SC2 API
+            Python · SC2 API · Multi-label Classification · Replay Data Pipeline · Joblib
           </p>
         </section>
       </main>
     </div>
 
+    <script src="page-transition.js"></script>
     <script>
       (function () {
         const i18n = {
           en: {
             pageTitle: "StarMax | XXX Aurora",
             pageDescription:
-              "StarMax: a real-time strategy coaching AI for StarCraft decision support.",
+              "StarMax: a human-AI collaborative macro coaching system for StarCraft II.",
             title: "StarMax",
-            subtitle: "StarCraft AI Coach",
-            intro: "StarMax is a real-time AI coaching system designed for strategy games.",
+            subtitle: "SC2 Macro Coaching System",
+            intro:
+              "StarMax is a human-AI collaborative macro coaching system for StarCraft II, built on the SC2 API and designed for interpretable decision support.",
             back: "Back to projects",
-            overviewTitle: "Overview",
-            overviewBody:
-              "It analyzes game states and predicts optimal macro decisions, assisting players during gameplay.",
-            focusTitle: "Research Focus",
-            focus1: "Decision prediction in RTS environments",
-            focus2: "Human-AI collaboration",
-            focus3: "Real-time recommendation systems",
-            focus4: "Game state modeling",
-            roleTitle: "My Role",
-            role1: "Dataset processing from game replays",
-            role2: "Machine learning model training",
-            role3: "Feature engineering",
-            role4: "System pipeline development",
+            overviewTitle: "Project Overview",
+            overviewBody1:
+              "This is my personal project. The idea came from conversations with my teacher, Dr Mike Cook. While we were discussing RTS games, I came up with StarMax (friends who know SC2 probably noticed the name is basically borrowed from AlphaStar).",
+            overviewBody2:
+              "This was my first time training my own model, and I think the result is pretty solid. I mainly use a multi-label training model, and now it can correctly read game states and give reasonable macro suggestions.",
+            overviewBody3:
+              "While building this project, I also learned a lot about model training. As Mike says, you learn many things by doing them. The project is still in development, and I am really grateful for Mike's guidance. I will publish a related demo when it is finished.",
+            repoBtn: "Open GitHub Repo",
+            pipelineTitle: "Current Usable Pipeline",
+            pipeline1: "Multi-label macro recommendation (main path)",
+            pipeline2: "Replay-to-dataset extraction from .SC2Replay",
+            pipeline3: "Model training and joblib export",
+            pipeline4: "Live in-game top-k macro suggestions",
+            pipeline5: "Optional desktop UI for live suggestions",
+            notesTitle: "Important Notes",
+            note1: "Requires StarCraft II and an available map.",
+            note2: "SC2 path is configurable via SC2PATH.",
+            note3: "Single-label scripts are kept for legacy compatibility.",
+            note4: "Best suited for research/prototyping at current stage.",
             techTitle: "Technologies",
-            techBody: "Python · Machine Learning · Game Data Parsing · SC2 API"
+            techBody:
+              "Python · SC2 API · Multi-label Classification · Replay Data Pipeline · Joblib"
           },
           zh: {
             pageTitle: "StarMax | XXX Aurora",
-            pageDescription: "StarMax：实时策略游戏 AI 教练系统。",
+            pageDescription: "StarMax：基于 SC2 API 的星际争霸 II 人机协作宏观教练系统。",
             title: "StarMax",
-            subtitle: "StarCraft AI Coach",
-            intro: "StarMax 是一个实时策略游戏 AI 教练系统。",
+            subtitle: "SC2 宏观教练系统",
+            intro:
+              "StarMax 是一个基于 SC2 API 的星际争霸 II 人机协作宏观教练系统，重点在可解释的决策支持。",
             back: "返回项目总览",
-            overviewTitle: "概览",
-            overviewBody:
-              "它可以分析游戏状态并预测宏观决策，为玩家在对局中提供实时建议。",
-            focusTitle: "研究重点",
-            focus1: "RTS 环境下的决策预测",
-            focus2: "人机协作",
-            focus3: "实时推荐系统",
-            focus4: "游戏状态建模",
-            roleTitle: "我的角色",
-            role1: "从比赛回放中处理数据集",
-            role2: "机器学习模型训练",
-            role3: "特征工程",
-            role4: "系统流水线开发",
+            overviewTitle: "项目概述",
+            overviewBody1:
+              "这个项目是我的个人项目，想法来自于我和我的老师Dr Mike Cook，我们在讨论RTS游戏的时候我就产生了StarMax的想法（了解SC2的朋友应该知道这名字其实是抄AlphaStar）。",
+            overviewBody2:
+              "这个项目是我第一次训练自己的模型，我认为效果还算不错，主要使用的是多标签训练模型，现在模型已经能正确读取游戏状态，并且给出合理的宏观建议。",
+            overviewBody3:
+              "做这个项目的时候我也学到了很多训练模型的相关知识，正如mike说的，很多东西是你干着干着学会的。这个项目还在开发中，感谢mike给了我很多指导，完成后我也会发布相关Demo演示。",
+            repoBtn: "打开 GitHub 仓库",
+            pipelineTitle: "当前可用流程",
+            pipeline1: "多标签宏观推荐（主流程）",
+            pipeline2: "从 .SC2Replay 回放提取训练数据集",
+            pipeline3: "模型训练与 joblib 导出",
+            pipeline4: "对局中实时 top-k 宏观建议",
+            pipeline5: "可选桌面 UI 实时显示建议",
+            notesTitle: "重要说明",
+            note1: "需要本地安装 StarCraft II 并有可用地图。",
+            note2: "SC2 路径可通过 SC2PATH 环境变量配置。",
+            note3: "仓库保留了单标签脚本用于兼容旧流程。",
+            note4: "现阶段更适合研究与原型验证场景。",
             techTitle: "技术栈",
-            techBody: "Python · Machine Learning · Game Data Parsing · SC2 API"
+            techBody:
+              "Python · SC2 API · 多标签分类 · 回放数据流水线 · Joblib"
           }
         };
 

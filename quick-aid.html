@@ -42,9 +42,14 @@
 
         <section class="panel">
           <h3 data-i18n="overviewTitle">Overview</h3>
-          <p data-i18n="overviewBody">
-            The system aims to make first-aid knowledge more accessible in emergency
-            situations.
+          <p data-i18n="overviewBody1">
+            这个项目是一个5个小时KCL校内黑客松的项目，灵感来自Sarah，他认为留学生需要一个这样的APP来解决看病的问题。
+          </p>
+          <p data-i18n="overviewBody2">
+            站在我个人的角度这个还是非常实用的，有趣的是我们做这个项目的时候在最后30秒的时候极限提交，差一点点就白白浪费了5小时时间。
+          </p>
+          <p data-i18n="overviewBody3">
+            最终我们也成功获得了TOP3。
           </p>
         </section>
 
@@ -69,26 +74,6 @@
             <li data-i18n="flow4">Wait-time + travel-time are combined to rank the best choice.</li>
             <li data-i18n="flow5">LLM function generates a concise human-readable recommendation reason.</li>
           </ul>
-        </section>
-
-        <section class="panel">
-          <h3 data-i18n="archTitle">System Architecture</h3>
-          <ul class="key-list">
-            <li data-i18n="arch1">Frontend: React + Vite + TypeScript + Tailwind CSS.</li>
-            <li data-i18n="arch2">Map and UI stack with Mapbox GL and component-based interaction flows.</li>
-            <li data-i18n="arch3">Edge function for hospital recommendation text using Gemini API.</li>
-            <li data-i18n="arch4">Edge function for real-time travel times via Google Distance Matrix API.</li>
-            <li data-i18n="arch5">Hospital data integration through dedicated API endpoints.</li>
-          </ul>
-        </section>
-
-        <section class="panel">
-          <h3 data-i18n="usersTitle">Why It Matters</h3>
-          <p data-i18n="usersBody">
-            QuickAid is designed for international students and newcomers who may be
-            unfamiliar with UK emergency pathways, insurance constraints, and hospital
-            triage logic.
-          </p>
         </section>
 
         <section class="panel">
@@ -123,16 +108,6 @@
         </section>
 
         <section class="panel">
-          <h3 data-i18n="roleTitle">My Role</h3>
-          <ul class="key-list">
-            <li data-i18n="role1">AI integration</li>
-            <li data-i18n="role2">Backend logic</li>
-            <li data-i18n="role3">System deployment</li>
-            <li data-i18n="role4">Interface integration</li>
-          </ul>
-        </section>
-
-        <section class="panel">
           <h3 data-i18n="techTitle">Technologies</h3>
           <p class="tech-line" data-i18n="techBody">
             Python · Flask · Computer Vision · Generative AI
@@ -141,6 +116,7 @@
       </main>
     </div>
 
+    <script src="page-transition.js"></script>
     <script>
       (function () {
         const i18n = {
@@ -154,8 +130,12 @@
               "QuickAid is an emergency navigation assistant that helps users choose where to seek care based on urgency, insurance access, travel time, and wait time.",
             back: "Back to projects",
             overviewTitle: "Overview",
-            overviewBody:
-              "The system aims to make first-aid knowledge more accessible in emergency situations.",
+            overviewBody1:
+              "This project came out of a 5-hour internal KCL hackathon. The original spark came from Sarah, who believed international students really need an app like this to solve the healthcare access problem.",
+            overviewBody2:
+              "From my personal perspective, it is genuinely practical. The funny part is that we made the final submission in the last 30 seconds, and we were this close to wasting the whole 5 hours.",
+            overviewBody3:
+              "In the end, we made it and won Top 3.",
             highlightsTitle: "Implemented Highlights",
             highlight1: "AI emergency locator for nearby A&E, urgent care, and hospitals.",
             highlight2: "Insurance-aware filtering for NHS/IHS/private coverage options.",
@@ -169,15 +149,6 @@
             flow3: "Travel-time service computes driving/transit/walking durations.",
             flow4: "Wait-time + travel-time are combined to rank the best choice.",
             flow5: "LLM function generates a concise human-readable recommendation reason.",
-            archTitle: "System Architecture",
-            arch1: "Frontend: React + Vite + TypeScript + Tailwind CSS.",
-            arch2: "Map and UI stack with Mapbox GL and component-based interaction flows.",
-            arch3: "Edge function for hospital recommendation text using Gemini API.",
-            arch4: "Edge function for real-time travel times via Google Distance Matrix API.",
-            arch5: "Hospital data integration through dedicated API endpoints.",
-            usersTitle: "Why It Matters",
-            usersBody:
-              "QuickAid is designed for international students and newcomers who may be unfamiliar with UK emergency pathways, insurance constraints, and hospital triage logic.",
             teamTitle: "Team",
             team1: "Yuzhen (Max) Yang",
             team2: "Shian (Andy) Ye",
@@ -192,11 +163,6 @@
             feature4: "One-tap language switch for international accessibility",
             featuresNote:
               "The recommendation layer combines travel-time data, wait-time estimates, and concise LLM explanations to improve emergency decisions.",
-            roleTitle: "My Role",
-            role1: "AI integration",
-            role2: "Backend logic",
-            role3: "System deployment",
-            role4: "Interface integration",
             techTitle: "Technologies",
             techBody: "React · TypeScript · Vite · Tailwind CSS · Supabase Edge Functions · Mapbox GL"
           },
@@ -209,8 +175,12 @@
               "QuickAid 是一个应急就医导航助手，会结合紧急程度、保险可及性、路程时间和候诊时间，帮助用户更快选择合适医院。",
             back: "返回项目总览",
             overviewTitle: "概览",
-            overviewBody:
-              "该系统目标是在紧急情况下提高急救信息与处理知识的可获得性。",
+            overviewBody1:
+              "这个项目是一个5个小时KCL校内黑客松的项目，灵感来自Sarah，他认为留学生需要一个这样的APP来解决看病的问题。",
+            overviewBody2:
+              "站在我个人的角度这个还是非常实用的，有趣的是我们做这个项目的时候在最后30秒的时候极限提交，差一点点就白白浪费了5小时时间。",
+            overviewBody3:
+              "最终我们也成功获得了TOP3。",
             highlightsTitle: "已实现亮点",
             highlight1: "提供附近 A&E、急诊中心与医院的智能定位能力。",
             highlight2: "支持 NHS / IHS / 私保等覆盖条件下的医院筛选。",
@@ -224,15 +194,6 @@
             flow3: "调用路程服务计算驾车/公交/步行耗时。",
             flow4: "结合候诊时间与路程时间，计算最优就诊选择。",
             flow5: "由 LLM 生成简短可读的推荐理由。",
-            archTitle: "系统架构",
-            arch1: "前端：React + Vite + TypeScript + Tailwind CSS。",
-            arch2: "地图与交互层基于 Mapbox GL 和组件化 UI 构建。",
-            arch3: "边缘函数用于生成医院推荐解释（Gemini API）。",
-            arch4: "边缘函数用于实时路程计算（Google Distance Matrix API）。",
-            arch5: "通过独立医院数据接口提供基础数据支持。",
-            usersTitle: "项目价值",
-            usersBody:
-              "QuickAid 面向国际学生和新移居人群，帮助他们在不熟悉英国急诊体系、保险规则和分诊逻辑时更快做出决策。",
             teamTitle: "团队",
             team1: "Yuzhen (Max) Yang",
             team2: "Shian (Andy) Ye",
@@ -247,11 +208,6 @@
             feature4: "一键语言切换，提升国际用户可达性",
             featuresNote:
               "推荐层结合路程耗时、候诊估计与简洁 LLM 解释，帮助用户更快做出急诊决策。",
-            roleTitle: "我的角色",
-            role1: "AI 模块集成",
-            role2: "后端逻辑开发",
-            role3: "系统部署",
-            role4: "界面集成",
             techTitle: "技术栈",
             techBody: "React · TypeScript · Vite · Tailwind CSS · Supabase Edge Functions · Mapbox GL"
           }
