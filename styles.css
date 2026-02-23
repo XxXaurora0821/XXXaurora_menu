@@ -303,8 +303,15 @@ h1 {
 }
 
 .detail-layout {
-  width: min(860px, calc(100% - 2rem));
-  grid-template-columns: 1fr;
+  position: relative;
+  z-index: 1;
+  width: min(1160px, calc(100% - 2rem));
+  margin: 2rem auto;
+}
+
+.detail-layout .content {
+  width: min(920px, 100%);
+  margin: 0 auto;
 }
 
 .detail-header h2 {
@@ -417,6 +424,11 @@ h1 {
   .sidebar {
     position: relative;
     top: 0;
+  }
+
+  .detail-layout {
+    width: min(860px, calc(100% - 1.4rem));
+    margin: 1.4rem auto;
   }
 }
 
