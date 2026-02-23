@@ -59,6 +59,60 @@
         </section>
 
         <section class="panel">
+          <h3 data-i18n="highlightsTitle">Implemented Highlights</h3>
+          <ul class="key-list">
+            <li data-i18n="highlight1">Family-scoped identity with isolated memory storage per family.</li>
+            <li data-i18n="highlight2">Automatic long-term memory + profile refresh every 16 short-term turns.</li>
+            <li data-i18n="highlight3">Memory buckets: shared, important events, private, and user-approved public.</li>
+            <li data-i18n="highlight4">Signup/login, bearer token auth, and multi-member family accounts.</li>
+            <li data-i18n="highlight5">Family-level language setting with multilingual input support.</li>
+            <li data-i18n="highlight6">Optional BNB Testnet on-chain space and permission purchase flow.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="memoryFlowTitle">Memory & Profile Flow</h3>
+          <ul class="key-list">
+            <li data-i18n="memoryFlow1">Each turn is written to STM (SQLite + vector retrieval store).</li>
+            <li data-i18n="memoryFlow2">Every 16 turns are summarized into LTM automatically.</li>
+            <li data-i18n="memoryFlow3">Family profile is refreshed after long-term summarization.</li>
+            <li data-i18n="memoryFlow4">Optional hub sync enables cross-device memory reuse.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="apiTitle">API & Runtime</h3>
+          <ul class="key-list">
+            <li data-i18n="api1"><code>POST /auth/signup</code> and <code>POST /auth/login</code> for account flow.</li>
+            <li data-i18n="api2"><code>POST /families/{id}/messages</code> for shared-memory conversation.</li>
+            <li data-i18n="api3"><code>GET /families/{id}/memory</code> for memory snapshots.</li>
+            <li data-i18n="api4"><code>GET /health</code> for service and on-chain status checks.</li>
+            <li data-i18n="api5">Run with <code>uvicorn family_companion.server:app --host 0.0.0.0 --port 8000</code>.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="modulesTitle">Core Modules</h3>
+          <ul class="key-list">
+            <li data-i18n="module1"><code>family_companion/server.py</code> FastAPI entrypoint.</li>
+            <li data-i18n="module2"><code>family_companion/service.py</code> family registration and orchestration.</li>
+            <li data-i18n="module3"><code>family_companion/agent.py</code> family companion chat behavior.</li>
+            <li data-i18n="module4"><code>family_companion/memory.py</code> LTMemory bootstrap and context assembly.</li>
+            <li data-i18n="module5"><code>family_companion/chain.py</code> optional on-chain task/buy wrappers.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="linksTitle">Demo & Links</h3>
+          <p class="video-link">
+            <a href="https://pjkt-potemkin.zzw.moe/" target="_blank" rel="noreferrer" data-i18n="demoLink">Open live demo</a>
+          </p>
+          <p class="video-link">
+            <a href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer" data-i18n="repoLink">Open GitHub repository</a>
+          </p>
+        </section>
+
+        <section class="panel">
           <h3 data-i18n="roleTitle">My Role</h3>
           <ul class="key-list">
             <li data-i18n="role1">System design and architecture</li>
@@ -114,6 +168,33 @@
             idea2: "Autonomous agent behavior",
             idea3: "Human-AI interaction over time",
             idea4: "Multi-session context evolution",
+            highlightsTitle: "Implemented Highlights",
+            highlight1: "Family-scoped identity with isolated memory storage per family.",
+            highlight2: "Automatic long-term memory + profile refresh every 16 short-term turns.",
+            highlight3: "Memory buckets: shared, important events, private, and user-approved public.",
+            highlight4: "Signup/login, bearer token auth, and multi-member family accounts.",
+            highlight5: "Family-level language setting with multilingual input support.",
+            highlight6: "Optional BNB Testnet on-chain space and permission purchase flow.",
+            memoryFlowTitle: "Memory & Profile Flow",
+            memoryFlow1: "Each turn is written to STM (SQLite + vector retrieval store).",
+            memoryFlow2: "Every 16 turns are summarized into LTM automatically.",
+            memoryFlow3: "Family profile is refreshed after long-term summarization.",
+            memoryFlow4: "Optional hub sync enables cross-device memory reuse.",
+            apiTitle: "API & Runtime",
+            api1: "POST /auth/signup and POST /auth/login for account flow.",
+            api2: "POST /families/{id}/messages for shared-memory conversation.",
+            api3: "GET /families/{id}/memory for memory snapshots.",
+            api4: "GET /health for service and on-chain status checks.",
+            api5: "Run with uvicorn family_companion.server:app --host 0.0.0.0 --port 8000.",
+            modulesTitle: "Core Modules",
+            module1: "family_companion/server.py FastAPI entrypoint.",
+            module2: "family_companion/service.py family registration and orchestration.",
+            module3: "family_companion/agent.py family companion chat behavior.",
+            module4: "family_companion/memory.py LTMemory bootstrap and context assembly.",
+            module5: "family_companion/chain.py optional on-chain task/buy wrappers.",
+            linksTitle: "Demo & Links",
+            demoLink: "Open live demo",
+            repoLink: "Open GitHub repository",
             roleTitle: "My Role",
             role1: "System design and architecture",
             role2: "Agent logic implementation",
@@ -141,6 +222,33 @@
             idea2: "自主 Agent 行为",
             idea3: "跨时间尺度的人机交互",
             idea4: "多会话上下文演化",
+            highlightsTitle: "已实现亮点",
+            highlight1: "以家庭为边界隔离身份与记忆存储，每个家庭独立空间。",
+            highlight2: "每 16 条短期对话自动归纳长期记忆并更新家庭画像。",
+            highlight3: "记忆分桶包含共享、重要事件、私密和用户授权公开记忆。",
+            highlight4: "支持注册登录、Bearer Token 鉴权和家庭多成员账户。",
+            highlight5: "支持家庭级语言设置，允许多语言输入。",
+            highlight6: "可选接入 BNB Testnet 链上空间和权限购买流程。",
+            memoryFlowTitle: "记忆与画像流程",
+            memoryFlow1: "每轮对话写入短期记忆（SQLite + 向量检索存储）。",
+            memoryFlow2: "每 16 轮自动汇总为长期记忆。",
+            memoryFlow3: "长期归纳后同步刷新家庭画像。",
+            memoryFlow4: "可选 Hub 同步以支持跨设备复用。",
+            apiTitle: "API 与运行方式",
+            api1: "通过 POST /auth/signup 和 POST /auth/login 完成账号流程。",
+            api2: "通过 POST /families/{id}/messages 进行共享记忆对话。",
+            api3: "通过 GET /families/{id}/memory 查看记忆快照。",
+            api4: "通过 GET /health 检查服务与链上状态。",
+            api5: "可使用 uvicorn family_companion.server:app --host 0.0.0.0 --port 8000 启动。",
+            modulesTitle: "核心模块",
+            module1: "family_companion/server.py：FastAPI 入口。",
+            module2: "family_companion/service.py：家庭注册与服务编排。",
+            module3: "family_companion/agent.py：家庭陪伴对话行为。",
+            module4: "family_companion/memory.py：LTMemory 初始化与上下文组装。",
+            module5: "family_companion/chain.py：可选链上 task/buy 封装。",
+            linksTitle: "体验与链接",
+            demoLink: "打开在线 Demo",
+            repoLink: "打开 GitHub 仓库",
             roleTitle: "我的角色",
             role1: "系统设计与架构",
             role2: "Agent 逻辑实现",
