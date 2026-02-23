@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarMax | XXX Aurora</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="StarMax: a real-time strategy coaching AI for StarCraft decision support."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="lang-switch" role="group" aria-label="Language selector">
+      <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <div class="layout detail-layout">
+      <main class="content">
+        <section class="panel hero detail-header">
+          <h2 data-i18n="title">StarMax</h2>
+          <p class="detail-sub" data-i18n="subtitle">StarCraft AI Coach</p>
+          <p data-i18n="intro">
+            StarMax is a real-time AI coaching system designed for strategy games.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="index.html#projects" data-i18n="back">Back to projects</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="overviewTitle">Overview</h3>
+          <p data-i18n="overviewBody">
+            It analyzes game states and predicts optimal macro decisions, assisting
+            players during gameplay.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="focusTitle">Research Focus</h3>
+          <ul class="key-list">
+            <li data-i18n="focus1">Decision prediction in RTS environments</li>
+            <li data-i18n="focus2">Human-AI collaboration</li>
+            <li data-i18n="focus3">Real-time recommendation systems</li>
+            <li data-i18n="focus4">Game state modeling</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="roleTitle">My Role</h3>
+          <ul class="key-list">
+            <li data-i18n="role1">Dataset processing from game replays</li>
+            <li data-i18n="role2">Machine learning model training</li>
+            <li data-i18n="role3">Feature engineering</li>
+            <li data-i18n="role4">System pipeline development</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="techTitle">Technologies</h3>
+          <p class="tech-line" data-i18n="techBody">
+            Python · Machine Learning · Game Data Parsing · SC2 API
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const i18n = {
+          en: {
+            pageTitle: "StarMax | XXX Aurora",
+            pageDescription:
+              "StarMax: a real-time strategy coaching AI for StarCraft decision support.",
+            title: "StarMax",
+            subtitle: "StarCraft AI Coach",
+            intro: "StarMax is a real-time AI coaching system designed for strategy games.",
+            back: "Back to projects",
+            overviewTitle: "概览",
+            overviewBody:
+              "It analyzes game states and predicts optimal macro decisions, assisting players during gameplay.",
+            focusTitle: "研究重点",
+            focus1: "Decision prediction in RTS environments",
+            focus2: "Human-AI collaboration",
+            focus3: "Real-time recommendation systems",
+            focus4: "Game state modeling",
+            roleTitle: "我的角色",
+            role1: "Dataset processing from game replays",
+            role2: "Machine learning model training",
+            role3: "Feature engineering",
+            role4: "System pipeline development",
+            techTitle: "技术栈",
+            techBody: "Python · Machine Learning · Game Data Parsing · SC2 API"
+          },
+          zh: {
+            pageTitle: "StarMax | XXX Aurora",
+            pageDescription: "StarMax：实时策略游戏 AI 教练系统。",
+            title: "StarMax",
+            subtitle: "StarCraft AI Coach",
+            intro: "StarMax 是一个实时策略游戏 AI 教练系统。",
+            back: "返回项目总览",
+            overviewTitle: "Overview",
+            overviewBody:
+              "它可以分析游戏状态并预测宏观决策，为玩家在对局中提供实时建议。",
+            focusTitle: "Research Focus",
+            focus1: "RTS 环境下的决策预测",
+            focus2: "人机协作",
+            focus3: "实时推荐系统",
+            focus4: "游戏状态建模",
+            roleTitle: "My Role",
+            role1: "从比赛回放中处理数据集",
+            role2: "机器学习模型训练",
+            role3: "特征工程",
+            role4: "系统流水线开发",
+            techTitle: "Technologies",
+            techBody: "Python · Machine Learning · Game Data Parsing · SC2 API"
+          }
+        };
+
+        const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function applyLang(lang) {
+          const dict = i18n[lang] || i18n.en;
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          document.title = dict.pageTitle;
+
+          const meta = document.getElementById("meta-description");
+          if (meta) {
+            meta.setAttribute("content", dict.pageDescription);
+          }
+
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.getAttribute("data-i18n");
+            if (dict[key]) {
+              node.textContent = dict[key];
+            }
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.getAttribute("data-lang-btn") === lang;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        }
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang-btn");
+            applyLang(lang);
+            try {
+              localStorage.setItem("site-lang", lang);
+            } catch (err) {
+              // Keep runtime language only when storage is blocked.
+            }
+          });
+        });
+
+        let initialLang = "en";
+        try {
+          const stored = localStorage.getItem("site-lang");
+          if (stored === "zh" || stored === "en") {
+            initialLang = stored;
+          }
+        } catch (err) {
+          initialLang = "en";
+        }
+
+        applyLang(initialLang);
+      })();
+    </script>
+  </body>
+</html>

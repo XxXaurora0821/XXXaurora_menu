@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick-Aid | XXX Aurora</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="Quick-Aid: AI first-aid assistant with injury image analysis and treatment guidance."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="lang-switch" role="group" aria-label="Language selector">
+      <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <div class="layout detail-layout">
+      <main class="content">
+        <section class="panel hero detail-header">
+          <h2 data-i18n="title">Quick-Aid</h2>
+          <p class="detail-sub" data-i18n="subtitle">AI First Aid Assistant</p>
+          <p data-i18n="intro">
+            Quick-Aid is an AI medical assistance tool that identifies injuries from
+            uploaded images and generates treatment guidance.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="index.html#projects" data-i18n="back">Back to projects</a>
+            <a class="ghost" href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="overviewTitle">Overview</h3>
+          <p data-i18n="overviewBody">
+            The system aims to make first-aid knowledge more accessible in emergency
+            situations.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="featuresTitle">Features</h3>
+          <ul class="key-list">
+            <li data-i18n="feature1">Injury image recognition</li>
+            <li data-i18n="feature2">Treatment recommendations</li>
+            <li data-i18n="feature3">User-friendly interface</li>
+            <li data-i18n="feature4">Fast response for emergencies</li>
+          </ul>
+          <p data-i18n="featuresNote">
+            The system uses generative AI and image processing to transform visual data
+            into practical medical guidance.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="roleTitle">My Role</h3>
+          <ul class="key-list">
+            <li data-i18n="role1">AI integration</li>
+            <li data-i18n="role2">Backend logic</li>
+            <li data-i18n="role3">System deployment</li>
+            <li data-i18n="role4">Interface integration</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="techTitle">Technologies</h3>
+          <p class="tech-line" data-i18n="techBody">
+            Python · Flask · Computer Vision · Generative AI
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const i18n = {
+          en: {
+            pageTitle: "Quick-Aid | XXX Aurora",
+            pageDescription:
+              "Quick-Aid: AI first-aid assistant with injury image analysis and treatment guidance.",
+            title: "Quick-Aid",
+            subtitle: "AI First Aid Assistant",
+            intro:
+              "Quick-Aid is an AI medical assistance tool that identifies injuries from uploaded images and generates treatment guidance.",
+            back: "Back to projects",
+            overviewTitle: "概览",
+            overviewBody:
+              "The system aims to make first-aid knowledge more accessible in emergency situations.",
+            featuresTitle: "功能",
+            feature1: "Injury image recognition",
+            feature2: "Treatment recommendations",
+            feature3: "User-friendly interface",
+            feature4: "Fast response for emergencies",
+            featuresNote:
+              "The system uses generative AI and image processing to transform visual data into practical medical guidance.",
+            roleTitle: "我的角色",
+            role1: "AI integration",
+            role2: "Backend logic",
+            role3: "System deployment",
+            role4: "Interface integration",
+            techTitle: "技术栈",
+            techBody: "Python · Flask · Computer Vision · Generative AI"
+          },
+          zh: {
+            pageTitle: "Quick-Aid | XXX Aurora",
+            pageDescription: "Quick-Aid：基于图像分析的 AI 急救助手。",
+            title: "Quick-Aid",
+            subtitle: "AI First Aid Assistant",
+            intro:
+              "Quick-Aid 是一个 AI 医疗辅助工具，可以从上传图像识别伤情并生成处理建议。",
+            back: "返回项目总览",
+            overviewTitle: "Overview",
+            overviewBody:
+              "该系统目标是在紧急情况下提高急救信息与处理知识的可获得性。",
+            featuresTitle: "Features",
+            feature1: "伤情图像识别",
+            feature2: "处理建议生成",
+            feature3: "用户友好界面",
+            feature4: "紧急场景快速响应",
+            featuresNote:
+              "该系统利用生成式 AI 和图像处理技术，将视觉数据转化为可执行的医疗建议。",
+            roleTitle: "My Role",
+            role1: "AI 模块集成",
+            role2: "后端逻辑开发",
+            role3: "系统部署",
+            role4: "界面集成",
+            techTitle: "Technologies",
+            techBody: "Python · Flask · Computer Vision · Generative AI"
+          }
+        };
+
+        const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function applyLang(lang) {
+          const dict = i18n[lang] || i18n.en;
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          document.title = dict.pageTitle;
+
+          const meta = document.getElementById("meta-description");
+          if (meta) {
+            meta.setAttribute("content", dict.pageDescription);
+          }
+
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.getAttribute("data-i18n");
+            if (dict[key]) {
+              node.textContent = dict[key];
+            }
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.getAttribute("data-lang-btn") === lang;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        }
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang-btn");
+            applyLang(lang);
+            try {
+              localStorage.setItem("site-lang", lang);
+            } catch (err) {
+              // Keep runtime language only when storage is blocked.
+            }
+          });
+        });
+
+        let initialLang = "en";
+        try {
+          const stored = localStorage.getItem("site-lang");
+          if (stored === "zh" || stored === "en") {
+            initialLang = stored;
+          }
+        } catch (err) {
+          initialLang = "en";
+        }
+
+        applyLang(initialLang);
+      })();
+    </script>
+  </body>
+</html>

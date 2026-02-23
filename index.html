@@ -7,7 +7,7 @@
     <meta
       id="meta-description"
       name="description"
-      content="XXX Aurora personal gateway: writing, projects, research, and contact."
+      content="XXX Aurora personal gateway: project overview and contact."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +35,7 @@
 
         <nav aria-label="Homepage navigation">
           <a href="#hello" data-i18n="navHello">Hello</a>
-          <a href="#links" data-i18n="navLinks">Quick Links</a>
+          <a href="#projects" data-i18n="navProjects">Projects</a>
           <a href="#updates" data-i18n="navUpdates">Recent Notes</a>
           <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
@@ -54,50 +54,71 @@
             new project, or playing strategy games.
           </p>
           <div class="hero-actions">
-            <a class="button" href="#links" data-i18n="heroBtnLinks">Browse links</a>
+            <a class="button" href="#projects" data-i18n="heroBtnProjects">View projects</a>
             <a class="ghost" href="#updates" data-i18n="heroBtnUpdates">See updates</a>
           </div>
         </section>
 
-        <section id="links" class="panel">
+        <section id="projects" class="panel">
           <div class="section-head">
-            <h3 data-i18n="linksTitle">Quick Links</h3>
-            <p data-i18n="linksSub">
-              Put your most used destinations here so both you and friends can find
-              them fast.
+            <h3 data-i18n="projectsTitle">Projects Overview</h3>
+            <p data-i18n="projectsSub">
+              Short version on the homepage. Click any project to see the full details.
             </p>
           </div>
 
-          <div class="grid">
-            <a class="card" href="#" aria-label="Writing">
-              <h4 data-i18n="cardWritingTitle">Writing</h4>
-              <p data-i18n="cardWritingBody">Blog posts, essays, reading notes, and long-form index.</p>
-            </a>
+          <div class="project-grid">
+            <article class="card project-card" aria-label="Project Potemkin">
+              <h4 data-i18n="potemkinTitle">Project Potemkin</h4>
+              <p class="project-tag" data-i18n="potemkinTag">AI Agent &amp; Memory Systems</p>
+              <p data-i18n="potemkinBody">
+                An AI companion system with persistent memory and autonomous behavior,
+                exploring long-term human-AI interaction and intelligent agents that
+                evolve over time.
+              </p>
+              <p class="project-note" data-i18n="potemkinNote">
+                Framed as an AI companion system that can grow with families, with
+                unified memory and long-term interaction capabilities.
+              </p>
+              <div class="card-actions">
+                <a class="button button-sm" href="project-potemkin.html" data-i18n="viewDetails">View details</a>
+                <a class="ghost button-sm" href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </article>
 
-            <a class="card" href="#" aria-label="Projects">
-              <h4 data-i18n="cardProjectsTitle">Projects</h4>
-              <p data-i18n="cardProjectsBody">Current and finished products, code, and experiments.</p>
-            </a>
+            <article class="card project-card" aria-label="StarMax">
+              <h4 data-i18n="starmaxTitle">StarMax</h4>
+              <p class="project-tag" data-i18n="starmaxTag">Game AI / StarCraft Strategy Coach</p>
+              <p data-i18n="starmaxBody">
+                A real-time strategy coaching AI that analyzes gameplay states and
+                provides decision recommendations, focused on complex decision-making
+                and human-AI collaboration.
+              </p>
+              <p class="project-note" data-i18n="starmaxNote">
+                Research focus: RTS decision prediction, game-state modeling, and
+                practical co-pilot support for players.
+              </p>
+              <div class="card-actions">
+                <a class="button button-sm" href="starmax.html" data-i18n="viewDetails">View details</a>
+              </div>
+            </article>
 
-            <a class="card" href="#" aria-label="Research Notes">
-              <h4 data-i18n="cardResearchTitle">Research Notes</h4>
-              <p data-i18n="cardResearchBody">Paper reading, method breakdowns, and reusable ideas.</p>
-            </a>
-
-            <a class="card" href="#" aria-label="Toolkit">
-              <h4 data-i18n="cardToolkitTitle">Toolkit</h4>
-              <p data-i18n="cardToolkitBody">My frequently used software, templates, and resources.</p>
-            </a>
-
-            <a class="card" href="#" aria-label="Bookmarks">
-              <h4 data-i18n="cardBookmarksTitle">Bookmarks</h4>
-              <p data-i18n="cardBookmarksBody">Pages, channels, and archives worth revisiting.</p>
-            </a>
-
-            <a class="card" href="#" aria-label="About">
-              <h4 data-i18n="cardAboutTitle">About</h4>
-              <p data-i18n="cardAboutBody">Max (Yuzhen Yang), AI student at King's College London. I build game AI, autonomous agents, and experimental AI projects.</p>
-            </a>
+            <article class="card project-card" aria-label="Quick-Aid">
+              <h4 data-i18n="quickAidTitle">Quick-Aid</h4>
+              <p class="project-tag" data-i18n="quickAidTag">AI Medical Assistant</p>
+              <p data-i18n="quickAidBody">
+                An AI-powered first-aid assistant that analyzes injury images and
+                generates treatment guidance to improve access to early medical response.
+              </p>
+              <p class="project-note" data-i18n="quickAidNote">
+                Uses image recognition to identify injury conditions and suggest
+                step-by-step handling instructions.
+              </p>
+              <div class="card-actions">
+                <a class="button button-sm" href="quick-aid.html" data-i18n="viewDetails">View details</a>
+                <a class="ghost button-sm" href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer">GitHub</a>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -110,15 +131,15 @@
           <ul class="updates">
             <li>
               <span class="date">2026-02-23</span>
-              <p data-i18n="note1">Launched the first version of this gateway and started organizing all entry points.</p>
+              <p data-i18n="note1">Published a bilingual project overview and added detail pages for three projects.</p>
             </li>
             <li>
-              <span class="date">2026-02-18</span>
-              <p data-i18n="note2">Added a research notes section and prepared a topic-based structure.</p>
+              <span class="date">2026-02-23</span>
+              <p data-i18n="note2">Connected homepage project cards to dedicated deep-dive pages.</p>
             </li>
             <li>
-              <span class="date">2026-02-10</span>
-              <p data-i18n="note3">Refactored the project index and filled in descriptions and screenshots.</p>
+              <span class="date">2026-02-23</span>
+              <p data-i18n="note3">Configured and validated Cloudflare Pages auto deployment via GitHub Actions.</p>
             </li>
           </ul>
         </section>
@@ -138,75 +159,88 @@
         const i18n = {
           en: {
             pageTitle: "XXX Aurora",
-            pageDescription: "XXX Aurora personal gateway: writing, projects, research, and contact.",
+            pageDescription: "XXX Aurora personal gateway: project overview and contact.",
             intro: "AI student at King's College London. Build first, understand later.",
             navHello: "Hello",
-            navLinks: "Quick Links",
+            navProjects: "Projects",
             navUpdates: "Recent Notes",
             navContact: "Contact",
             status: "Currently building in public.",
             heroTitle: "Hi, I'm Max (Yuzhen Yang).",
             heroBody:
               "I study Artificial Intelligence at King's College London, and I enjoy building all kinds of AI projects, from game AI and autonomous agents to weird but fun experiments. I believe the best way to learn is: build first, understand later. If you ever find me, I'm probably coding, thinking about a new project, or playing strategy games.",
-            heroBtnLinks: "Browse links",
+            heroBtnProjects: "View projects",
             heroBtnUpdates: "See updates",
-            linksTitle: "Quick Links",
-            linksSub:
-              "Put your most used destinations here so both you and friends can find them fast.",
-            cardWritingTitle: "Writing",
-            cardWritingBody: "Blog posts, essays, reading notes, and long-form index.",
-            cardProjectsTitle: "Projects",
-            cardProjectsBody: "Current and finished products, code, and experiments.",
-            cardResearchTitle: "Research Notes",
-            cardResearchBody: "Paper reading, method breakdowns, and reusable ideas.",
-            cardToolkitTitle: "Toolkit",
-            cardToolkitBody: "My frequently used software, templates, and resources.",
-            cardBookmarksTitle: "Bookmarks",
-            cardBookmarksBody: "Pages, channels, and archives worth revisiting.",
-            cardAboutTitle: "About",
-            cardAboutBody: "Max (Yuzhen Yang), AI student at King's College London. I build game AI, autonomous agents, and experimental AI projects.",
+            projectsTitle: "Projects Overview",
+            projectsSub: "Short version on the homepage. Click any project to see the full details.",
+            potemkinTitle: "Project Potemkin",
+            potemkinTag: "AI Agent & Memory Systems",
+            potemkinBody:
+              "An AI companion system with persistent memory and autonomous behavior, exploring long-term human-AI interaction and intelligent agents that evolve over time.",
+            potemkinNote:
+              "Framed as an AI companion system that can grow with families, with unified memory and long-term interaction capabilities.",
+            starmaxTitle: "StarMax",
+            starmaxTag: "Game AI / StarCraft Strategy Coach",
+            starmaxBody:
+              "A real-time strategy coaching AI that analyzes gameplay states and provides decision recommendations, focused on complex decision-making and human-AI collaboration.",
+            starmaxNote:
+              "Research focus: RTS decision prediction, game-state modeling, and practical co-pilot support for players.",
+            quickAidTitle: "Quick-Aid",
+            quickAidTag: "AI Medical Assistant",
+            quickAidBody:
+              "An AI-powered first-aid assistant that analyzes injury images and generates treatment guidance to improve access to early medical response.",
+            quickAidNote:
+              "Uses image recognition to identify injury conditions and suggest step-by-step handling instructions.",
+            viewDetails: "View details",
             updatesTitle: "Recent Notes",
             updatesSub: "Keep the cadence, even if each update is small.",
-            note1: "Launched the first version of this gateway and started organizing all entry points.",
-            note2: "Added a research notes section and prepared a topic-based structure.",
-            note3: "Refactored the project index and filled in descriptions and screenshots.",
+            note1: "Published a bilingual project overview and added detail pages for three projects.",
+            note2: "Connected homepage project cards to dedicated deep-dive pages.",
+            note3: "Configured and validated Cloudflare Pages auto deployment via GitHub Actions.",
             contactTitle: "Contact",
             contactLead: "If you'd like to discuss projects, writing, or collaboration, email me at",
             contactTail: "."
           },
           zh: {
             pageTitle: "XXX Aurora 个人导航",
-            pageDescription: "XXX Aurora 的个人导航页：文章、项目、研究和联系方式。",
+            pageDescription: "XXX Aurora 的个人导航页：项目总览与联系方式。",
             intro: "King's College London 人工智能学生。build first, understand later.",
             navHello: "你好",
-            navLinks: "快速导航",
+            navProjects: "项目",
             navUpdates: "最近更新",
             navContact: "联系",
             status: "正在公开构建中。",
             heroTitle: "你好，我是 Max（Yuzhen Yang）。",
             heroBody:
               "我在 King's College London 学 Artificial Intelligence，平时喜欢做各种 AI 项目，从游戏 AI 到 autonomous agents，再到一些奇怪但有趣的实验。我相信最好的学习方式是：build first, understand later. 如果你看到我，大概率在写代码、想新项目，或者打策略游戏。",
-            heroBtnLinks: "查看导航",
+            heroBtnProjects: "查看项目",
             heroBtnUpdates: "最近更新",
-            linksTitle: "快速导航",
-            linksSub: "把你最常用的入口放在这里，方便自己和朋友快速访问。",
-            cardWritingTitle: "写作",
-            cardWritingBody: "博客、随笔、读书记录与长文索引。",
-            cardProjectsTitle: "项目",
-            cardProjectsBody: "正在进行和已完成的产品、代码与实验。",
-            cardResearchTitle: "研究笔记",
-            cardResearchBody: "论文阅读、方法拆解与可复用灵感。",
-            cardToolkitTitle: "工具箱",
-            cardToolkitBody: "我高频使用的软件、模板与资源站点。",
-            cardBookmarksTitle: "收藏",
-            cardBookmarksBody: "值得反复回看的页面、频道与档案。",
-            cardAboutTitle: "关于",
-            cardAboutBody: "Max（Yuzhen Yang），King's College London 人工智能学生，专注于游戏 AI、autonomous agents 和有趣的实验型 AI 项目。",
+            projectsTitle: "项目总览",
+            projectsSub: "首页展示简短版，点击项目可进入详细介绍页面。",
+            potemkinTitle: "Project Potemkin",
+            potemkinTag: "AI Agent 与记忆系统",
+            potemkinBody:
+              "一个具有长期记忆能力与自主行为的 AI Agent 系统，探索人与 AI 的长期交互以及智能体随时间成长的可能性。",
+            potemkinNote:
+              "项目被描述为一个“随家庭成长的 AI 伴侣系统”，强调统一记忆与长期交互能力。",
+            starmaxTitle: "StarMax",
+            starmaxTag: "游戏 AI / 星际争霸策略教练",
+            starmaxBody:
+              "一个实时策略游戏辅助 AI，分析游戏状态并提供决策建议，研究复杂决策环境中的 AI 行为与人机协作。",
+            starmaxNote:
+              "研究重点包括 RTS 决策预测、游戏状态建模与实时人机协同建议。",
+            quickAidTitle: "Quick-Aid",
+            quickAidTag: "AI 医疗助手",
+            quickAidBody:
+              "一个基于 AI 的急救助手，可以分析伤口图像并生成处理建议，提高紧急情况下的医疗信息可获得性。",
+            quickAidNote:
+              "该系统通过图像识别技术识别伤情并提供处理步骤建议。",
+            viewDetails: "查看详情",
             updatesTitle: "最近更新",
             updatesSub: "保持更新频率，哪怕每次只是一小段。",
-            note1: "上线导航页初版，并开始整理全网入口。",
-            note2: "新增研究笔记栏目，准备按主题组织内容。",
-            note3: "重构项目索引页，补齐说明与截图。",
+            note1: "发布了中英双语项目总览，并新增三个项目详情页。",
+            note2: "首页项目卡片已连接到对应的深入介绍页面。",
+            note3: "已配置并验证 Cloudflare Pages 的 GitHub Actions 自动部署。",
             contactTitle: "联系",
             contactLead: "如果你想交流项目、内容或合作，请发邮件到",
             contactTail: "。"
@@ -246,7 +280,7 @@
             try {
               localStorage.setItem("site-lang", lang);
             } catch (err) {
-              // Ignore storage access errors and keep runtime language only.
+              // Keep runtime language only when storage is blocked.
             }
           });
         });

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Potemkin | XXX Aurora</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="Project Potemkin: persistent memory AI agent for long-term human-AI interaction."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="lang-switch" role="group" aria-label="Language selector">
+      <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <div class="layout detail-layout">
+      <main class="content">
+        <section class="panel hero detail-header">
+          <h2 data-i18n="title">Project Potemkin</h2>
+          <p class="detail-sub" data-i18n="subtitle">AI Agent &amp; Memory Systems</p>
+          <p data-i18n="intro">
+            Project Potemkin is an experimental AI agent system focused on persistent
+            memory, autonomous interaction, and long-term user relationships.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="index.html#projects" data-i18n="back">Back to projects</a>
+            <a class="ghost" href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="overviewTitle">Overview</h3>
+          <p data-i18n="overviewBody">
+            The goal is to explore how AI companions can evolve over time rather than
+            functioning as stateless tools.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="ideasTitle">Key Ideas</h3>
+          <ul class="key-list">
+            <li data-i18n="idea1">Persistent memory architecture</li>
+            <li data-i18n="idea2">Autonomous agent behavior</li>
+            <li data-i18n="idea3">Human-AI interaction over time</li>
+            <li data-i18n="idea4">Multi-session context evolution</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="roleTitle">My Role</h3>
+          <ul class="key-list">
+            <li data-i18n="role1">System design and architecture</li>
+            <li data-i18n="role2">Agent logic implementation</li>
+            <li data-i18n="role3">Memory pipeline development</li>
+            <li data-i18n="role4">Prototype integration</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="techTitle">Technologies</h3>
+          <p class="tech-line" data-i18n="techBody">
+            Python · LLM APIs · Memory Systems · Agent Architecture
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const i18n = {
+          en: {
+            pageTitle: "Project Potemkin | XXX Aurora",
+            pageDescription:
+              "Project Potemkin: persistent memory AI agent for long-term human-AI interaction.",
+            title: "Project Potemkin",
+            subtitle: "AI Agent & Memory Systems",
+            intro:
+              "Project Potemkin is an experimental AI agent system focused on persistent memory, autonomous interaction, and long-term user relationships.",
+            back: "Back to projects",
+            overviewTitle: "概览",
+            overviewBody:
+              "The goal is to explore how AI companions can evolve over time rather than functioning as stateless tools.",
+            ideasTitle: "核心思路",
+            idea1: "Persistent memory architecture",
+            idea2: "Autonomous agent behavior",
+            idea3: "Human-AI interaction over time",
+            idea4: "Multi-session context evolution",
+            roleTitle: "我的角色",
+            role1: "System design and architecture",
+            role2: "Agent logic implementation",
+            role3: "Memory pipeline development",
+            role4: "Prototype integration",
+            techTitle: "技术栈",
+            techBody: "Python · LLM APIs · Memory Systems · Agent Architecture"
+          },
+          zh: {
+            pageTitle: "Project Potemkin | XXX Aurora",
+            pageDescription: "Project Potemkin：长期记忆 AI Agent 与长期人机交互探索。",
+            title: "Project Potemkin",
+            subtitle: "AI Agent 与记忆系统",
+            intro:
+              "Project Potemkin 是一个实验性的 AI Agent 系统，重点研究长期记忆、自主交互以及长期用户关系。",
+            back: "返回项目总览",
+            overviewTitle: "Overview",
+            overviewBody:
+              "目标是探索 AI 如何从“工具”转变为“伴侣”，并在长期使用中持续演化。",
+            ideasTitle: "Key Ideas",
+            idea1: "持久化记忆架构",
+            idea2: "自主 Agent 行为",
+            idea3: "跨时间尺度的人机交互",
+            idea4: "多会话上下文演化",
+            roleTitle: "My Role",
+            role1: "系统设计与架构",
+            role2: "Agent 逻辑实现",
+            role3: "记忆流水线开发",
+            role4: "原型集成",
+            techTitle: "Technologies",
+            techBody: "Python · LLM APIs · Memory Systems · Agent Architecture"
+          }
+        };
+
+        const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function applyLang(lang) {
+          const dict = i18n[lang] || i18n.en;
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          document.title = dict.pageTitle;
+
+          const meta = document.getElementById("meta-description");
+          if (meta) {
+            meta.setAttribute("content", dict.pageDescription);
+          }
+
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.getAttribute("data-i18n");
+            if (dict[key]) {
+              node.textContent = dict[key];
+            }
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.getAttribute("data-lang-btn") === lang;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        }
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang-btn");
+            applyLang(lang);
+            try {
+              localStorage.setItem("site-lang", lang);
+            } catch (err) {
+              // Keep runtime language only when storage is blocked.
+            }
+          });
+        });
+
+        let initialLang = "en";
+        try {
+          const stored = localStorage.getItem("site-lang");
+          if (stored === "zh" || stored === "en") {
+            initialLang = stored;
+          }
+        } catch (err) {
+          initialLang = "en";
+        }
+
+        applyLang(initialLang);
+      })();
+    </script>
+  </body>
+</html>
