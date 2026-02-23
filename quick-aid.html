@@ -7,7 +7,7 @@
     <meta
       id="meta-description"
       name="description"
-      content="Quick-Aid: AI first-aid assistant with injury image analysis and treatment guidance."
+      content="QuickAid: emergency navigation app for smarter A&E decision support."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,8 +31,8 @@
           <h2 data-i18n="title">Quick-Aid</h2>
           <p class="detail-sub" data-i18n="subtitle">AI First Aid Assistant</p>
           <p data-i18n="intro">
-            Quick-Aid is an AI medical assistance tool that identifies injuries from
-            uploaded images and generates treatment guidance.
+            QuickAid is an emergency navigation assistant that helps users choose where
+            to seek care based on urgency, insurance access, travel time, and wait time.
           </p>
           <div class="hero-actions detail-actions">
             <a class="button" href="index.html#projects" data-i18n="back">Back to projects</a>
@@ -49,16 +49,76 @@
         </section>
 
         <section class="panel">
+          <h3 data-i18n="highlightsTitle">Implemented Highlights</h3>
+          <ul class="key-list">
+            <li data-i18n="highlight1">AI emergency locator for nearby A&amp;E, urgent care, and hospitals.</li>
+            <li data-i18n="highlight2">Insurance-aware filtering for NHS/IHS/private coverage options.</li>
+            <li data-i18n="highlight3">QuickRoute ranking by total time to be seen, not just nearest distance.</li>
+            <li data-i18n="highlight4">Safety triage gate for life-threatening symptoms with 999 guidance.</li>
+            <li data-i18n="highlight5">Context checklist for documents, medication, and emergency contacts.</li>
+            <li data-i18n="highlight6">After-visit guidance for GP registration, prescriptions, and follow-up.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="flowTitle">Decision Flow</h3>
+          <ul class="key-list">
+            <li data-i18n="flow1">Symptom assessment classifies urgency (severe / moderate / mild).</li>
+            <li data-i18n="flow2">Coverage filter narrows hospitals based on insurance access rules.</li>
+            <li data-i18n="flow3">Travel-time service computes driving/transit/walking durations.</li>
+            <li data-i18n="flow4">Wait-time + travel-time are combined to rank the best choice.</li>
+            <li data-i18n="flow5">LLM function generates a concise human-readable recommendation reason.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="archTitle">System Architecture</h3>
+          <ul class="key-list">
+            <li data-i18n="arch1">Frontend: React + Vite + TypeScript + Tailwind CSS.</li>
+            <li data-i18n="arch2">Map and UI stack with Mapbox GL and component-based interaction flows.</li>
+            <li data-i18n="arch3">Edge function for hospital recommendation text using Gemini API.</li>
+            <li data-i18n="arch4">Edge function for real-time travel times via Google Distance Matrix API.</li>
+            <li data-i18n="arch5">Hospital data integration through dedicated API endpoints.</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="usersTitle">Why It Matters</h3>
+          <p data-i18n="usersBody">
+            QuickAid is designed for international students and newcomers who may be
+            unfamiliar with UK emergency pathways, insurance constraints, and hospital
+            triage logic.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="teamTitle">Team</h3>
+          <ul class="key-list">
+            <li data-i18n="team1">Yuzhen (Max) Yang</li>
+            <li data-i18n="team2">Shian (Andy) Ye</li>
+            <li data-i18n="team3">Sarah Asulaim</li>
+            <li data-i18n="team4">Zhewen (Ryan) Zheng</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="linksTitle">Project Link</h3>
+          <p class="video-link">
+            <a href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer" data-i18n="repoLink">Open GitHub repository</a>
+          </p>
+        </section>
+
+        <section class="panel">
           <h3 data-i18n="featuresTitle">Features</h3>
           <ul class="key-list">
-            <li data-i18n="feature1">Injury image recognition</li>
-            <li data-i18n="feature2">Treatment recommendations</li>
-            <li data-i18n="feature3">User-friendly interface</li>
-            <li data-i18n="feature4">Fast response for emergencies</li>
+            <li data-i18n="feature1">Emergency locator with map-based nearby hospital discovery</li>
+            <li data-i18n="feature2">Insurance and access filter for NHS, IHS, and private scenarios</li>
+            <li data-i18n="feature3">QuickRoute recommendation based on total time to be seen</li>
+            <li data-i18n="feature4">One-tap language switch for international accessibility</li>
           </ul>
           <p data-i18n="featuresNote">
-            The system uses generative AI and image processing to transform visual data
-            into practical medical guidance.
+            The recommendation layer combines travel-time data, wait-time estimates, and
+            concise LLM explanations to improve emergency decisions.
           </p>
         </section>
 
@@ -87,55 +147,113 @@
           en: {
             pageTitle: "Quick-Aid | XXX Aurora",
             pageDescription:
-              "Quick-Aid: AI first-aid assistant with injury image analysis and treatment guidance.",
+              "QuickAid: emergency navigation app for smarter A&E decision support.",
             title: "Quick-Aid",
             subtitle: "AI First Aid Assistant",
             intro:
-              "Quick-Aid is an AI medical assistance tool that identifies injuries from uploaded images and generates treatment guidance.",
+              "QuickAid is an emergency navigation assistant that helps users choose where to seek care based on urgency, insurance access, travel time, and wait time.",
             back: "Back to projects",
             overviewTitle: "Overview",
             overviewBody:
               "The system aims to make first-aid knowledge more accessible in emergency situations.",
+            highlightsTitle: "Implemented Highlights",
+            highlight1: "AI emergency locator for nearby A&E, urgent care, and hospitals.",
+            highlight2: "Insurance-aware filtering for NHS/IHS/private coverage options.",
+            highlight3: "QuickRoute ranking by total time to be seen, not just nearest distance.",
+            highlight4: "Safety triage gate for life-threatening symptoms with 999 guidance.",
+            highlight5: "Context checklist for documents, medication, and emergency contacts.",
+            highlight6: "After-visit guidance for GP registration, prescriptions, and follow-up.",
+            flowTitle: "Decision Flow",
+            flow1: "Symptom assessment classifies urgency (severe / moderate / mild).",
+            flow2: "Coverage filter narrows hospitals based on insurance access rules.",
+            flow3: "Travel-time service computes driving/transit/walking durations.",
+            flow4: "Wait-time + travel-time are combined to rank the best choice.",
+            flow5: "LLM function generates a concise human-readable recommendation reason.",
+            archTitle: "System Architecture",
+            arch1: "Frontend: React + Vite + TypeScript + Tailwind CSS.",
+            arch2: "Map and UI stack with Mapbox GL and component-based interaction flows.",
+            arch3: "Edge function for hospital recommendation text using Gemini API.",
+            arch4: "Edge function for real-time travel times via Google Distance Matrix API.",
+            arch5: "Hospital data integration through dedicated API endpoints.",
+            usersTitle: "Why It Matters",
+            usersBody:
+              "QuickAid is designed for international students and newcomers who may be unfamiliar with UK emergency pathways, insurance constraints, and hospital triage logic.",
+            teamTitle: "Team",
+            team1: "Yuzhen (Max) Yang",
+            team2: "Shian (Andy) Ye",
+            team3: "Sarah Asulaim",
+            team4: "Zhewen (Ryan) Zheng",
+            linksTitle: "Project Link",
+            repoLink: "Open GitHub repository",
             featuresTitle: "Features",
-            feature1: "Injury image recognition",
-            feature2: "Treatment recommendations",
-            feature3: "User-friendly interface",
-            feature4: "Fast response for emergencies",
+            feature1: "Emergency locator with map-based nearby hospital discovery",
+            feature2: "Insurance and access filter for NHS, IHS, and private scenarios",
+            feature3: "QuickRoute recommendation based on total time to be seen",
+            feature4: "One-tap language switch for international accessibility",
             featuresNote:
-              "The system uses generative AI and image processing to transform visual data into practical medical guidance.",
+              "The recommendation layer combines travel-time data, wait-time estimates, and concise LLM explanations to improve emergency decisions.",
             roleTitle: "My Role",
             role1: "AI integration",
             role2: "Backend logic",
             role3: "System deployment",
             role4: "Interface integration",
             techTitle: "Technologies",
-            techBody: "Python · Flask · Computer Vision · Generative AI"
+            techBody: "React · TypeScript · Vite · Tailwind CSS · Supabase Edge Functions · Mapbox GL"
           },
           zh: {
             pageTitle: "Quick-Aid | XXX Aurora",
-            pageDescription: "Quick-Aid：基于图像分析的 AI 急救助手。",
+            pageDescription: "QuickAid：用于应急就医决策的智能急诊导航工具。",
             title: "Quick-Aid",
             subtitle: "AI First Aid Assistant",
             intro:
-              "Quick-Aid 是一个 AI 医疗辅助工具，可以从上传图像识别伤情并生成处理建议。",
+              "QuickAid 是一个应急就医导航助手，会结合紧急程度、保险可及性、路程时间和候诊时间，帮助用户更快选择合适医院。",
             back: "返回项目总览",
             overviewTitle: "概览",
             overviewBody:
               "该系统目标是在紧急情况下提高急救信息与处理知识的可获得性。",
+            highlightsTitle: "已实现亮点",
+            highlight1: "提供附近 A&E、急诊中心与医院的智能定位能力。",
+            highlight2: "支持 NHS / IHS / 私保等覆盖条件下的医院筛选。",
+            highlight3: "QuickRoute 按“就诊总耗时”而非仅地理距离进行推荐排序。",
+            highlight4: "对危及生命症状设置安全分诊闸门，并给出 999 指引。",
+            highlight5: "根据场景生成证件、药物和紧急联系人等携带清单。",
+            highlight6: "就诊后给出 GP 注册、取药与复诊等后续建议。",
+            flowTitle: "决策流程",
+            flow1: "先通过症状评估判断紧急程度（严重 / 中度 / 轻度）。",
+            flow2: "再根据保险/覆盖规则过滤可访问医院。",
+            flow3: "调用路程服务计算驾车/公交/步行耗时。",
+            flow4: "结合候诊时间与路程时间，计算最优就诊选择。",
+            flow5: "由 LLM 生成简短可读的推荐理由。",
+            archTitle: "系统架构",
+            arch1: "前端：React + Vite + TypeScript + Tailwind CSS。",
+            arch2: "地图与交互层基于 Mapbox GL 和组件化 UI 构建。",
+            arch3: "边缘函数用于生成医院推荐解释（Gemini API）。",
+            arch4: "边缘函数用于实时路程计算（Google Distance Matrix API）。",
+            arch5: "通过独立医院数据接口提供基础数据支持。",
+            usersTitle: "项目价值",
+            usersBody:
+              "QuickAid 面向国际学生和新移居人群，帮助他们在不熟悉英国急诊体系、保险规则和分诊逻辑时更快做出决策。",
+            teamTitle: "团队",
+            team1: "Yuzhen (Max) Yang",
+            team2: "Shian (Andy) Ye",
+            team3: "Sarah Asulaim",
+            team4: "Zhewen (Ryan) Zheng",
+            linksTitle: "项目链接",
+            repoLink: "打开 GitHub 仓库",
             featuresTitle: "功能",
-            feature1: "伤情图像识别",
-            feature2: "处理建议生成",
-            feature3: "用户友好界面",
-            feature4: "紧急场景快速响应",
+            feature1: "地图化急诊定位，快速发现附近可用医院",
+            feature2: "面向 NHS、IHS 和私保场景的可及性筛选",
+            feature3: "基于总就诊耗时的 QuickRoute 推荐",
+            feature4: "一键语言切换，提升国际用户可达性",
             featuresNote:
-              "该系统利用生成式 AI 和图像处理技术，将视觉数据转化为可执行的医疗建议。",
+              "推荐层结合路程耗时、候诊估计与简洁 LLM 解释，帮助用户更快做出急诊决策。",
             roleTitle: "我的角色",
             role1: "AI 模块集成",
             role2: "后端逻辑开发",
             role3: "系统部署",
             role4: "界面集成",
             techTitle: "技术栈",
-            techBody: "Python · Flask · Computer Vision · Generative AI"
+            techBody: "React · TypeScript · Vite · Tailwind CSS · Supabase Edge Functions · Mapbox GL"
           }
         };
 
