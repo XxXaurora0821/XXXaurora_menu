@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SoulSpirit | XXX Aurora</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="SoulSpirit: a playful cocktail customization experiment."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="lang-switch" role="group" aria-label="Language selector">
+      <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <div class="layout detail-layout">
+      <main class="content">
+        <section class="panel hero detail-header">
+          <h2 data-i18n="title">SoulSpirit</h2>
+          <p class="detail-sub" data-i18n="subtitle">Cocktail Test Lab</p>
+          <p data-i18n="intro">
+            SoulSpirit is a playful test program for personalized cocktails based on mood
+            and taste preferences.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="index.html#playground" data-i18n="back">Back to playground</a>
+            <a class="ghost" href="https://soulspirit.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="launch">Launch app</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="overviewTitle">Overview</h3>
+          <p data-i18n="overviewBody">
+            It focuses on turning abstract preferences into practical recipe directions
+            that are fun to try and easy to iterate.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="featuresTitle">Features</h3>
+          <ul class="key-list">
+            <li data-i18n="feature1">Mood-based flavor direction</li>
+            <li data-i18n="feature2">Taste profile customization</li>
+            <li data-i18n="feature3">Fast recipe prototyping flow</li>
+            <li data-i18n="feature4">Playful interaction design</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="statusTitle">Current Status</h3>
+          <p data-i18n="statusBody">
+            Active in experimental mode for idea validation and user feedback testing.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const i18n = {
+          en: {
+            pageTitle: "SoulSpirit | XXX Aurora",
+            pageDescription: "SoulSpirit: a playful cocktail customization experiment.",
+            title: "SoulSpirit",
+            subtitle: "Cocktail Test Lab",
+            intro:
+              "SoulSpirit is a playful test program for personalized cocktails based on mood and taste preferences.",
+            back: "Back to playground",
+            launch: "Launch app",
+            overviewTitle: "Overview",
+            overviewBody:
+              "It focuses on turning abstract preferences into practical recipe directions that are fun to try and easy to iterate.",
+            featuresTitle: "Features",
+            feature1: "Mood-based flavor direction",
+            feature2: "Taste profile customization",
+            feature3: "Fast recipe prototyping flow",
+            feature4: "Playful interaction design",
+            statusTitle: "Current Status",
+            statusBody: "Active in experimental mode for idea validation and user feedback testing."
+          },
+          zh: {
+            pageTitle: "SoulSpirit | XXX Aurora",
+            pageDescription: "SoulSpirit：用于定制鸡尾酒的趣味实验项目。",
+            title: "SoulSpirit",
+            subtitle: "定制鸡尾酒测试程序",
+            intro:
+              "SoulSpirit 是一个用于定制鸡尾酒的趣味测试程序，会根据情绪和口味偏好生成配方方向。",
+            back: "返回游乐场",
+            launch: "进入项目",
+            overviewTitle: "概览",
+            overviewBody: "它的重点是把抽象偏好转化为可执行配方方向，便于快速尝试和迭代。",
+            featuresTitle: "功能",
+            feature1: "基于情绪的风味方向",
+            feature2: "口味偏好定制",
+            feature3: "快速配方原型流程",
+            feature4: "趣味化交互设计",
+            statusTitle: "当前状态",
+            statusBody: "当前处于实验模式，用于验证创意和收集用户反馈。"
+          }
+        };
+
+        const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function applyLang(lang) {
+          const dict = i18n[lang] || i18n.en;
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          document.title = dict.pageTitle;
+
+          const meta = document.getElementById("meta-description");
+          if (meta) {
+            meta.setAttribute("content", dict.pageDescription);
+          }
+
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.getAttribute("data-i18n");
+            if (dict[key]) {
+              node.textContent = dict[key];
+            }
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.getAttribute("data-lang-btn") === lang;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        }
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang-btn");
+            applyLang(lang);
+            try {
+              localStorage.setItem("site-lang", lang);
+            } catch (err) {
+              // Keep runtime language only when storage is blocked.
+            }
+          });
+        });
+
+        let initialLang = "en";
+        try {
+          const stored = localStorage.getItem("site-lang");
+          if (stored === "zh" || stored === "en") {
+            initialLang = stored;
+          }
+        } catch (err) {
+          initialLang = "en";
+        }
+
+        applyLang(initialLang);
+      })();
+    </script>
+  </body>
+</html>

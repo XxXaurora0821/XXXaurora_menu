@@ -326,6 +326,26 @@ h1 {
   font-weight: 600;
 }
 
+.quick-jump {
+  margin-top: 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.9rem;
+}
+
+.quick-jump-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.quick-jump-sub {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .updates {
   margin: 1rem 0 0;
   padding: 0;

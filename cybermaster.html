@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberMaster | XXX Aurora</title>
+    <meta
+      id="meta-description"
+      name="description"
+      content="CyberMaster: a cyber-themed fortune and personality reading experiment."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <div class="lang-switch" role="group" aria-label="Language selector">
+      <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
+    </div>
+
+    <div class="layout detail-layout">
+      <main class="content">
+        <section class="panel hero detail-header">
+          <h2 data-i18n="title">CyberMaster</h2>
+          <p class="detail-sub" data-i18n="subtitle">Cyber Fortune Teller</p>
+          <p data-i18n="intro">
+            CyberMaster is an entertainment-oriented cyber divination app that generates
+            themed fortunes and personality readings.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="index.html#playground" data-i18n="back">Back to playground</a>
+            <a class="ghost" href="https://cybermaster.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="launch">Launch app</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="overviewTitle">Overview</h3>
+          <p data-i18n="overviewBody">
+            It combines playful prompt logic with themed output styles to create a fun,
+            immersive cyber mystic experience.
+          </p>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="featuresTitle">Features</h3>
+          <ul class="key-list">
+            <li data-i18n="feature1">Cyber-style fortune generation</li>
+            <li data-i18n="feature2">Themed personality reading</li>
+            <li data-i18n="feature3">Fast one-click playful interaction</li>
+            <li data-i18n="feature4">Entertainment-first experience</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h3 data-i18n="statusTitle">Current Status</h3>
+          <p data-i18n="statusBody">
+            Deployed on Cloudflare and running as a fun public experiment.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (function () {
+        const i18n = {
+          en: {
+            pageTitle: "CyberMaster | XXX Aurora",
+            pageDescription:
+              "CyberMaster: a cyber-themed fortune and personality reading experiment.",
+            title: "CyberMaster",
+            subtitle: "Cyber Fortune Teller",
+            intro:
+              "CyberMaster is an entertainment-oriented cyber divination app that generates themed fortunes and personality readings.",
+            back: "Back to playground",
+            launch: "Launch app",
+            overviewTitle: "Overview",
+            overviewBody:
+              "It combines playful prompt logic with themed output styles to create a fun, immersive cyber mystic experience.",
+            featuresTitle: "Features",
+            feature1: "Cyber-style fortune generation",
+            feature2: "Themed personality reading",
+            feature3: "Fast one-click playful interaction",
+            feature4: "Entertainment-first experience",
+            statusTitle: "Current Status",
+            statusBody: "Deployed on Cloudflare and running as a fun public experiment."
+          },
+          zh: {
+            pageTitle: "CyberMaster | XXX Aurora",
+            pageDescription: "CyberMaster：赛博算命与人格解读娱乐实验。",
+            title: "CyberMaster",
+            subtitle: "赛博算命大师",
+            intro:
+              "CyberMaster 是一个娱乐向赛博算命应用，会生成主题化运势和人格解读内容。",
+            back: "返回游乐场",
+            launch: "进入项目",
+            overviewTitle: "概览",
+            overviewBody: "它结合了趣味提示逻辑与主题化输出风格，打造沉浸式的赛博玄学体验。",
+            featuresTitle: "功能",
+            feature1: "赛博风格运势生成",
+            feature2: "主题化人格解读",
+            feature3: "一键快速互动",
+            feature4: "娱乐优先体验",
+            statusTitle: "当前状态",
+            statusBody: "已部署在 Cloudflare，作为公开娱乐实验持续运行。"
+          }
+        };
+
+        const buttons = document.querySelectorAll("[data-lang-btn]");
+
+        function applyLang(lang) {
+          const dict = i18n[lang] || i18n.en;
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          document.title = dict.pageTitle;
+
+          const meta = document.getElementById("meta-description");
+          if (meta) {
+            meta.setAttribute("content", dict.pageDescription);
+          }
+
+          document.querySelectorAll("[data-i18n]").forEach((node) => {
+            const key = node.getAttribute("data-i18n");
+            if (dict[key]) {
+              node.textContent = dict[key];
+            }
+          });
+
+          buttons.forEach((btn) => {
+            const isActive = btn.getAttribute("data-lang-btn") === lang;
+            btn.classList.toggle("is-active", isActive);
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+          });
+        }
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.getAttribute("data-lang-btn");
+            applyLang(lang);
+            try {
+              localStorage.setItem("site-lang", lang);
+            } catch (err) {
+              // Keep runtime language only when storage is blocked.
+            }
+          });
+        });
+
+        let initialLang = "en";
+        try {
+          const stored = localStorage.getItem("site-lang");
+          if (stored === "zh" || stored === "en") {
+            initialLang = stored;
+          }
+        } catch (err) {
+          initialLang = "en";
+        }
+
+        applyLang(initialLang);
+      })();
+    </script>
+  </body>
+</html>
