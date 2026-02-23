@@ -36,11 +36,14 @@
         <nav aria-label="Homepage navigation">
           <a href="#hello" data-i18n="navHello">Hello</a>
           <a href="#projects" data-i18n="navProjects">Projects</a>
-          <a href="#updates" data-i18n="navUpdates">Recent Notes</a>
+          <a href="#playground" data-i18n="navPlayground">Playground</a>
           <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
 
         <p class="status" data-i18n="status">Currently building in public.</p>
+        <p class="profile-link">
+          <a href="https://github.com/XxXaurora0821" target="_blank" rel="noreferrer" data-i18n="githubHome">My GitHub Homepage</a>
+        </p>
       </aside>
 
       <main class="content">
@@ -55,7 +58,7 @@
           </p>
           <div class="hero-actions">
             <a class="button" href="#projects" data-i18n="heroBtnProjects">View projects</a>
-            <a class="ghost" href="#updates" data-i18n="heroBtnUpdates">See updates</a>
+            <a class="ghost" href="#playground" data-i18n="heroBtnPlayground">See playground</a>
           </div>
         </section>
 
@@ -122,26 +125,37 @@
           </div>
         </section>
 
-        <section id="updates" class="panel">
+        <section id="playground" class="panel">
           <div class="section-head">
-            <h3 data-i18n="updatesTitle">Recent Notes</h3>
-            <p data-i18n="updatesSub">Keep the cadence, even if each update is small.</p>
+            <h3 data-i18n="playgroundTitle">Playground</h3>
+            <p data-i18n="playgroundSub">Small fun experiments and quirky tools built for testing ideas.</p>
           </div>
 
-          <ul class="updates">
-            <li>
-              <span class="date">2026-02-23</span>
-              <p data-i18n="note1">Published a bilingual project overview and added detail pages for three projects.</p>
-            </li>
-            <li>
-              <span class="date">2026-02-23</span>
-              <p data-i18n="note2">Connected homepage project cards to dedicated deep-dive pages.</p>
-            </li>
-            <li>
-              <span class="date">2026-02-23</span>
-              <p data-i18n="note3">Configured and validated Cloudflare Pages auto deployment via GitHub Actions.</p>
-            </li>
-          </ul>
+          <div class="grid">
+            <article class="card project-card" aria-label="SoulSpirit">
+              <h4 data-i18n="soulspiritTitle">SoulSpirit</h4>
+              <p class="project-tag" data-i18n="soulspiritTag">Cocktail Test Lab</p>
+              <p data-i18n="soulspiritBody">
+                A playful testing program for customizing cocktails by mood and taste
+                preferences.
+              </p>
+              <p class="project-note" data-i18n="soulspiritNote">
+                Currently used for idea testing and recipe prototyping.
+              </p>
+            </article>
+
+            <article class="card project-card" aria-label="CyberMaster">
+              <h4 data-i18n="cybermasterTitle">CyberMaster</h4>
+              <p class="project-tag" data-i18n="cybermasterTag">Cyber Fortune Teller</p>
+              <p data-i18n="cybermasterBody">
+                A fun cyber divination app that generates themed fortunes and playful
+                personality readings.
+              </p>
+              <p class="project-note" data-i18n="cybermasterNote">
+                Built as an entertainment-only experiment.
+              </p>
+            </article>
+          </div>
         </section>
 
         <section id="contact" class="panel contact">
@@ -163,14 +177,15 @@
             intro: "AI student at King's College London. Build first, understand later.",
             navHello: "Hello",
             navProjects: "Projects",
-            navUpdates: "Recent Notes",
+            navPlayground: "Playground",
             navContact: "Contact",
             status: "Currently building in public.",
+            githubHome: "My GitHub Homepage",
             heroTitle: "Hi, I'm Max (Yuzhen Yang).",
             heroBody:
               "I study Artificial Intelligence at King's College London, and I enjoy building all kinds of AI projects, from game AI and autonomous agents to weird but fun experiments. I believe the best way to learn is: build first, understand later. If you ever find me, I'm probably coding, thinking about a new project, or playing strategy games.",
             heroBtnProjects: "View projects",
-            heroBtnUpdates: "See updates",
+            heroBtnPlayground: "See playground",
             projectsTitle: "Projects Overview",
             projectsSub: "Short version on the homepage. Click any project to see the full details.",
             potemkinTitle: "Project Potemkin",
@@ -192,11 +207,19 @@
             quickAidNote:
               "Uses image recognition to identify injury conditions and suggest step-by-step handling instructions.",
             viewDetails: "View details",
-            updatesTitle: "Recent Notes",
-            updatesSub: "Keep the cadence, even if each update is small.",
-            note1: "Published a bilingual project overview and added detail pages for three projects.",
-            note2: "Connected homepage project cards to dedicated deep-dive pages.",
-            note3: "Configured and validated Cloudflare Pages auto deployment via GitHub Actions.",
+            playgroundTitle: "Playground",
+            playgroundSub: "Small fun experiments and quirky tools built for testing ideas.",
+            soulspiritTitle: "SoulSpirit",
+            soulspiritTag: "Cocktail Test Lab",
+            soulspiritBody:
+              "A playful testing program for customizing cocktails by mood and taste preferences.",
+            soulspiritNote:
+              "Currently used for idea testing and recipe prototyping.",
+            cybermasterTitle: "CyberMaster",
+            cybermasterTag: "Cyber Fortune Teller",
+            cybermasterBody:
+              "A fun cyber divination app that generates themed fortunes and playful personality readings.",
+            cybermasterNote: "Built as an entertainment-only experiment.",
             contactTitle: "Contact",
             contactLead: "If you'd like to discuss projects, writing, or collaboration, email me at",
             contactTail: "."
@@ -207,14 +230,15 @@
             intro: "King's College London 人工智能学生。build first, understand later.",
             navHello: "你好",
             navProjects: "项目",
-            navUpdates: "最近更新",
+            navPlayground: "游乐场",
             navContact: "联系",
             status: "正在公开构建中。",
+            githubHome: "我的 GitHub 主页",
             heroTitle: "你好，我是 Max（Yuzhen Yang）。",
             heroBody:
               "我在 King's College London 学 Artificial Intelligence，平时喜欢做各种 AI 项目，从游戏 AI 到 autonomous agents，再到一些奇怪但有趣的实验。我相信最好的学习方式是：build first, understand later. 如果你看到我，大概率在写代码、想新项目，或者打策略游戏。",
             heroBtnProjects: "查看项目",
-            heroBtnUpdates: "最近更新",
+            heroBtnPlayground: "查看游乐场",
             projectsTitle: "项目总览",
             projectsSub: "首页展示简短版，点击项目可进入详细介绍页面。",
             potemkinTitle: "Project Potemkin",
@@ -236,11 +260,19 @@
             quickAidNote:
               "该系统通过图像识别技术识别伤情并提供处理步骤建议。",
             viewDetails: "查看详情",
-            updatesTitle: "最近更新",
-            updatesSub: "保持更新频率，哪怕每次只是一小段。",
-            note1: "发布了中英双语项目总览，并新增三个项目详情页。",
-            note2: "首页项目卡片已连接到对应的深入介绍页面。",
-            note3: "已配置并验证 Cloudflare Pages 的 GitHub Actions 自动部署。",
+            playgroundTitle: "游乐场",
+            playgroundSub: "放一些好玩的实验程序和小工具，用来测试新想法。",
+            soulspiritTitle: "SoulSpirit",
+            soulspiritTag: "定制鸡尾酒测试程序",
+            soulspiritBody:
+              "一个用于测试定制鸡尾酒的小程序，会根据心情和口味偏好生成玩法与配方方向。",
+            soulspiritNote:
+              "当前用于快速试验创意和配方原型。",
+            cybermasterTitle: "CyberMaster",
+            cybermasterTag: "赛博算命大师",
+            cybermasterBody:
+              "一个偏娱乐向的赛博算命程序，会生成主题化运势和趣味人格解读。",
+            cybermasterNote: "目前作为娱乐实验项目运行。",
             contactTitle: "联系",
             contactLead: "如果你想交流项目、内容或合作，请发邮件到",
             contactTail: "。"
