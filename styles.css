@@ -492,7 +492,10 @@ body.welcome-active .lang-switch {
   transform: scaleX(0);
   transform-origin: 0 50%;
   background: linear-gradient(90deg, rgba(0, 245, 255, 0.94), rgba(245, 230, 0, 0.9));
+  background-size: 180% 100%;
+  background-position: 0 0;
   box-shadow: 0 0 12px rgba(0, 245, 255, 0.42);
+  animation: welcomeProgressFlow 1.2s linear infinite;
 }
 
 .welcome-progress-value {
@@ -1063,9 +1066,9 @@ h1 {
 
 .project-grid .project-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 0.72rem;
 }
 
 .project-main {
@@ -1094,14 +1097,43 @@ h1 {
   max-width: 66ch;
 }
 
+.project-media {
+  margin-top: 0.72rem;
+  max-width: 620px;
+}
+
+.project-preview {
+  display: block;
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 245, 255, 0.24);
+  background: rgba(8, 12, 24, 0.72);
+  box-shadow: 0 8px 18px rgba(2, 6, 16, 0.48);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.project-card:hover .project-preview {
+  transform: translateY(-1px);
+  border-color: rgba(0, 245, 255, 0.46);
+  box-shadow: 0 12px 24px rgba(0, 245, 255, 0.16), 0 12px 28px rgba(2, 6, 16, 0.5);
+}
+
 .project-note {
   margin-top: 0.54rem !important;
 }
 
 .project-actions {
-  margin-top: 0;
-  align-self: center;
+  margin-top: 0.18rem;
+  align-self: flex-start;
   flex-shrink: 0;
+}
+
+.project-grid .project-actions .button-sm {
+  min-height: 2.1rem;
+  padding: 0.5rem 0.88rem;
+  font-size: 0.8rem;
 }
 
 .card-actions {
@@ -1403,6 +1435,15 @@ h1 {
   }
 }
 
+@keyframes welcomeProgressFlow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 180% 0;
+  }
+}
+
 @keyframes welcomeBrandShiftA {
   0%,
   16%,
@@ -1537,6 +1578,14 @@ h1 {
     margin-top: 0.75rem;
     align-self: flex-start;
   }
+
+  .project-media {
+    max-width: 100%;
+  }
+
+  .project-preview {
+    max-height: 260px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1586,6 +1635,10 @@ h1 {
     width: auto;
   }
 
+  .project-preview {
+    max-height: 200px;
+  }
+
   .welcome-overlay {
     padding: 0.8rem;
   }
@@ -1630,6 +1683,7 @@ h1 {
   .status::before,
   .welcome-overlay::before,
   .welcome-atmosphere,
+  .welcome-progress-bar,
   .welcome-hint,
   .welcome-overlay[data-phase="intro"] .welcome-brand::before,
   .welcome-overlay[data-phase="intro"] .welcome-brand::after {

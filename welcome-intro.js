@@ -3,6 +3,10 @@
   const FONT_TIMEOUT_MS = 1800;
   const IMAGE_TIMEOUT_MS = 1200;
   const INTRO_FAILSAFE_MS = 5200;
+  const MIN_LOADING_VISUAL_MS = 2400;
+  const LOADING_PROGRESS_HOLD = 0.985;
+  const PROGRESS_EASE = 0.16;
+  const INTRO_SEEN_SESSION_KEY = "xxxaurora-welcome-intro-seen";
 
   function wait(ms) {
     return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -62,6 +66,22 @@
     return Promise.allSettled(pending).then(() => undefined);
   }
 
+  function readIntroSeen() {
+    try {
+      return window.sessionStorage.getItem(INTRO_SEEN_SESSION_KEY) === "1";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function markIntroSeen() {
+    try {
+      window.sessionStorage.setItem(INTRO_SEEN_SESSION_KEY, "1");
+    } catch (err) {
+      // Ignore storage failures (private mode / blocked storage).
+    }
+  }
+
   async function preloadCriticalAssets(onProgress) {
     const tasks = [
       () => withTimeout(waitForDocumentComplete(), PRELOAD_TIMEOUT_MS),
@@ -90,12 +110,19 @@
     const body = document.body;
     const onEnter = typeof options.onEnter === "function" ? options.onEnter : () => {};
     const prefersReducedMotion = options.prefersReducedMotion === true;
+    const shouldSkipIntro = body?.dataset?.welcomeIntro === "off" || readIntroSeen();
 
-    if (!overlay || body?.dataset?.welcomeIntro === "off") {
+    if (!overlay || shouldSkipIntro) {
       body?.classList.remove("welcome-active", "welcome-preloading", "welcome-intro-ready");
+      if (overlay) {
+        overlay.setAttribute("aria-hidden", "true");
+        overlay.remove();
+      }
       onEnter();
       return;
     }
+
+    markIntroSeen();
 
     const hasGsap = !!window.gsap && !prefersReducedMotion;
     const progressBar = overlay.querySelector(".welcome-progress-bar");
@@ -113,6 +140,11 @@
     let wantsEnter = false;
     const idleTweens = [];
     let cleanup = () => {};
+    let progressFrame = 0;
+    let progressVisual = 0;
+    let progressActual = 0;
+    let progressStartAt = 0;
+    let preloadSettled = false;
 
     const setPhase = (nextPhase) => {
       phase = nextPhase;
@@ -132,7 +164,55 @@
       }
     };
 
+    const stopProgressLoop = () => {
+      if (progressFrame) {
+        window.cancelAnimationFrame(progressFrame);
+        progressFrame = 0;
+      }
+    };
+
+    const updateActualProgress = (ratio) => {
+      const clamped = Math.max(0, Math.min(1, ratio));
+      progressActual = Math.max(progressActual, clamped);
+    };
+
+    const startProgressLoop = () => {
+      progressStartAt = performance.now();
+      progressVisual = 0;
+      progressActual = 0;
+      preloadSettled = false;
+
+      const tick = () => {
+        const elapsed = performance.now() - progressStartAt;
+        const elapsedRatio = Math.max(0, Math.min(1, elapsed / MIN_LOADING_VISUAL_MS));
+        const gatedByTime = elapsedRatio * LOADING_PROGRESS_HOLD;
+        const cappedActual = preloadSettled
+          ? LOADING_PROGRESS_HOLD
+          : Math.min(progressActual, LOADING_PROGRESS_HOLD);
+        const targetProgress =
+          preloadSettled && elapsedRatio >= 1 ? 1 : Math.min(cappedActual, gatedByTime);
+        const delta = targetProgress - progressVisual;
+
+        if (Math.abs(delta) <= 0.0006) {
+          progressVisual = targetProgress;
+        } else {
+          progressVisual += delta * PROGRESS_EASE;
+        }
+
+        if (targetProgress === 1 && progressVisual > 0.9995) {
+          progressVisual = 1;
+        }
+
+        setProgress(progressVisual);
+        progressFrame = window.requestAnimationFrame(tick);
+      };
+
+      stopProgressLoop();
+      progressFrame = window.requestAnimationFrame(tick);
+    };
+
     const finish = () => {
+      stopProgressLoop();
       setPhase("entered");
       body.classList.remove("welcome-active", "welcome-preloading", "welcome-intro-ready");
       overlay.setAttribute("aria-hidden", "true");
@@ -267,25 +347,42 @@
 
     const run = async () => {
       setPhase("loading");
+      startProgressLoop();
       const failsafe = window.setTimeout(() => {
+        preloadSettled = true;
+        updateActualProgress(1);
         setProgress(1);
+        stopProgressLoop();
         runIntroReveal();
       }, INTRO_FAILSAFE_MS);
 
       try {
-        await preloadCriticalAssets(setProgress);
+        await preloadCriticalAssets(updateActualProgress);
       } catch (err) {
-        setProgress(1);
+        updateActualProgress(1);
       }
 
+      preloadSettled = true;
+      updateActualProgress(1);
+
+      const elapsed = performance.now() - progressStartAt;
+      const remain = MIN_LOADING_VISUAL_MS - elapsed;
+      if (remain > 0) {
+        await wait(remain);
+      }
+
+      await wait(160);
       setProgress(1);
-      await wait(80);
+      stopProgressLoop();
       window.clearTimeout(failsafe);
       runIntroReveal();
     };
 
     run().catch(() => {
+      preloadSettled = true;
+      updateActualProgress(1);
       setProgress(1);
+      stopProgressLoop();
       runIntroReveal();
     });
   }
