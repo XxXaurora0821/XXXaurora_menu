@@ -252,3 +252,221 @@
     resetToIdle();
   });
 })();
+
+(() => {
+  const body = document.body;
+  if (!body) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+  const root = document.documentElement;
+
+  body.classList.add("fx-enhanced");
+
+  const ambientLayer = document.createElement("div");
+  ambientLayer.className = "ambient-layer";
+  ambientLayer.setAttribute("aria-hidden", "true");
+  ambientLayer.innerHTML = [
+    '<span class="ambient-blob ambient-blob-a"></span>',
+    '<span class="ambient-blob ambient-blob-b"></span>',
+    '<span class="ambient-blob ambient-blob-c"></span>',
+    '<span class="ambient-grid"></span>'
+  ].join("");
+
+  const bodyFirst = body.firstElementChild;
+  if (bodyFirst) {
+    body.insertBefore(ambientLayer, bodyFirst);
+  } else {
+    body.appendChild(ambientLayer);
+  }
+
+  const progress = document.createElement("div");
+  progress.className = "scroll-energy";
+  progress.setAttribute("aria-hidden", "true");
+  progress.innerHTML = '<span class="scroll-energy__bar"></span>';
+  body.appendChild(progress);
+
+  const updateScrollProgress = () => {
+    const maxScroll = Math.max(
+      1,
+      document.documentElement.scrollHeight - window.innerHeight
+    );
+    const ratio = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+    root.style.setProperty("--scroll-progress", ratio.toFixed(4));
+  };
+
+  updateScrollProgress();
+  document.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress);
+
+  if (!prefersReducedMotion) {
+    let pointerX = 0;
+    let pointerY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let frame = 0;
+
+    const render = () => {
+      frame = 0;
+      pointerX += (targetX - pointerX) * 0.08;
+      pointerY += (targetY - pointerY) * 0.08;
+
+      root.style.setProperty("--ambient-x", pointerX.toFixed(4));
+      root.style.setProperty("--ambient-y", pointerY.toFixed(4));
+
+      if (
+        Math.abs(pointerX - targetX) > 0.001 ||
+        Math.abs(pointerY - targetY) > 0.001
+      ) {
+        frame = window.requestAnimationFrame(render);
+      }
+    };
+
+    const onPointerMove = (event) => {
+      const x = event.clientX / window.innerWidth;
+      const y = event.clientY / window.innerHeight;
+      targetX = (x - 0.5) * 2;
+      targetY = (y - 0.5) * 2;
+      if (!frame) {
+        frame = window.requestAnimationFrame(render);
+      }
+    };
+
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+  }
+
+  const initDetailReveal = () => {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    if (!document.querySelector(".detail-layout")) {
+      return;
+    }
+
+    const blocks = Array.from(
+      document.querySelectorAll(".detail-layout .panel, .detail-layout .quick-jump")
+    );
+    if (!blocks.length) {
+      return;
+    }
+
+    blocks.forEach((block, index) => {
+      block.classList.add("fx-reveal");
+      block.style.setProperty("--fx-reveal-delay", `${Math.min(index * 48, 320)}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries, activeObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          entry.target.classList.add("is-visible");
+          activeObserver.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -14% 0px"
+      }
+    );
+
+    blocks.forEach((block) => observer.observe(block));
+  };
+
+  const initTiltPanels = () => {
+    if (prefersReducedMotion || !supportsFinePointer) {
+      return;
+    }
+
+    const targets = Array.from(
+      document.querySelectorAll(".project-card, .quick-jump, .detail-layout .panel, .hero")
+    );
+    if (!targets.length) {
+      return;
+    }
+
+    targets.forEach((target) => {
+      target.classList.add("fx-tilt");
+      if (!target.querySelector(".fx-glare")) {
+        const glare = document.createElement("span");
+        glare.className = "fx-glare";
+        glare.setAttribute("aria-hidden", "true");
+        target.appendChild(glare);
+      }
+
+      const resetTilt = () => {
+        target.style.setProperty("--tilt-rotate-x", "0deg");
+        target.style.setProperty("--tilt-rotate-y", "0deg");
+        target.style.setProperty("--tilt-shift-x", "50%");
+        target.style.setProperty("--tilt-shift-y", "50%");
+        target.style.setProperty("--tilt-lift", "0px");
+        target.classList.remove("is-tilting");
+      };
+
+      target.addEventListener("pointerenter", () => {
+        target.classList.add("is-tilting");
+      });
+
+      target.addEventListener("pointermove", (event) => {
+        const rect = target.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width;
+        const py = (event.clientY - rect.top) / rect.height;
+        const rotateX = (0.5 - py) * 6;
+        const rotateY = (px - 0.5) * 8;
+
+        target.style.setProperty("--tilt-rotate-x", `${rotateX.toFixed(3)}deg`);
+        target.style.setProperty("--tilt-rotate-y", `${rotateY.toFixed(3)}deg`);
+        target.style.setProperty("--tilt-shift-x", `${(px * 100).toFixed(2)}%`);
+        target.style.setProperty("--tilt-shift-y", `${(py * 100).toFixed(2)}%`);
+        target.style.setProperty("--tilt-lift", "-4px");
+      });
+
+      target.addEventListener("pointerleave", resetTilt);
+      target.addEventListener("blur", resetTilt, true);
+    });
+  };
+
+  const initMagneticButtons = () => {
+    if (prefersReducedMotion || !supportsFinePointer) {
+      return;
+    }
+
+    const targets = Array.from(
+      document.querySelectorAll(
+        ".button, .ghost, .lang-btn, .sidebar nav a"
+      )
+    );
+    if (!targets.length) {
+      return;
+    }
+
+    targets.forEach((target) => {
+      target.classList.add("fx-magnetic");
+
+      const reset = () => {
+        target.style.setProperty("--magnetic-x", "0px");
+        target.style.setProperty("--magnetic-y", "0px");
+      };
+
+      target.addEventListener("pointermove", (event) => {
+        const rect = target.getBoundingClientRect();
+        const offsetX = event.clientX - (rect.left + rect.width / 2);
+        const offsetY = event.clientY - (rect.top + rect.height / 2);
+        const force = target.matches(".sidebar nav a") ? 0.09 : 0.14;
+        target.style.setProperty("--magnetic-x", `${(offsetX * force).toFixed(2)}px`);
+        target.style.setProperty("--magnetic-y", `${(offsetY * force).toFixed(2)}px`);
+      });
+
+      target.addEventListener("pointerleave", reset);
+      target.addEventListener("blur", reset, true);
+    });
+  };
+
+  initDetailReveal();
+  initTiltPanels();
+  initMagneticButtons();
+})();
