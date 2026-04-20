@@ -109,6 +109,9 @@
     const overlay = document.getElementById("welcome-overlay");
     const body = document.body;
     const onEnter = typeof options.onEnter === "function" ? options.onEnter : () => {};
+    const onLanguageSelect =
+      typeof options.onLanguageSelect === "function" ? options.onLanguageSelect : null;
+    const initialLang = options.initialLang === "zh" ? "zh" : "en";
     const prefersReducedMotion = options.prefersReducedMotion === true;
     const shouldSkipIntro = body?.dataset?.welcomeIntro === "off" || readIntroSeen();
 
@@ -118,11 +121,9 @@
         overlay.setAttribute("aria-hidden", "true");
         overlay.remove();
       }
-      onEnter();
+      onEnter(initialLang);
       return;
     }
-
-    markIntroSeen();
 
     const hasGsap = !!window.gsap && !prefersReducedMotion;
     const progressBar = overlay.querySelector(".welcome-progress-bar");
@@ -133,11 +134,13 @@
     const brand = overlay.querySelector(".welcome-brand");
     const sub = overlay.querySelector(".welcome-sub");
     const hint = overlay.querySelector(".welcome-hint");
+    const entryActions = overlay.querySelector(".welcome-entry-actions");
+    const langButtons = Array.from(overlay.querySelectorAll("[data-welcome-lang]"));
     const atmosphere = overlay.querySelector(".welcome-atmosphere");
 
     let phase = "loading";
     let entered = false;
-    let wantsEnter = false;
+    let selectedLang = initialLang;
     const idleTweens = [];
     let cleanup = () => {};
     let progressFrame = 0;
@@ -212,19 +215,60 @@
     };
 
     const finish = () => {
+      applySelectedLanguage(selectedLang);
       stopProgressLoop();
       setPhase("entered");
       body.classList.remove("welcome-active", "welcome-preloading", "welcome-intro-ready");
       overlay.setAttribute("aria-hidden", "true");
       overlay.remove();
-      onEnter();
+      onEnter(selectedLang);
+    };
+
+    const setSelectedLanguage = (lang) => {
+      selectedLang = lang === "zh" ? "zh" : "en";
+      langButtons.forEach((button) => {
+        const isActive = button.getAttribute("data-welcome-lang") === selectedLang;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    };
+
+    const focusSelectedLanguage = () => {
+      const activeButton =
+        langButtons.find(
+          (button) => button.getAttribute("data-welcome-lang") === selectedLang
+        ) || langButtons[0];
+      if (!activeButton) {
+        return;
+      }
+
+      try {
+        activeButton.focus({ preventScroll: true });
+      } catch (err) {
+        activeButton.focus();
+      }
+    };
+
+    const applySelectedLanguage = (lang) => {
+      if (onLanguageSelect) {
+        onLanguageSelect(lang);
+        return;
+      }
+
+      try {
+        window.localStorage.setItem("site-lang", lang);
+      } catch (err) {
+        // Keep runtime language only when storage is blocked.
+      }
     };
 
     const runEnterTransition = () => {
       if (entered || phase !== "intro") {
         return;
       }
+      applySelectedLanguage(selectedLang);
       entered = true;
+      markIntroSeen();
       idleTweens.forEach((tween) => tween.kill());
       cleanup();
 
@@ -234,51 +278,49 @@
       }
 
       const gsap = window.gsap;
-      gsap
-        .timeline({
-          defaults: { ease: "power2.out" },
-          onComplete: finish
-        })
-        .to(hint, { autoAlpha: 0, y: 10, duration: 0.18 })
-        .to(loader, { autoAlpha: 0, y: -8, duration: 0.18 }, 0)
+      const tl = gsap.timeline({
+        defaults: { ease: "power2.out" },
+        onComplete: finish
+      });
+
+      tl.to(hint, { autoAlpha: 0, y: 10, duration: 0.18 });
+      if (entryActions) {
+        tl.to(entryActions, { autoAlpha: 0, y: 10, duration: 0.18 }, 0);
+      }
+      tl.to(loader, { autoAlpha: 0, y: -8, duration: 0.18 }, 0)
         .to(brand, { scale: 1.01, duration: 0.18 }, 0)
         .to(panel, { autoAlpha: 0, y: 18, scale: 0.985, duration: 0.34 }, 0.08)
         .to(atmosphere, { autoAlpha: 0.42, scale: 1.02, duration: 0.3 }, 0.08)
         .to(overlay, { autoAlpha: 0, duration: 0.3 }, 0.14);
     };
 
-    const onPointerDown = (event) => {
-      if (typeof event.button === "number" && event.button !== 0) {
+    const onLanguageButtonClick = (event) => {
+      const button = event.currentTarget;
+      const lang = button?.getAttribute("data-welcome-lang");
+      if (!lang || phase !== "intro" || entered) {
         return;
       }
-      wantsEnter = true;
-      if (phase === "intro") {
-        runEnterTransition();
-      }
-    };
 
-    const onKeyDown = (event) => {
-      if (event.key !== "Enter" && event.key !== " ") {
-        return;
-      }
       event.preventDefault();
-      wantsEnter = true;
-      if (phase === "intro") {
-        runEnterTransition();
+      setSelectedLanguage(lang);
+      applySelectedLanguage(lang);
+      if (entryActions) {
+        entryActions.style.pointerEvents = "none";
       }
+      window.setTimeout(() => {
+        runEnterTransition();
+      }, 90);
     };
 
-    overlay.addEventListener("pointerdown", onPointerDown);
-    overlay.addEventListener("keydown", onKeyDown);
-    try {
-      overlay.focus({ preventScroll: true });
-    } catch (err) {
-      overlay.focus();
-    }
+    langButtons.forEach((button) =>
+      button.addEventListener("click", onLanguageButtonClick)
+    );
+    setSelectedLanguage(initialLang);
 
     cleanup = () => {
-      overlay.removeEventListener("pointerdown", onPointerDown);
-      overlay.removeEventListener("keydown", onKeyDown);
+      langButtons.forEach((button) =>
+        button.removeEventListener("click", onLanguageButtonClick)
+      );
     };
 
     let introRevealed = false;
@@ -299,19 +341,26 @@
           hint.style.opacity = "1";
           hint.style.transform = "none";
         }
-        if (wantsEnter) {
-          runEnterTransition();
+        if (entryActions) {
+          entryActions.style.opacity = "1";
+          entryActions.style.transform = "none";
+          entryActions.style.pointerEvents = "auto";
         }
+        applySelectedLanguage(selectedLang);
+        focusSelectedLanguage();
         return;
       }
 
       const gsap = window.gsap;
-      gsap.set([kicker, brand, sub, hint], { autoAlpha: 0, y: 16 });
+      gsap.set([kicker, brand, sub, hint, entryActions].filter(Boolean), {
+        autoAlpha: 0,
+        y: 16
+      });
       gsap.set(loader, { autoAlpha: 1, y: 0 });
       gsap.set(overlay, { autoAlpha: 1 });
       gsap.set(atmosphere, { autoAlpha: 0.66, scale: 1.03 });
 
-      gsap
+      const tl = gsap
         .timeline({ defaults: { ease: "power3.out" } })
         .to(loader, { autoAlpha: 0, y: -10, duration: 0.34 })
         .to(panel, { y: 0, duration: 0.52, ease: "power2.out" }, 0)
@@ -319,6 +368,10 @@
         .to(brand, { autoAlpha: 1, y: 0, duration: 0.42 }, "-=0.06")
         .to(sub, { autoAlpha: 1, y: 0, duration: 0.34 }, "-=0.16")
         .to(hint, { autoAlpha: 1, y: 0, duration: 0.3 }, "-=0.1");
+
+      if (entryActions) {
+        tl.to(entryActions, { autoAlpha: 1, y: 0, duration: 0.32 }, "-=0.08");
+      }
 
       idleTweens.push(
         gsap.to(panel, {
@@ -340,9 +393,7 @@
         })
       );
 
-      if (wantsEnter) {
-        window.setTimeout(runEnterTransition, 90);
-      }
+      window.setTimeout(focusSelectedLanguage, 380);
     };
 
     const run = async () => {

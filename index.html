@@ -22,9 +22,9 @@
       id="welcome-overlay"
       class="welcome-overlay"
       data-phase="loading"
-      role="button"
-      tabindex="0"
-      aria-label="Enter site"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Choose site language"
     >
       <div class="welcome-atmosphere" aria-hidden="true">
         <span class="welcome-orb welcome-orb-a"></span>
@@ -42,7 +42,7 @@
       </div>
 
       <div class="welcome-panel">
-        <p class="welcome-kicker">GATEWAY INITIALIZING</p>
+        <p class="welcome-kicker" data-i18n="welcomeKicker">GATEWAY INITIALIZING</p>
         <h2 class="welcome-brand" data-brand="XxXAurora">XxXAurora</h2>
         <p class="welcome-sub" data-i18n="welcomeSub">Personal Gateway Interface</p>
 
@@ -54,7 +54,15 @@
           <p class="welcome-progress-value">0%</p>
         </div>
 
-        <p class="welcome-hint" data-i18n="welcomeHint">Click anywhere to enter</p>
+        <p class="welcome-hint" data-i18n="welcomeHint">Choose language to enter</p>
+        <div class="welcome-entry-actions" role="group" aria-label="Choose site language">
+          <button type="button" class="welcome-lang-btn is-active" data-welcome-lang="en" aria-pressed="true">
+            English
+          </button>
+          <button type="button" class="welcome-lang-btn" data-welcome-lang="zh" aria-pressed="false">
+            中文
+          </button>
+        </div>
       </div>
     </div>
 
@@ -256,9 +264,10 @@
           en: {
             pageTitle: "XXX Aurora",
             pageDescription: "XXX Aurora personal gateway: project overview and contact.",
+            welcomeKicker: "Gateway Initializing",
             welcomeSub: "Personal Gateway Interface",
             welcomeLoad: "Synchronizing interface assets...",
-            welcomeHint: "Click anywhere to enter",
+            welcomeHint: "Choose language to enter",
             menuTitle: "Menu",
             intro: "Hi, I'm xxxaurora.",
             navHello: "Intro",
@@ -319,9 +328,10 @@
           zh: {
             pageTitle: "XXX Aurora 个人导航",
             pageDescription: "XXX Aurora 的个人导航页：项目总览与联系方式。",
+            welcomeKicker: "正在初始化入口",
             welcomeSub: "个人导航接口",
             welcomeLoad: "正在同步界面资源...",
-            welcomeHint: "点击任意位置进入",
+            welcomeHint: "选择语言进入",
             menuTitle: "菜单",
             intro: "大家好我是xxxaurora",
             navHello: "简介",
@@ -562,6 +572,22 @@
           });
         }
 
+        function persistLang(lang) {
+          try {
+            localStorage.setItem("site-lang", lang);
+          } catch (err) {
+            // Keep runtime language only when storage is blocked.
+          }
+        }
+
+        function setSiteLang(lang, options = {}) {
+          const persist = options.persist !== false;
+          applyLang(lang);
+          if (persist) {
+            persistLang(lang);
+          }
+        }
+
         function initGsapFx() {
           if (!window.gsap || prefersReducedMotion) return;
           const gsap = window.gsap;
@@ -589,12 +615,7 @@
         buttons.forEach((btn) => {
           btn.addEventListener("click", () => {
             const lang = btn.getAttribute("data-lang-btn");
-            applyLang(lang);
-            try {
-              localStorage.setItem("site-lang", lang);
-            } catch (err) {
-              // Keep runtime language only when storage is blocked.
-            }
+            setSiteLang(lang);
           });
         });
 
@@ -654,7 +675,8 @@
           // 雨从第一帧就开始跑，不等 home-entered
         }
 
-        function startMainSiteFx() {
+        function startMainSiteFx(lang = initialLang) {
+          setSiteLang(lang);
           document.body.classList.add("home-entered");
           initNavTracking();
           initModuleMotion();
@@ -670,6 +692,8 @@
         if (typeof window.initWelcomeIntro === "function") {
           window.initWelcomeIntro({
             prefersReducedMotion,
+            initialLang,
+            onLanguageSelect: (lang) => setSiteLang(lang),
             onEnter: startMainSiteFx
           });
         } else {
