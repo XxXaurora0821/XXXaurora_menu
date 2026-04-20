@@ -1,1 +1,17 @@
+# Cloudflare Wrangler cache
 .wrangler/
+
+# macOS system files
+.DS_Store
+**/.DS_Store
+
+# Node modules (if ever added)
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+
+# Claude Code project memory (local only)
+.claude/
+CLAUDE.md
