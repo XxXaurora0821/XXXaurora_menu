@@ -114,7 +114,7 @@
     mo.observe(overlay, { attributes: true, attributeFilter: ['data-phase'] });
   }
 
-  // ── 2. GLITCH BARS (welcome ambience) ─────────────────────────────
+  // ── 2. CP2077-STYLE GLITCH SYSTEM ────────────────────────────────
   function initGlitchBars() {
     const overlay = document.getElementById('welcome-overlay');
     if (!overlay) return;
@@ -124,31 +124,96 @@
     wrap.setAttribute('aria-hidden', 'true');
     overlay.appendChild(wrap);
 
-    function spawnBurst() {
-      if (overlay.getAttribute('data-phase') === 'entered') return;
+    const panel = overlay.querySelector('.welcome-panel');
 
-      const count = 2 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < count; i++) {
-        const bar    = document.createElement('div');
-        const top    = Math.random() * 100;
-        const h      = 1 + Math.random() * 5;
-        const w      = 20 + Math.random() * 55;
-        const left   = Math.random() * (100 - w);
-        const cyan   = Math.random() > 0.4;
-        bar.className = 'wg-bar';
-        bar.style.cssText =
-          `top:${top}%;left:${left}%;width:${w}%;height:${h}px;` +
-          `background:${cyan ? 'rgba(0,232,255,0.38)' : 'rgba(255,30,80,0.28)'};`;
-        wrap.appendChild(bar);
-
-        const life = 45 + Math.random() * 90;
-        setTimeout(() => bar.remove(), life);
+    // ─ HEAVY TEAR: panel displacement + full-width slices + RGB ghost
+    function heavyTear() {
+      // Shake the panel (CP2077 signature move)
+      if (panel) {
+        panel.classList.add('cp77-tear');
+        setTimeout(() => panel.classList.remove('cp77-tear'), 260);
       }
 
-      setTimeout(spawnBurst, 700 + Math.random() * 1200);
+      // 2-5 full-width horizontal displacement slices
+      const count = 2 + Math.floor(Math.random() * 4);
+      for (let i = 0; i < count; i++) {
+        const el    = document.createElement('div');
+        const top   = 4 + Math.random() * 90;
+        const h     = 3 + Math.random() * 22;
+        const shift = (Math.random() - 0.5) * 70;
+        const cyan  = Math.random() > 0.42;
+        const a     = 0.28 + Math.random() * 0.48;
+        el.style.cssText = `position:absolute;left:0;right:0;top:${top}%;height:${h}px;` +
+          `background:${cyan ? `rgba(0,232,255,${a})` : `rgba(255,30,80,${a})`};` +
+          `transform:translateX(${shift}px);mix-blend-mode:screen;pointer-events:none;`;
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 55 + Math.random() * 90);
+      }
+
+      // RGB ghost pair (1px red + 1px cyan, offset ±8px)
+      const gy = 8 + Math.random() * 82;
+      [['rgba(255,30,80,0.7)', -8], ['rgba(0,232,255,0.7)', 8]].forEach(([col, dx]) => {
+        const g = document.createElement('div');
+        g.style.cssText = `position:absolute;left:0;right:0;top:${gy}%;height:1px;` +
+          `background:${col};transform:translateX(${dx}px);mix-blend-mode:screen;pointer-events:none;`;
+        wrap.appendChild(g);
+        setTimeout(() => g.remove(), 75);
+      });
+
+      // Brief full-screen cyan flash
+      const flash = document.createElement('div');
+      flash.className = 'cp77-flash';
+      flash.style.background = 'rgba(0,232,255,0.055)';
+      overlay.appendChild(flash);
+      setTimeout(() => flash.remove(), 95);
     }
 
-    setTimeout(spawnBurst, 400);
+    // ─ MEDIUM: scattered colored bars
+    function colorBars() {
+      const count = 5 + Math.floor(Math.random() * 7);
+      for (let i = 0; i < count; i++) {
+        const el   = document.createElement('div');
+        const top  = Math.random() * 100;
+        const h    = 1 + Math.random() * 7;
+        const w    = 15 + Math.random() * 70;
+        const left = Math.random() * (100 - w);
+        const cyan = Math.random() > 0.38;
+        const a    = 0.22 + Math.random() * 0.52;
+        el.style.cssText = `position:absolute;top:${top}%;left:${left}%;width:${w}%;height:${h}px;` +
+          `background:${cyan ? `rgba(0,232,255,${a})` : `rgba(255,30,80,${a})`};` +
+          `mix-blend-mode:screen;pointer-events:none;`;
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 35 + Math.random() * 75);
+      }
+    }
+
+    // ─ MICRO-FLICKER: constant single-line scanline hits
+    function microFlicker() {
+      if (overlay.getAttribute('data-phase') === 'entered') return;
+      if (Math.random() > 0.55) {
+        const el  = document.createElement('div');
+        const top = Math.random() * 100;
+        const a   = 0.35 + Math.random() * 0.55;
+        el.style.cssText = `position:absolute;left:0;right:0;top:${top}%;height:1px;` +
+          `background:rgba(0,232,255,${a});mix-blend-mode:screen;pointer-events:none;`;
+        wrap.appendChild(el);
+        setTimeout(() => el.remove(), 25 + Math.random() * 35);
+      }
+      setTimeout(microFlicker, 90 + Math.random() * 220);
+    }
+
+    // ─ MAIN BURST SCHEDULER
+    function spawnBurst() {
+      if (overlay.getAttribute('data-phase') === 'entered') return;
+      const r = Math.random();
+      if      (r > 0.62) heavyTear();
+      else if (r > 0.22) colorBars();
+      // else: skip (natural quiet moment)
+      setTimeout(spawnBurst, 480 + Math.random() * 1400);
+    }
+
+    setTimeout(spawnBurst,   280);
+    setTimeout(microFlicker, 150);
   }
 
   // ── 3. WELCOME SCANLINE TICKER (side labels) ───────────────────────

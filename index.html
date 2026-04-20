@@ -16,14 +16,7 @@
   </head>
   <body class="home-page welcome-active welcome-preloading">
     <div class="grain"></div>
-    <div class="home-photo-bg" aria-hidden="true"></div>
-    <img
-      class="home-bg-preload"
-      src="img/background.png"
-      alt=""
-      aria-hidden="true"
-      decoding="async"
-    />
+    <canvas id="rain-canvas" aria-hidden="true"></canvas>
 
     <div
       id="welcome-overlay"
@@ -93,7 +86,6 @@
 
       <main class="content">
         <section id="hello" class="panel hero">
-          <canvas id="rain-canvas" aria-hidden="true"></canvas>
           <h2 data-i18n="heroTitle">Hi everyone, welcome to my website.</h2>
           <p data-i18n="heroBody">
             Hi everyone, welcome to my website. Here you can check out projects of all
@@ -620,13 +612,13 @@
           const canvas = document.getElementById('rain-canvas');
           if (!canvas || prefersReducedMotion) return;
           const ctx = canvas.getContext('2d');
-          const CHARS = 'アイウエオカキクケコサシスセソ0123456789ABCDEFGHIJ@#$%';
+          const CHARS = '禹数码网脑机信号光影速流核阵链断连空零万亿0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*<>[]{}|';
           const SZ = 13;
           let cols, drops, raf;
 
           function resize() {
-            canvas.width  = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
             cols  = Math.floor(canvas.width / SZ);
             drops = Array.from({ length: cols }, () => Math.random() * -(canvas.height / SZ));
           }
@@ -636,21 +628,30 @@
           let last = 0;
           function frame(ts) {
             raf = requestAnimationFrame(frame);
-            if (ts - last < 55) return;
+            if (ts - last < 50) return;
             last = ts;
-            ctx.fillStyle = 'rgba(2, 4, 10, 0.065)';
+            // 拖尾淡出 — 值越小拖尾越长
+            ctx.fillStyle = 'rgba(4, 8, 16, 0.055)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.font = SZ + 'px "IBM Plex Mono",monospace';
             drops.forEach((y, i) => {
               const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
-              const alpha = 0.07 + Math.random() * 0.22;
-              ctx.fillStyle = 'rgba(0,232,255,' + alpha + ')';
+              // 列头字符更亮（新落下的第一格）
+              const isHead = y > 0 && drops[i] - 0.55 <= 0;
+              const alpha  = isHead
+                ? 0.55 + Math.random() * 0.2           // 列头：亮但不刺眼
+                : 0.08 + Math.random() * 0.14;          // 正文：暗，退到背景
+              ctx.fillStyle = isHead
+                ? 'rgba(200,255,255,' + alpha + ')'     // 列头：接近白色
+                : 'rgba(0,232,255,'  + alpha + ')';     // 正文：标准青色
               ctx.fillText(ch, i * SZ, y * SZ);
-              if (y * SZ > canvas.height && Math.random() > 0.974) drops[i] = 0;
-              drops[i] += 0.55;
+              if (y * SZ > canvas.height && Math.random() > 0.972) drops[i] = 0;
+              drops[i] += 0.58;
             });
           }
           raf = requestAnimationFrame(frame);
+
+          // 雨从第一帧就开始跑，不等 home-entered
         }
 
         function startMainSiteFx() {
@@ -659,10 +660,12 @@
           initModuleMotion();
           initGsapFx();
           initHeadingGlitch();
-          initMatrixRain();
         }
 
         applyLang(initialLang);
+
+        // 代码雨立刻启动，不等欢迎页结束
+        initMatrixRain();
 
         if (typeof window.initWelcomeIntro === "function") {
           window.initWelcomeIntro({
