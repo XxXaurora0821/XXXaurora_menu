@@ -727,8 +727,8 @@ h1 {
 .project-card {
   counter-increment: proj;
   display: grid;
-  grid-template-columns: 1fr 160px;
-  gap: 2rem;
+  grid-template-columns: 1fr 128px;
+  gap: 1.5rem;
   align-items: start;
   padding: 2rem 0;
   border-top: 1px solid var(--border);
@@ -812,12 +812,18 @@ h1 {
 
 .project-note { margin-top: 0.5rem !important; font-size: 0.72rem; color: var(--text-dim); }
 
-.project-media { align-self: start; }
+.project-media {
+  align-self: start;
+  justify-self: end;
+  width: min(128px, 100%);
+}
 
 .project-preview {
   display: block;
   width: 100%;
+  max-width: 128px;
   aspect-ratio: 16 / 10;
+  max-height: 80px;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid var(--border-mid);
