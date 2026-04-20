@@ -705,7 +705,7 @@ h1 {
 .project-card {
   counter-increment: proj;
   display: grid;
-  grid-template-columns: 1fr 220px;
+  grid-template-columns: 1fr 160px;
   gap: 2rem;
   align-items: start;
   padding: 2rem 0;
@@ -758,7 +758,7 @@ h1 {
 
 .card h4 {
   font-family: var(--font-display);
-  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -772,8 +772,8 @@ h1 {
   display: block;
   margin-top: 0.35rem;
   font-family: var(--font-body);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--hot) !important;
   font-weight: 500;
@@ -782,8 +782,8 @@ h1 {
 
 .project-summary {
   margin-top: 0.8rem !important;
-  font-size: 0.78rem;
-  line-height: 1.82;
+  font-size: 0.88rem;
+  line-height: 1.8;
   color: var(--text);
   max-width: 54ch;
 }

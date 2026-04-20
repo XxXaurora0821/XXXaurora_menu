@@ -631,7 +631,7 @@
             if (ts - last < 50) return;
             last = ts;
             // 拖尾淡出 — 值越小拖尾越长
-            ctx.fillStyle = 'rgba(4, 8, 16, 0.055)';
+            ctx.fillStyle = 'rgba(4, 8, 16, 0.16)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.font = SZ + 'px "IBM Plex Mono",monospace';
             drops.forEach((y, i) => {

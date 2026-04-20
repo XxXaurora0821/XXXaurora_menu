@@ -338,7 +338,7 @@
         obs.unobserve(entry.target);
         const text = entry.target.textContent.trim();
         // small delay so GSAP reveal completes first
-        setTimeout(() => scrambleTo(entry.target, text, { speed: 2.2 }), 160);
+        setTimeout(() => scrambleTo(entry.target, text, { speed: 0.6 }), 160);
       });
     }, { threshold: 0.45 });
 
