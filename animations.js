@@ -321,8 +321,10 @@
     const h2 = document.querySelector('.hero h2');
     if (!h2) return;
 
-    const txt = h2.textContent.trim();
+    const txt = (h2.dataset.textDecodeTarget || h2.textContent).trim();
     h2.dataset.glitchText = txt;
+
+    h2.querySelectorAll('.glitch-layer').forEach(layer => layer.remove());
 
     [1, 2].forEach(n => {
       const lay = document.createElement('span');
@@ -404,6 +406,10 @@
 
   // ── 7. SECTION TITLE DECODE ON SCROLL ────────────────────────────
   function initSectionDecode() {
+    if (document.documentElement.dataset.globalTextDecode === '1') {
+      return;
+    }
+
     const heads = document.querySelectorAll('.section-head h3');
     if (!heads.length) return;
 

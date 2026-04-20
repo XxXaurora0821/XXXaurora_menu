@@ -466,7 +466,306 @@
     });
   };
 
+  const initTextDecode = () => {
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const SELECTOR = "body :is(h1, h2, h3, h4, h5, h6, p, li, a, button, span)";
+    const CHAR_POOL = "!<>_\\/[]{}-=+*^?#0123456789ABCDEF";
+    const MIN_OPACITY = 0.18;
+    const STAGGER_MS = 34;
+    const rootEl = document.documentElement;
+    const observed = new Set();
+    const intersecting = new Set();
+    const scheduled = new WeakSet();
+    const active = new WeakSet();
+    const decoded = new WeakSet();
+    const orderMap = new WeakMap();
+    let order = 0;
+    let processFrame = 0;
+
+    rootEl.dataset.globalTextDecode = "1";
+
+    const shouldSkip = (el) => {
+      if (!(el instanceof HTMLElement)) {
+        return true;
+      }
+
+      if (
+        el.matches(".welcome-progress-value, .glitch-layer") ||
+        el.closest(
+          ".welcome-terminal, .wt-side-ticker, .cyber-cursor, .ambient-layer, .scroll-energy, script, style"
+        )
+      ) {
+        return true;
+      }
+
+      if (el.getAttribute("aria-hidden") === "true" || el.closest("[aria-hidden='true']")) {
+        return true;
+      }
+
+      return false;
+    };
+
+    const getPrimaryTextNode = (el) => {
+      if (shouldSkip(el)) {
+        return null;
+      }
+
+      const hasBlockingChild = Array.from(el.children).some((child) => {
+        if (!(child instanceof HTMLElement)) {
+          return false;
+        }
+        return child.getAttribute("aria-hidden") !== "true";
+      });
+      if (hasBlockingChild) {
+        return null;
+      }
+
+      const textNodes = Array.from(el.childNodes).filter(
+        (node) =>
+          node.nodeType === Node.TEXT_NODE &&
+          typeof node.textContent === "string" &&
+          node.textContent.trim()
+      );
+
+      if (textNodes.length !== 1) {
+        return null;
+      }
+
+      return textNodes[0];
+    };
+
+    const isRenderable = (el) => {
+      if (!(el instanceof HTMLElement) || !el.isConnected) {
+        return false;
+      }
+
+      if (document.body.classList.contains("welcome-active") && !el.closest("#welcome-overlay")) {
+        return false;
+      }
+
+      const overlay = document.getElementById("welcome-overlay");
+      if (overlay && el.closest("#welcome-overlay")) {
+        const phase = overlay.getAttribute("data-phase");
+        if (
+          phase !== "intro" &&
+          el.matches(".welcome-brand, .welcome-sub, .welcome-hint")
+        ) {
+          return false;
+        }
+      }
+
+      const rect = el.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) {
+        return false;
+      }
+
+      let current = el;
+      while (current) {
+        if (current instanceof HTMLElement) {
+          const style = window.getComputedStyle(current);
+          if (style.display === "none" || style.visibility === "hidden") {
+            return false;
+          }
+          if (Number.parseFloat(style.opacity || "1") < MIN_OPACITY) {
+            return false;
+          }
+        }
+        current = current.parentElement;
+      }
+
+      return true;
+    };
+
+    const getSpeed = (el, text) => {
+      const denseLength = text.replace(/\s+/g, "").length;
+      let speed = Math.max(0.9, Math.min(8.2, denseLength / 18));
+
+      if (el.matches("h1, h2, h3, h4, h5, h6, .detail-sub, .project-tag")) {
+        speed *= 0.82;
+      } else if (el.matches("p, li, .project-summary, .project-note")) {
+        speed *= 1.18;
+      }
+
+      return Math.max(0.8, Math.min(8.5, speed));
+    };
+
+    const scrambleNodeTo = (node, targetText, speed, onDone) => {
+      const chars = targetText.split("");
+      const queue = chars.map((char, index) => ({
+        to: char,
+        start: Math.floor(index / speed),
+        end: Math.floor(index / speed) + Math.floor(5 + Math.random() * 8),
+        current: ""
+      }));
+
+      let frame = 0;
+
+      const tick = () => {
+        let done = 0;
+        let output = "";
+
+        queue.forEach((item) => {
+          if (frame >= item.end) {
+            done += 1;
+            output += item.to;
+          } else if (frame >= item.start) {
+            if (!item.current || Math.random() < 0.36) {
+              item.current = CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
+            }
+            output += item.current;
+          } else {
+            output += item.to;
+          }
+        });
+
+        node.textContent = output;
+
+        if (done < chars.length) {
+          window.requestAnimationFrame(() => {
+            frame += 1;
+            tick();
+          });
+          return;
+        }
+
+        node.textContent = targetText;
+        onDone();
+      };
+
+      tick();
+    };
+
+    const startDecode = (el) => {
+      const textNode = getPrimaryTextNode(el);
+      if (!textNode) {
+        return;
+      }
+
+      const finalText = textNode.textContent;
+      if (!finalText || !finalText.trim()) {
+        return;
+      }
+
+      active.add(el);
+      el.dataset.textDecodeState = "running";
+      el.dataset.textDecodeTarget = finalText.trim();
+
+      scrambleNodeTo(textNode, finalText, getSpeed(el, finalText), () => {
+        active.delete(el);
+        decoded.add(el);
+        intersecting.delete(el);
+        observed.delete(el);
+        el.dataset.textDecodeState = "done";
+        observer.unobserve(el);
+      });
+    };
+
+    const scheduleDecode = (el, delay) => {
+      if (
+        scheduled.has(el) ||
+        active.has(el) ||
+        decoded.has(el) ||
+        el.dataset.textDecodeState === "done"
+      ) {
+        return;
+      }
+
+      scheduled.add(el);
+      window.setTimeout(() => {
+        scheduled.delete(el);
+
+        if (!intersecting.has(el) || !isRenderable(el)) {
+          requestProcess();
+          return;
+        }
+
+        startDecode(el);
+      }, delay);
+    };
+
+    const processTargets = () => {
+      processFrame = 0;
+
+      const ready = [];
+      let blocked = false;
+
+      intersecting.forEach((el) => {
+        if (
+          !(el instanceof HTMLElement) ||
+          decoded.has(el) ||
+          active.has(el) ||
+          el.dataset.textDecodeState === "done"
+        ) {
+          return;
+        }
+
+        if (!isRenderable(el)) {
+          blocked = true;
+          return;
+        }
+
+        ready.push(el);
+      });
+
+      ready
+        .sort((left, right) => (orderMap.get(left) || 0) - (orderMap.get(right) || 0))
+        .forEach((el, index) => scheduleDecode(el, index * STAGGER_MS));
+
+      if (blocked) {
+        requestProcess();
+      }
+    };
+
+    const requestProcess = () => {
+      if (processFrame) {
+        return;
+      }
+      processFrame = window.requestAnimationFrame(processTargets);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!(entry.target instanceof HTMLElement)) {
+            return;
+          }
+
+          if (!entry.isIntersecting) {
+            intersecting.delete(entry.target);
+            return;
+          }
+
+          intersecting.add(entry.target);
+          requestProcess();
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: "0px 0px -12% 0px"
+      }
+    );
+
+    Array.from(document.querySelectorAll(SELECTOR)).forEach((el) => {
+      const textNode = getPrimaryTextNode(el);
+      if (!textNode) {
+        return;
+      }
+
+      orderMap.set(el, order);
+      order += 1;
+      observed.add(el);
+      observer.observe(el);
+    });
+
+    requestProcess();
+  };
+
   initDetailReveal();
   initTiltPanels();
   initMagneticButtons();
+  document.documentElement.dataset.globalTextDecode = "1";
+  window.requestAnimationFrame(initTextDecode);
 })();
