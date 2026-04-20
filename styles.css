@@ -978,6 +978,35 @@ h1 {
   text-transform: uppercase;
 }
 
+.grid .playground-media {
+  margin-top: 1rem;
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-mid);
+  background:
+    linear-gradient(180deg, rgba(0, 232, 255, 0.05), rgba(255, 30, 80, 0.04)),
+    rgba(6, 10, 18, 0.82);
+  overflow: hidden;
+}
+
+.grid .playground-preview {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 25vw, 280px);
+  object-fit: contain;
+  padding: 0.45rem;
+  filter: saturate(0.72) brightness(0.86);
+  transition: filter 260ms ease, transform 260ms ease;
+}
+
+.grid .project-card:hover .playground-preview {
+  filter: saturate(0.96) brightness(1);
+  transform: scale(1.01);
+}
+
 /* ─── CONTACT ─────────────────────────────────────────────── */
 .panel.contact h3 {
   font-family: var(--font-display);
