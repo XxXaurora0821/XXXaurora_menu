@@ -269,35 +269,55 @@ body.welcome-active .lang-switch {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-bright);
+  isolation: isolate;
+  will-change: transform, filter, text-shadow;
 }
 
 .welcome-brand::before,
-.welcome-brand::after {
-  content: attr(data-brand);
+.welcome-brand::after,
+.welcome-sub::before,
+.welcome-sub::after {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
   mix-blend-mode: screen;
+  will-change: transform, opacity, clip-path, text-shadow, filter;
+}
+
+.welcome-brand::before,
+.welcome-brand::after {
+  content: attr(data-brand);
 }
 
 .welcome-brand::before { color: var(--neon); }
 .welcome-brand::after  { color: var(--hot);  }
 
+.welcome-sub::before,
+.welcome-sub::after {
+  content: attr(data-text);
+}
+
+.welcome-sub::before { color: var(--neon); }
+.welcome-sub::after  { color: var(--hot);  }
+
 .welcome-overlay[data-phase="intro"] .welcome-brand::before {
-  animation: welcomeBrandShiftA 5.2s steps(2,end) infinite;
+  animation: welcomeBrandShiftA 2.35s steps(1,end) infinite;
 }
 .welcome-overlay[data-phase="intro"] .welcome-brand::after {
-  animation: welcomeBrandShiftB 6.4s steps(2,end) infinite;
+  animation: welcomeBrandShiftB 2.7s steps(1,end) infinite 0.12s;
 }
 
 .welcome-sub {
+  position: relative;
   margin: 0.55rem 0 0;
   font-family: var(--font-body);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-dim);
+  isolation: isolate;
+  will-change: transform, filter, text-shadow;
 }
 
 .welcome-loader {
@@ -373,7 +393,9 @@ body.welcome-active .lang-switch {
   transform: translateY(6px);
 }
 .welcome-overlay[data-phase="loading"] .welcome-brand::before,
-.welcome-overlay[data-phase="loading"] .welcome-brand::after {
+.welcome-overlay[data-phase="loading"] .welcome-brand::after,
+.welcome-overlay[data-phase="loading"] .welcome-sub::before,
+.welcome-overlay[data-phase="loading"] .welcome-sub::after {
   opacity: 0 !important;
 }
 
@@ -1134,15 +1156,293 @@ body.fx-enhanced .home-photo-bg { /* handled by home-entered */ }
 }
 
 @keyframes welcomeBrandShiftA {
-  0%,100% { transform: translate(0,0);    opacity: 0; }
-  10%     { transform: translate(-3px,0); opacity: 0.72; }
-  20%     { transform: translate(0,0);    opacity: 0; }
+  0%, 68%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  72% {
+    transform: translate3d(-6px, -1px, 0);
+    opacity: 0.8;
+    clip-path: inset(7% 0 55% 0);
+  }
+  76% {
+    transform: translate3d(4px, 1px, 0);
+    opacity: 0.58;
+    clip-path: inset(38% 0 22% 0);
+  }
+  80% {
+    transform: translate3d(-3px, 0, 0);
+    opacity: 0.22;
+    clip-path: inset(71% 0 5% 0);
+  }
 }
 
 @keyframes welcomeBrandShiftB {
-  0%,100% { transform: translate(0,0);   opacity: 0; }
-  7%      { transform: translate(3px,1px); opacity: 0.68; }
-  14%     { transform: translate(0,0);   opacity: 0; }
+  0%, 66%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  70% {
+    transform: translate3d(6px, 1px, 0);
+    opacity: 0.78;
+    clip-path: inset(15% 0 46% 0);
+  }
+  74% {
+    transform: translate3d(-4px, 0, 0);
+    opacity: 0.54;
+    clip-path: inset(54% 0 14% 0);
+  }
+  78% {
+    transform: translate3d(2px, -1px, 0);
+    opacity: 0.18;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeSubShiftA {
+  0%, 74%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  78% {
+    transform: translate3d(-3px, 0, 0);
+    opacity: 0.6;
+    clip-path: inset(10% 0 52% 0);
+  }
+  82% {
+    transform: translate3d(2px, 0, 0);
+    opacity: 0.38;
+    clip-path: inset(57% 0 13% 0);
+  }
+  86% {
+    transform: translate3d(-1px, 0, 0);
+    opacity: 0.14;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeSubShiftB {
+  0%, 72%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+  76% {
+    transform: translate3d(3px, 0, 0);
+    opacity: 0.54;
+    clip-path: inset(18% 0 44% 0);
+  }
+  80% {
+    transform: translate3d(-2px, 0, 0);
+    opacity: 0.34;
+    clip-path: inset(48% 0 16% 0);
+  }
+  84% {
+    transform: translate3d(1px, 0, 0);
+    opacity: 0.12;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeBrandMainHit {
+  0% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+    filter: none;
+    text-shadow:
+      -0.025em 0 rgba(0, 232, 255, 0.34),
+      0.025em 0 rgba(255, 30, 80, 0.26),
+      0 0 26px rgba(0, 232, 255, 0.14);
+  }
+  18% {
+    transform: translate3d(4px, -1px, 0) skewX(3deg);
+    filter: brightness(1.18) contrast(1.08);
+    text-shadow:
+      -0.08em 0 rgba(0, 232, 255, 0.92),
+      0.08em 0 rgba(255, 30, 80, 0.78),
+      0 0 30px rgba(0, 232, 255, 0.35);
+  }
+  44% {
+    transform: translate3d(-6px, 0, 0) skewX(-4deg);
+    filter: brightness(0.84) contrast(1.16);
+    text-shadow:
+      0.09em 0 rgba(255, 30, 80, 0.82),
+      -0.09em 0 rgba(0, 232, 255, 0.9),
+      0 0 24px rgba(255, 30, 80, 0.22);
+  }
+  70% {
+    transform: translate3d(3px, 1px, 0) skewX(2deg);
+    filter: brightness(1.08);
+    text-shadow:
+      -0.045em 0 rgba(0, 232, 255, 0.74),
+      0.045em 0 rgba(255, 30, 80, 0.66),
+      0 0 26px rgba(0, 232, 255, 0.24);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+    filter: none;
+    text-shadow:
+      -0.025em 0 rgba(0, 232, 255, 0.34),
+      0.025em 0 rgba(255, 30, 80, 0.26),
+      0 0 26px rgba(0, 232, 255, 0.14);
+  }
+}
+
+@keyframes welcomeBrandLayerA {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+  16% {
+    opacity: 0.92;
+    transform: translate3d(-12px, -1px, 0);
+    clip-path: inset(5% 0 58% 0);
+  }
+  42% {
+    opacity: 0.7;
+    transform: translate3d(9px, 1px, 0);
+    clip-path: inset(34% 0 24% 0);
+  }
+  68% {
+    opacity: 0.46;
+    transform: translate3d(-7px, 0, 0);
+    clip-path: inset(69% 0 4% 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeBrandLayerB {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+  14% {
+    opacity: 0.88;
+    transform: translate3d(11px, 1px, 0);
+    clip-path: inset(16% 0 42% 0);
+  }
+  40% {
+    opacity: 0.68;
+    transform: translate3d(-8px, 0, 0);
+    clip-path: inset(47% 0 15% 0);
+  }
+  66% {
+    opacity: 0.44;
+    transform: translate3d(6px, -1px, 0);
+    clip-path: inset(0 0 74% 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeSubMainHit {
+  0% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+    filter: none;
+    text-shadow:
+      -0.018em 0 rgba(0, 232, 255, 0.2),
+      0.018em 0 rgba(255, 30, 80, 0.16),
+      0 0 14px rgba(0, 232, 255, 0.08);
+  }
+  22% {
+    transform: translate3d(2px, 0, 0) skewX(2deg);
+    filter: brightness(1.12);
+    text-shadow:
+      -0.06em 0 rgba(0, 232, 255, 0.72),
+      0.06em 0 rgba(255, 30, 80, 0.58),
+      0 0 16px rgba(0, 232, 255, 0.22);
+  }
+  48% {
+    transform: translate3d(-3px, 0, 0) skewX(-3deg);
+    filter: brightness(0.9) contrast(1.12);
+    text-shadow:
+      0.065em 0 rgba(255, 30, 80, 0.64),
+      -0.065em 0 rgba(0, 232, 255, 0.76),
+      0 0 14px rgba(255, 30, 80, 0.16);
+  }
+  74% {
+    transform: translate3d(1px, 0, 0) skewX(1deg);
+    filter: brightness(1.04);
+    text-shadow:
+      -0.03em 0 rgba(0, 232, 255, 0.54),
+      0.03em 0 rgba(255, 30, 80, 0.42),
+      0 0 15px rgba(0, 232, 255, 0.14);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+    filter: none;
+    text-shadow:
+      -0.018em 0 rgba(0, 232, 255, 0.2),
+      0.018em 0 rgba(255, 30, 80, 0.16),
+      0 0 14px rgba(0, 232, 255, 0.08);
+  }
+}
+
+@keyframes welcomeSubLayerA {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+  18% {
+    opacity: 0.72;
+    transform: translate3d(-6px, 0, 0);
+    clip-path: inset(8% 0 56% 0);
+  }
+  46% {
+    opacity: 0.54;
+    transform: translate3d(5px, 0, 0);
+    clip-path: inset(45% 0 16% 0);
+  }
+  74% {
+    opacity: 0.34;
+    transform: translate3d(-3px, 0, 0);
+    clip-path: inset(74% 0 4% 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes welcomeSubLayerB {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
+  16% {
+    opacity: 0.66;
+    transform: translate3d(5px, 0, 0);
+    clip-path: inset(16% 0 40% 0);
+  }
+  42% {
+    opacity: 0.5;
+    transform: translate3d(-4px, 0, 0);
+    clip-path: inset(54% 0 12% 0);
+  }
+  70% {
+    opacity: 0.28;
+    transform: translate3d(2px, 0, 0);
+    clip-path: inset(0 0 76% 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 @keyframes headingGlitch {
@@ -1310,15 +1610,59 @@ body.fx-enhanced .home-photo-bg { /* handled by home-entered */ }
 
 /* ─── WELCOME BRAND REVEAL (CSS-driven for intro phase) ───── */
 .welcome-overlay[data-phase="intro"] .welcome-brand {
+  text-shadow:
+    -0.025em 0 rgba(0, 232, 255, 0.34),
+    0.025em 0 rgba(255, 30, 80, 0.26),
+    0 0 26px rgba(0, 232, 255, 0.14);
   animation: brandReveal 0.75s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .welcome-overlay[data-phase="intro"] .welcome-sub {
+  text-shadow:
+    -0.018em 0 rgba(0, 232, 255, 0.2),
+    0.018em 0 rgba(255, 30, 80, 0.16),
+    0 0 14px rgba(0, 232, 255, 0.08);
   animation: fadeSlideUp 0.5s ease 0.28s both;
+}
+
+.welcome-overlay[data-phase="intro"] .welcome-sub::before {
+  animation: welcomeSubShiftA 2.9s steps(1,end) infinite 0.18s;
+}
+
+.welcome-overlay[data-phase="intro"] .welcome-sub::after {
+  animation: welcomeSubShiftB 3.2s steps(1,end) infinite 0.06s;
 }
 
 .welcome-overlay[data-phase="intro"] .welcome-hint {
   animation: fadeSlideUp 0.5s ease 0.55s both;
+}
+
+.welcome-brand.welcome-text-glitch {
+  animation: welcomeBrandMainHit 210ms steps(2, end) both;
+}
+
+.welcome-brand.welcome-text-glitch::before {
+  opacity: 0.92;
+  animation: welcomeBrandLayerA 210ms steps(2, end) both;
+}
+
+.welcome-brand.welcome-text-glitch::after {
+  opacity: 0.86;
+  animation: welcomeBrandLayerB 210ms steps(2, end) both;
+}
+
+.welcome-sub.welcome-text-glitch {
+  animation: welcomeSubMainHit 180ms steps(2, end) both;
+}
+
+.welcome-sub.welcome-text-glitch::before {
+  opacity: 0.72;
+  animation: welcomeSubLayerA 180ms steps(2, end) both;
+}
+
+.welcome-sub.welcome-text-glitch::after {
+  opacity: 0.66;
+  animation: welcomeSubLayerB 180ms steps(2, end) both;
 }
 
 /* ─── HERO GLITCH LAYERS (enhanced glitch-hit) ───────────── */

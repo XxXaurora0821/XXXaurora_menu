@@ -240,6 +240,81 @@
     }, 1200);
   }
 
+  function initWelcomeTextGlitch() {
+    const overlay = document.getElementById('welcome-overlay');
+    if (!overlay || !MOTION_OK) return;
+
+    const brand = overlay.querySelector('.welcome-brand');
+    const sub = overlay.querySelector('.welcome-sub');
+    if (!brand && !sub) return;
+
+    let burstTimer = 0;
+
+    function syncTextLayers() {
+      if (brand) {
+        brand.dataset.brand = brand.textContent.trim();
+      }
+      if (sub) {
+        sub.dataset.text = sub.textContent.trim();
+      }
+    }
+
+    function fireBurst(el, duration) {
+      if (!el) return;
+      el.classList.remove('welcome-text-glitch');
+      void el.offsetWidth;
+      el.classList.add('welcome-text-glitch');
+      window.setTimeout(() => el.classList.remove('welcome-text-glitch'), duration);
+    }
+
+    function stopBursts() {
+      window.clearTimeout(burstTimer);
+      burstTimer = 0;
+      brand && brand.classList.remove('welcome-text-glitch');
+      sub && sub.classList.remove('welcome-text-glitch');
+    }
+
+    function scheduleBurst() {
+      stopBursts();
+      if (overlay.getAttribute('data-phase') !== 'intro') return;
+
+      syncTextLayers();
+      fireBurst(brand, 210);
+
+      if (sub && Math.random() > 0.26) {
+        window.setTimeout(() => fireBurst(sub, 180), 35 + Math.random() * 55);
+      }
+
+      burstTimer = window.setTimeout(scheduleBurst, 620 + Math.random() * 920);
+    }
+
+    const textMo = new MutationObserver(syncTextLayers);
+    brand && textMo.observe(brand, { childList: true, subtree: true, characterData: true });
+    sub && textMo.observe(sub, { childList: true, subtree: true, characterData: true });
+
+    const phaseMo = new MutationObserver(() => {
+      syncTextLayers();
+      const phase = overlay.getAttribute('data-phase');
+      if (phase === 'intro') {
+        scheduleBurst();
+        return;
+      }
+
+      stopBursts();
+      if (phase === 'entered') {
+        textMo.disconnect();
+        phaseMo.disconnect();
+      }
+    });
+
+    phaseMo.observe(overlay, { attributes: true, attributeFilter: ['data-phase'] });
+    syncTextLayers();
+
+    if (overlay.getAttribute('data-phase') === 'intro') {
+      scheduleBurst();
+    }
+  }
+
   // ── 4. HERO TITLE GLITCH LAYERS ───────────────────────────────────
   // CSS .glitch-hit triggers the animation; JS adds the duplicate layers.
   function enhanceHeroGlitch() {
@@ -386,6 +461,7 @@
     // Welcome effects (always run, overlay present at page load)
     initWelcomeTerminal();
     initGlitchBars();
+    initWelcomeTextGlitch();
     initWelcomeSideTicker();
     initWelcomeCorners();
 
