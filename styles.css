@@ -616,7 +616,7 @@ h1 {
 /* ─── PANELS (sections) ───────────────────────────────────── */
 .panel {
   position: relative;
-  padding: clamp(2.8rem, 6vh, 5rem) clamp(2rem, 4.5vw, 3.5rem);
+  padding: clamp(2.2rem, 5vh, 4rem) clamp(2rem, 4.5vw, 3.5rem);
   border-bottom: 1px solid var(--border);
   border-radius: 0;
   border-left: none;
@@ -745,7 +745,7 @@ h1 {
 .button-sm { padding: 0.38rem 0.78rem; font-size: 0.63rem; }
 
 /* ─── SECTION HEADS ───────────────────────────────────────── */
-.section-head { margin-bottom: 2.2rem; }
+.section-head { margin-bottom: 1.8rem; }
 
 .section-head h3, .panel > h3 {
   font-family: var(--font-display);
@@ -792,8 +792,8 @@ h1 {
 .project-card {
   counter-increment: proj;
   display: grid;
-  grid-template-columns: 1fr 560px;
-  gap: 2.8rem;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
   align-items: start;
   padding: 2rem 0;
   border-top: 1px solid var(--border);
@@ -868,9 +868,9 @@ h1 {
 }
 
 .project-summary {
-  margin-top: 0.8rem !important;
-  font-size: 0.88rem;
-  line-height: 1.8;
+  margin-top: 0.65rem !important;
+  font-size: 0.84rem;
+  line-height: 1.72;
   color: var(--text);
   max-width: 54ch;
 }
@@ -880,15 +880,15 @@ h1 {
 .project-media {
   align-self: start;
   justify-self: end;
-  width: min(560px, 100%);
+  width: min(380px, 100%);
 }
 
 .project-preview {
   display: block;
   width: 100%;
-  max-width: 560px;
-  aspect-ratio: 16 / 10;
-  max-height: 350px;
+  max-width: 380px;
+  aspect-ratio: 16 / 9;
+  max-height: 240px;
   object-fit: cover;
   border-radius: 2px;
   border: 1px solid var(--border-mid);
