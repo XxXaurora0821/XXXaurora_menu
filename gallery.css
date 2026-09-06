@@ -172,3 +172,24 @@ html[lang=zh-CN] .home-page.composition .contact h3 { font-family: 'Songti SC', 
   .opening { transition: none; }
   .home-page.composition .project-grid > .project-card:nth-child(2) .case-cover { transform: none; }
 }
+/* XxXaurora 文字标识：高低交错的 XxX 与紧凑字身组成固定签名。 */
+.brand-lockup { display: inline-flex; align-items: baseline; gap: 0; font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; line-height: 1; letter-spacing: -.065em; white-space: nowrap; }
+.brand-lockup .logo-prefix { color: var(--accent); letter-spacing: -.115em; margin-right: .075em; }
+.brand-lockup .logo-cross { display: inline-block; font-size: .84em; transform: translateY(.025em); transition: transform .6s var(--ease); }
+.brand-lockup .logo-name { color: var(--text); }
+.brand-lockup .logo-stop { display: inline-block; width: .095em; height: .095em; background: var(--accent); margin-left: .11em; }
+.brand-lockup:hover .logo-cross, .brand-lockup:focus-visible .logo-cross { transform: translateY(-.025em) rotate(180deg); }
+.home-page.composition .wordmark { font-size: 34px; font-weight: 700; letter-spacing: -.065em; }
+.detail-page .detail-brand { font-size: 34px; font-weight: 700; letter-spacing: -.065em; }
+.opening .opening-symbol { display: none; }
+.opening .opening-kicker { margin-bottom: 22px; }
+.opening h2.brand-lockup { display: inline-flex; font-size: clamp(72px, 14vw, 220px); font-weight: 700; letter-spacing: -.065em; line-height: 1.1; margin: 12px 0 30px; }
+.opening h2.brand-lockup .logo-prefix, .opening h2.brand-lockup .logo-name, .opening h2.brand-lockup .logo-cross { color: #fff; }
+.opening h2.brand-lockup .logo-stop { background: #fff; }
+.site-footer { display: grid; grid-template-columns: 1fr auto auto; column-gap: 35px; row-gap: 32px; padding: 38px 0 28px; }
+.site-footer .footer-brand { grid-column: 1 / -1; width: fit-content; font-size: clamp(70px, 14.5vw, 220px); line-height: 1; font-weight: 700; letter-spacing: -.065em; padding-bottom: 20px; }
+.site-footer .footer-brand .logo-prefix { color: var(--accent); }
+.site-footer .footer-brand .logo-name { color: var(--text); }
+.site-footer .footer-brand .logo-stop { background: var(--accent); }
+@media(min-width:681px) and (max-width:1050px) { .home-page.composition .wordmark { font-size: 28px; } .home-page.composition .sidebar { gap: 24px; } }
+@media(max-width:680px) { .home-page.composition .wordmark, .detail-page .detail-brand { font-size: 29px; } .opening h2.brand-lockup { font-size: 14vw; } .opening .opening-kicker { font-size: 10px; letter-spacing: .8px; } .site-footer { grid-template-columns: 1fr auto; gap: 20px; } .site-footer .footer-brand { font-size: 14vw; padding-bottom: 8px; } }

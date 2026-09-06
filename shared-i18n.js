@@ -277,9 +277,9 @@
     "Homepage navigation",
     "主页导航"
   ],
-  "XxXAurora home": [
-    "XxXAurora home",
-    "XxXAurora 主页"
+  "XxXaurora home": [
+    "XxXaurora home",
+    "XxXaurora 主页"
   ],
   "Project Potemkin trailer": [
     "Project Potemkin trailer",
