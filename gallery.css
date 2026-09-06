@@ -193,38 +193,3 @@ html[lang=zh-CN] .home-page.composition .contact h3 { font-family: 'Songti SC', 
 .site-footer .footer-brand .logo-stop { background: var(--accent); }
 @media(min-width:681px) and (max-width:1050px) { .home-page.composition .wordmark { font-size: 28px; } .home-page.composition .sidebar { gap: 24px; } }
 @media(max-width:680px) { .home-page.composition .wordmark, .detail-page .detail-brand { font-size: 29px; } .opening h2.brand-lockup { font-size: 14vw; } .opening .opening-kicker { font-size: 10px; letter-spacing: .8px; } .site-footer { grid-template-columns: 1fr auto; gap: 20px; } .site-footer .footer-brand { font-size: 14vw; padding-bottom: 8px; } }
-/* 箭头统一使用矢量路径，不依赖系统字符或 emoji 字体。 */
-.ui-arrow { display: inline-block; width: 1em; height: 1em; flex: 0 0 auto; vertical-align: -.12em; overflow: visible; }
-.ui-arrow path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.button::after, .ghost::after, .project-card h4::after {
-  content: "";
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  flex: 0 0 auto;
-  background: currentColor;
-  -webkit-mask: url('img/arrow-ne.svg') center / contain no-repeat;
-  mask: url('img/arrow-ne.svg') center / contain no-repeat;
-}
-.project-card h4::after { margin-top: .2em; }
-.star-word > span .ui-arrow, .contact-arrow .ui-arrow { display: block; }
-@media(max-width:680px) {
-  .home-page.composition .hero-actions { flex-wrap: wrap; gap: 14px 22px; }
-  .home-page.composition .card-actions, .detail-page .detail-actions { flex-wrap: wrap; }
-  .home-page.composition .hero-actions a, .home-page.composition .card-actions a, .detail-page .detail-actions a { min-height: 44px; }
-  .lang-btn { min-height: 34px; }
-  .home-page.composition .sidebar nav a { min-height: 44px; display: inline-flex; align-items: center; }
-  .opening-actions { flex-wrap: wrap; justify-content: center; }
-  .opening-actions button { min-height: 46px; }
-  .cover-top, .cover-bottom { flex-wrap: wrap; row-gap: 6px; }
-  .site-footer .replay-intro { min-height: 44px; }
-}
-@media(max-width:360px) {
-  .home-page.composition #playground .project-card { grid-template-columns: 78px minmax(0,1fr); gap: 14px; }
-  .home-page.composition #playground .project-info h4 { font-size: 20px; }
-  .home-page.composition .wordmark { font-size: 26px; }
-}
-@supports(padding:max(0px)) {
-  .opening-center { padding-top: max(110px, env(safe-area-inset-top)); padding-bottom: max(110px, env(safe-area-inset-bottom)); }
-  .opening-bottom { bottom: max(25px, env(safe-area-inset-bottom)); }
-}

@@ -41,9 +41,9 @@
     "Skip to content",
     "跳转至内容"
   ],
-  "GitHub profile": [
-    "GitHub profile",
-    "代码主页"
+  "GitHub ↗": [
+    "GitHub ↗",
+    "代码主页 ↗"
   ],
   "GitHub": [
     "GitHub",
@@ -121,9 +121,9 @@
     "HUMAN ↔ AGENT",
     "人与智能体"
   ],
-  "PERSISTENT BY DESIGN": [
-    "PERSISTENT BY DESIGN",
-    "为长久陪伴而设计"
+  "PERSISTENT BY DESIGN ↗": [
+    "PERSISTENT BY DESIGN ↗",
+    "为长久陪伴而设计 ↗"
   ],
   "HUMAN + AI": [
     "HUMAN + AI",
@@ -193,9 +193,9 @@
     "A&E NAVIGATION",
     "急诊导航"
   ],
-  "FIND A SUITABLE ROUTE": [
-    "FIND A SUITABLE ROUTE",
-    "找到合适的就医路径"
+  "FIND A SUITABLE ROUTE ↗": [
+    "FIND A SUITABLE ROUTE ↗",
+    "找到合适的就医路径 ↗"
   ],
   "02 / SIDE QUESTS": [
     "02 / SIDE QUESTS",
@@ -217,9 +217,9 @@
     "SILKY",
     "丝滑"
   ],
-  "CRISP": [
-    "CRISP",
-    "清冽"
+  "CRISP ↗": [
+    "CRISP ↗",
+    "清冽 ↗"
   ],
   "SPARKLING": [
     "SPARKLING",
@@ -253,9 +253,9 @@
     "CHANCE, WITH CHARACTER.",
     "偶然之中，自有趣味。"
   ],
-  "FOR THE FUN OF IT": [
-    "FOR THE FUN OF IT",
-    "只为有趣"
+  "FOR THE FUN OF IT ↗": [
+    "FOR THE FUN OF IT ↗",
+    "只为有趣 ↗"
   ],
   "03 / SAY HELLO": [
     "03 / SAY HELLO",
@@ -265,9 +265,9 @@
     "BUILD FIRST. UNDERSTAND LATER.",
     "先动手创造，再慢慢理解。"
   ],
-  "Replay intro / 重播开场": [
-    "Replay intro",
-    "重播开场"
+  "Replay intro / 重播开场 ↗": [
+    "Replay intro ↗",
+    "重播开场 ↗"
   ],
   "Language selector": [
     "Language selector",
@@ -284,26 +284,6 @@
   "Project Potemkin trailer": [
     "Project Potemkin trailer",
     "Project Potemkin 宣传片"
-  ],
-  "IDEAS": [
-    "IDEAS",
-    "想法"
-  ],
-  "EXPERIMENTS": [
-    "EXPERIMENTS",
-    "实验"
-  ],
-  "POSSIBILITIES": [
-    "POSSIBILITIES",
-    "可能"
-  ],
-  "HUMAN": [
-    "HUMAN",
-    "人"
-  ],
-  "AGENT": [
-    "AGENT",
-    "智能体"
   ]
 };
   const records = [];
