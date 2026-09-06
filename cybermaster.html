@@ -12,13 +12,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="gallery.css" />
   </head>
-  <body>
-    <div class="grain"></div>
+  <body class="detail-page">
+    <a class="detail-brand" href="index.html"><span>✳</span> XxXAurora<span>.</span></a>
 
     <div class="lang-switch" role="group" aria-label="Language selector">
       <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
@@ -39,6 +42,7 @@
             <a class="ghost" href="https://cybermaster.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="launch">Launch app</a>
           </div>
         </section>
+        <div class="detail-cover case-cover cover-cybermaster" aria-hidden="true"><span class="cover-top">C / CYBERMASTER <span>ANCIENT × DIGITAL</span></span><div class="oracle-layout"><div class="oracle-type">问<br><em>卦</em></div><div class="hexagram"><i></i><i class="broken"></i><i></i><i class="broken"></i><i class="broken"></i><i></i></div><span class="oracle-caption">AN OLD QUESTION.<br>A NEW INTERFACE.</span></div><span class="cover-bottom">CHANCE, WITH CHARACTER. <span>FOR THE FUN OF IT ↗</span></span></div>
 
         <section class="panel">
           <h3 data-i18n="overviewTitle">Overview</h3>
@@ -67,7 +71,7 @@
       </main>
     </div>
 
-    <script src="page-transition.js"></script>
+    <script src="shared-i18n.js"></script>
     <script>
       (function () {
         const i18n = {
@@ -116,6 +120,7 @@
         const buttons = document.querySelectorAll("[data-lang-btn]");
 
         function applyLang(lang) {
+          window.applySharedLanguage(lang);
           const dict = i18n[lang] || i18n.en;
           document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
           document.title = dict.pageTitle;

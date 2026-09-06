@@ -12,13 +12,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="gallery.css" />
   </head>
-  <body>
-    <div class="grain"></div>
+  <body class="detail-page">
+    <a class="detail-brand" href="index.html"><span>✳</span> XxXAurora<span>.</span></a>
 
     <div class="lang-switch" role="group" aria-label="Language selector">
       <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
@@ -39,6 +42,7 @@
             <a class="ghost" href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </section>
+        <div class="detail-cover case-cover cover-quickaid" aria-hidden="true"><span class="cover-top">Q / QUICK-AID <span>CARE, CONNECTED</span></span><div class="care-title">Less searching.<br><em>Closer to care.</em></div><div class="care-diagram"><span class="care-origin">YOU</span><svg viewBox="0 0 420 140" fill="none" aria-hidden="true"><path d="M20 70 H105 Q125 70 140 45 L155 20 H400 M105 70 H400 M105 70 Q125 70 140 95 L155 120 H400" stroke="currentColor" stroke-width="1" opacity=".3"/><path class="care-route" d="M20 70 H105 Q125 70 140 45 L155 20 H400" stroke="currentColor" stroke-width="3"/><circle cx="20" cy="70" r="6" fill="currentColor"/><circle cx="400" cy="20" r="6" fill="currentColor"/></svg><div class="care-options"><span>URGENCY</span><span>TRAVEL TIME</span><span>EXPECTED WAIT</span></div></div><span class="cover-bottom">A&E NAVIGATION <span>FIND A SUITABLE ROUTE ↗</span></span></div>
 
         <section class="panel">
           <h3 data-i18n="overviewTitle">Overview</h3>
@@ -116,7 +120,7 @@
       </main>
     </div>
 
-    <script src="page-transition.js"></script>
+    <script src="shared-i18n.js"></script>
     <script>
       (function () {
         const i18n = {
@@ -170,30 +174,30 @@
             pageTitle: "Quick-Aid | XXX Aurora",
             pageDescription: "QuickAid：用于应急就医决策的智能急诊导航工具。",
             title: "Quick-Aid",
-            subtitle: "AI First Aid Assistant",
+            subtitle: "智能急救助手",
             intro:
               "QuickAid 是一个应急就医导航助手，会结合紧急程度、保险可及性、路程时间和候诊时间，帮助用户更快选择合适医院。",
             back: "返回项目总览",
             overviewTitle: "概览",
             overviewBody1:
-              "这个项目是一个5个小时KCL校内黑客松的项目，灵感来自Sarah，他认为留学生需要一个这样的APP来解决看病的问题。",
+              "这个项目是一个5个小时伦敦国王学院校内黑客松的项目，灵感来自Sarah，他认为留学生需要一个这样的应用来解决看病的问题。",
             overviewBody2:
               "站在我个人的角度这个还是非常实用的，有趣的是我们做这个项目的时候在最后30秒的时候极限提交，差一点点就白白浪费了5小时时间。",
             overviewBody3:
-              "最终我们也成功获得了TOP3。",
+              "最终我们也成功获得了前三名。",
             highlightsTitle: "已实现亮点",
-            highlight1: "提供附近 A&E、急诊中心与医院的智能定位能力。",
-            highlight2: "支持 NHS / IHS / 私保等覆盖条件下的医院筛选。",
+            highlight1: "提供附近 急诊科、急诊中心与医院的智能定位能力。",
+            highlight2: "支持 英国国家医疗服务 / 移民医疗附加费 / 私人保险等覆盖条件下的医院筛选。",
             highlight3: "QuickRoute 按“就诊总耗时”而非仅地理距离进行推荐排序。",
             highlight4: "对危及生命症状设置安全分诊闸门，并给出 999 指引。",
             highlight5: "根据场景生成证件、药物和紧急联系人等携带清单。",
-            highlight6: "就诊后给出 GP 注册、取药与复诊等后续建议。",
+            highlight6: "就诊后给出 全科医生注册、取药与复诊等后续建议。",
             flowTitle: "决策流程",
             flow1: "先通过症状评估判断紧急程度（严重 / 中度 / 轻度）。",
             flow2: "再根据保险/覆盖规则过滤可访问医院。",
             flow3: "调用路程服务计算驾车/公交/步行耗时。",
             flow4: "结合候诊时间与路程时间，计算最优就诊选择。",
-            flow5: "由 LLM 生成简短可读的推荐理由。",
+            flow5: "由 大语言模型 生成简短可读的推荐理由。",
             teamTitle: "团队",
             team1: "Yuzhen (Max) Yang",
             team2: "Shian (Andy) Ye",
@@ -203,11 +207,11 @@
             repoLink: "打开 GitHub 仓库",
             featuresTitle: "功能",
             feature1: "地图化急诊定位，快速发现附近可用医院",
-            feature2: "面向 NHS、IHS 和私保场景的可及性筛选",
+            feature2: "面向 英国国家医疗服务、移民医疗附加费和私人保险场景的可及性筛选",
             feature3: "基于总就诊耗时的 QuickRoute 推荐",
             feature4: "一键语言切换，提升国际用户可达性",
             featuresNote:
-              "推荐层结合路程耗时、候诊估计与简洁 LLM 解释，帮助用户更快做出急诊决策。",
+              "推荐层结合路程耗时、候诊估计与简洁 大语言模型 解释，帮助用户更快做出急诊决策。",
             techTitle: "技术栈",
             techBody: "React · TypeScript · Vite · Tailwind CSS · Supabase Edge Functions · Mapbox GL"
           }
@@ -216,6 +220,7 @@
         const buttons = document.querySelectorAll("[data-lang-btn]");
 
         function applyLang(lang) {
+          window.applySharedLanguage(lang);
           const dict = i18n[lang] || i18n.en;
           document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
           document.title = dict.pageTitle;

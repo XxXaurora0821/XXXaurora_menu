@@ -11,61 +11,31 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="gallery.css" />
   </head>
-  <body class="home-page welcome-active welcome-preloading">
-    <div class="grain"></div>
-    <canvas id="rain-canvas" aria-hidden="true"></canvas>
-
-    <div
-      id="welcome-overlay"
-      class="welcome-overlay"
-      data-phase="loading"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Choose site language"
-    >
-      <div class="welcome-atmosphere" aria-hidden="true">
-        <span class="welcome-orb welcome-orb-a"></span>
-        <span class="welcome-orb welcome-orb-b"></span>
-        <span class="welcome-streak welcome-streak-a"></span>
-        <span class="welcome-streak welcome-streak-b"></span>
-        <span class="welcome-vignette"></span>
-      </div>
-
-      <div class="welcome-frame" aria-hidden="true">
-        <span class="welcome-corner corner-tl"></span>
-        <span class="welcome-corner corner-tr"></span>
-        <span class="welcome-corner corner-bl"></span>
-        <span class="welcome-corner corner-br"></span>
-      </div>
-
-      <div class="welcome-panel">
-        <p class="welcome-kicker" data-i18n="welcomeKicker">GATEWAY INITIALIZING</p>
-        <h2 class="welcome-brand" data-brand="XxXAurora">XxXAurora</h2>
-        <p class="welcome-sub" data-i18n="welcomeSub">Personal Gateway Interface</p>
-
-        <div class="welcome-loader" aria-live="polite">
-          <p class="welcome-load-label" data-i18n="welcomeLoad">Synchronizing interface assets...</p>
-          <div class="welcome-progress" aria-hidden="true">
-            <span class="welcome-progress-bar"></span>
-          </div>
-          <p class="welcome-progress-value">0%</p>
-        </div>
-
-        <p class="welcome-hint" data-i18n="welcomeHint">Choose language to enter</p>
-        <div class="welcome-entry-actions" role="group" aria-label="Choose site language">
-          <button type="button" class="welcome-lang-btn is-active" data-welcome-lang="en" aria-pressed="true">
-            English
-          </button>
-          <button type="button" class="welcome-lang-btn" data-welcome-lang="zh" aria-pressed="false">
-            中文
-          </button>
+  <body class="home-page composition">
+    <dialog class="opening" id="opening" aria-labelledby="opening-title" aria-describedby="opening-hint">
+      <div class="opening-space" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="opening-corner">XXXAURORA.COM <span> / PERSONAL UNIVERSE</span></div>
+      <div class="opening-center">
+        <span class="opening-symbol" aria-hidden="true">✳</span>
+        <p class="opening-kicker">A LITTLE CURIOSITY. ENDLESS POSSIBILITIES.</p>
+        <h2 id="opening-title">XxXAurora<span>.</span></h2>
+        <p class="opening-sub">Build first. Understand later.</p>
+        <div class="opening-line" aria-hidden="true"><span></span></div>
+        <p id="opening-hint">Choose your language to enter / 选择语言进入</p>
+        <div class="opening-actions">
+          <button type="button" data-lang-btn="en" data-intro-lang="en" aria-pressed="true">English <span aria-hidden="true">↗</span></button>
+          <button type="button" data-lang-btn="zh" data-intro-lang="zh" aria-pressed="false">中文 <span aria-hidden="true">↗</span></button>
         </div>
       </div>
-    </div>
-
+      <div class="opening-bottom"><span>IDEAS → EXPERIMENTS → POSSIBILITIES</span><button type="button" class="opening-skip">Skip intro / 跳过 <span aria-hidden="true">↗</span></button></div>
+    </dialog>
+    <a class="skip-link" href="#hello">Skip to content / 跳转至内容</a>
+    <div class="reading-progress" aria-hidden="true"></div>
     <div class="lang-switch" role="group" aria-label="Language selector">
       <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
       <button class="lang-btn" data-lang-btn="zh" aria-pressed="false">中文</button>
@@ -73,12 +43,7 @@
 
     <div class="layout">
       <aside class="sidebar">
-        <p class="eyebrow">XXXAURORA.COM</p>
-        <h1 data-i18n="menuTitle">Menu</h1>
-        <p class="intro" data-i18n="intro">
-          大家好我是xxxaurora
-        </p>
-
+        <a class="wordmark" href="#hello" aria-label="XxXAurora home"><span class="brand-symbol" aria-hidden="true">✳</span> XxXAurora<span class="brand-dot">.</span></a>
         <nav aria-label="Homepage navigation">
           <a href="#hello" data-i18n="navHello">Intro</a>
           <a href="#projects" data-i18n="navProjects">Projects</a>
@@ -86,183 +51,135 @@
           <a href="#contact" data-i18n="navContact">Contact</a>
         </nav>
 
-        <p class="status" data-i18n="status">Currently building in public.</p>
-        <p class="profile-link">
-          <a href="https://github.com/XxXaurora0821" target="_blank" rel="noreferrer" data-i18n="githubHome">My GitHub Homepage</a>
-        </p>
+        <a class="header-github" href="https://github.com/XxXaurora0821" target="_blank" rel="noreferrer">GitHub ↗</a>
       </aside>
 
       <main class="content">
         <section id="hello" class="panel hero">
-          <h2 data-i18n="heroTitle">Hi everyone, welcome to my website.</h2>
-          <p data-i18n="heroBody">
-            Hi everyone, welcome to my website. Here you can check out projects of all
-            sizes, from AI to autonomous systems, plus some small websites I build just
-            for fun. By the way, I'm Max, an Artificial Intelligence student at King's
-            College London. Most of the time I turn ideas in my head into projects big
-            and small, and make weird but fun experiments. I believe the best way to
-            learn is build first, understand later.
-          </p>
+          <div class="hero-art" aria-hidden="true"><div class="aurora-haze"></div><canvas id="aurora-canvas"></canvas><div class="orbit-label">EXPLORING THE POSSIBLE <span>↗</span></div></div>
+          <div class="hero-copy">
+          <p class="hero-kicker"><span class="live-dot"></span> MAX / AI STUDENT & CREATIVE BUILDER</p>
+          <h1><span data-i18n="heroTitle">Curious by nature.</span><em data-i18n="heroAccent">Builder by choice.</em></h1>
+          <p class="hero-description" data-i18n="heroBody">I’m Max, an AI student at King’s College London. I turn curious ideas into intelligent systems and playful experiments. Build first, understand later.</p>
           <div class="hero-actions home-actions">
             <a class="button" href="#projects" data-i18n="heroBtnProjects">View projects</a>
             <a class="ghost" href="#playground" data-i18n="heroBtnPlayground">See playground</a>
           </div>
+          </div>
+          <div class="hero-bottom"><span>KING’S COLLEGE LONDON · ARTIFICIAL INTELLIGENCE</span><a href="#projects">SCROLL TO EXPLORE <span>↓</span></a></div>
         </section>
 
         <section id="projects" class="panel">
-          <div class="section-head">
-            <h3 data-i18n="projectsTitle">Projects Overview</h3>
+          <div class="section-head"><span class="section-index">01 / SELECTED WORK <span class="edition">A FEW THINGS I’VE BUILT / 2026</span></span>
+            <h3 data-i18n="projectsTitle">Selected work</h3>
             <p data-i18n="projectsSub">
-              Short version on the homepage. Click any project to see the full details.
+              Exploring intelligence, one project at a time.
             </p>
           </div>
 
           <div class="project-grid">
             <article class="card project-card" aria-label="Project Potemkin">
-              <div class="project-main">
-                <h4 data-i18n="potemkinTitle">Project Potemkin</h4>
-                <p class="project-tag" data-i18n="potemkinTag">AI Agent &amp; Memory Systems</p>
-                <p class="project-summary" data-i18n="potemkinBody">
+<a class="project-media case-cover cover-potemkin" href="project-potemkin.html" tabindex="-1" aria-hidden="true"><span class="cover-top">P / PROJECT POTEMKIN <span>MEMORY SYSTEMS</span></span>
+<div class="memory-editorial"><div class="cover-statement">More than<br>a conversation.<em>A continuum.</em></div><div class="memory-schema"><span class="memory-caption">A MEMORY THAT STAYS.</span><div class="memory-node node-recent"><span>01 / INPUT</span><b>Conversation</b></div><div class="memory-thread"></div><div class="memory-node node-core"><span>02 / CONTEXT</span><b>Short-term memory</b></div><div class="memory-thread"></div><div class="memory-node node-long"><span>03 / CONTINUITY</span><b>Long-term memory</b></div></div></div>
+<span class="cover-bottom">HUMAN ↔ AGENT <span>PERSISTENT BY DESIGN ↗</span></span></a>
+<div class="project-info"><span class="folio" aria-hidden="true">01 / 05</span>
+<p class="project-tag" data-i18n="potemkinTag">AI Agent &amp; Memory Systems</p>
+<h4><a href="project-potemkin.html" data-i18n="potemkinTitle">Project Potemkin</a></h4>
+<p class="project-summary" data-i18n="potemkinBody">
                   An AI companion system with persistent memory and autonomous behavior,
                   exploring long-term human-AI interaction and intelligent agents that
                   evolve over time.
                 </p>
-                <div class="project-media">
-                  <img
-                    class="project-preview"
-                    src="img/Potemkin.png"
-                    alt="Project Potemkin preview"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-              <div class="card-actions project-actions">
+<div class="card-actions project-actions">
                 <a class="button button-sm" href="project-potemkin.html" data-i18n="viewDetails">View details</a>
                 <a class="ghost button-sm" href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer">GitHub</a>
               </div>
-            </article>
+</div>
+</article>
 
             <article class="card project-card" aria-label="StarMax">
-              <div class="project-main">
-                <h4 data-i18n="starmaxTitle">StarMax</h4>
-                <p class="project-tag" data-i18n="starmaxTag">SC2 Macro Coach / Human-AI Collaboration</p>
-                <p class="project-summary" data-i18n="starmaxBody">
+<a class="project-media case-cover cover-starmax" href="starmax.html" tabindex="-1" aria-hidden="true"><span class="cover-top">S / STARMAX <span>HUMAN + AI</span></span><div class="star-word">Think<br><em>one move</em><br>ahead<span>↗</span></div><div class="decision-strip"><span>REPLAY</span><i>→</i><span>STATE</span><i>→</i><span class="decision-active">NEXT ACTION</span></div><span class="cover-bottom">STARCRAFT II <span>MACRO COACHING</span></span></a>
+<div class="project-info"><span class="folio" aria-hidden="true">02 / 05</span>
+<p class="project-tag" data-i18n="starmaxTag">SC2 Macro Coach / Human-AI Collaboration</p>
+<h4><a href="starmax.html" data-i18n="starmaxTitle">StarMax</a></h4>
+<p class="project-summary" data-i18n="starmaxBody">
                   A human-AI collaborative macro coaching system for StarCraft II,
                   focused on interpretable state abstractions and actionable suggestions.
                 </p>
-                <div class="project-media">
-                  <img
-                    class="project-preview"
-                    src="img/StarMax.png"
-                    alt="StarMax preview"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-              <div class="card-actions project-actions">
+<div class="card-actions project-actions">
                 <a class="button button-sm" href="starmax.html" data-i18n="viewDetails">View details</a>
                 <a class="ghost button-sm" href="https://github.com/XxXaurora0821/StarMax" target="_blank" rel="noreferrer">GitHub</a>
               </div>
-            </article>
+</div>
+</article>
 
             <article class="card project-card" aria-label="Quick-Aid">
-              <div class="project-main">
-                <h4 data-i18n="quickAidTitle">Quick-Aid</h4>
-                <p class="project-tag" data-i18n="quickAidTag">Emergency Navigation AI</p>
-                <p class="project-summary" data-i18n="quickAidBody">
+<a class="project-media case-cover cover-quickaid" href="quick-aid.html" tabindex="-1" aria-hidden="true"><span class="cover-top">Q / QUICK-AID <span>CARE, CONNECTED</span></span><div class="care-title">Less searching.<br><em>Closer to care.</em></div><div class="care-diagram"><span class="care-origin">YOU</span><svg viewBox="0 0 420 140" fill="none" aria-hidden="true"><path d="M20 70 H105 Q125 70 140 45 L155 20 H400 M105 70 H400 M105 70 Q125 70 140 95 L155 120 H400" stroke="currentColor" stroke-width="1" opacity=".3"/><path class="care-route" d="M20 70 H105 Q125 70 140 45 L155 20 H400" stroke="currentColor" stroke-width="3"/><circle cx="20" cy="70" r="6" fill="currentColor"/><circle cx="400" cy="20" r="6" fill="currentColor"/></svg><div class="care-options"><span>URGENCY</span><span>TRAVEL TIME</span><span>EXPECTED WAIT</span></div></div><span class="cover-bottom">A&E NAVIGATION <span>FIND A SUITABLE ROUTE ↗</span></span></a>
+<div class="project-info"><span class="folio" aria-hidden="true">03 / 05</span>
+<p class="project-tag" data-i18n="quickAidTag">Emergency Navigation AI</p>
+<h4><a href="quick-aid.html" data-i18n="quickAidTitle">Quick-Aid</a></h4>
+<p class="project-summary" data-i18n="quickAidBody">
                   An emergency navigation app that helps users choose the fastest suitable
                   A&amp;E by combining urgency, insurance access, travel time, and expected waits.
                 </p>
-                <div class="project-media">
-                  <img
-                    class="project-preview"
-                    src="img/Quick-Aid.png"
-                    alt="Quick-Aid preview"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-              </div>
-              <div class="card-actions project-actions">
+<div class="card-actions project-actions">
                 <a class="button button-sm" href="quick-aid.html" data-i18n="viewDetails">View details</a>
                 <a class="ghost button-sm" href="https://github.com/zwzheng45/QuickAid" target="_blank" rel="noreferrer">GitHub</a>
               </div>
-            </article>
+</div>
+</article>
           </div>
         </section>
 
         <section id="playground" class="panel">
-          <div class="section-head">
+          <div class="section-head"><span class="section-index">02 / SIDE QUESTS</span>
             <h3 data-i18n="playgroundTitle">Playground</h3>
             <p data-i18n="playgroundSub">Small fun experiments and quirky tools built for testing ideas.</p>
           </div>
 
-          <div class="quick-jump">
-            <p class="quick-jump-title" data-i18n="playgroundHubTitle">Project Redirects</p>
-            <p class="quick-jump-sub" data-i18n="playgroundHubSub">Direct jump to running apps on Cloudflare.</p>
-            <div class="card-actions">
-              <a class="button button-sm" href="https://soulspirits.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="jumpSoulspirit">Open SoulSpirit</a>
-              <a class="ghost button-sm" href="https://cybermaster.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="jumpCybermaster">Open CyberMaster</a>
-            </div>
-          </div>
-
           <div class="grid">
             <article class="card project-card" aria-label="SoulSpirit">
-              <h4 data-i18n="soulspiritTitle">SoulSpirit</h4>
-              <p class="project-tag" data-i18n="soulspiritTag">Cocktail Test Lab</p>
-              <p data-i18n="soulspiritBody">
+<a class="playground-media case-cover cover-soulspirit" href="soulspirit.html" tabindex="-1" aria-hidden="true"><span class="cover-top">S / SOULSPIRIT <span>TASTE EXPERIMENT NO. 01</span></span><div class="soul-word">In good<br><em>spirits.</em><span>✳</span></div><div class="taste-choices"><span>SILKY</span><span>CRISP ↗</span><span>SPARKLING</span></div><span class="cover-bottom">A LITTLE MOOD. A LITTLE MIXOLOGY. <span>↗</span></span></a>
+<div class="project-info"><span class="folio" aria-hidden="true">04 / 05</span>
+<p class="project-tag" data-i18n="soulspiritTag">Cocktail Test Lab</p>
+<h4><a href="soulspirit.html" data-i18n="soulspiritTitle">SoulSpirit</a></h4>
+<p data-i18n="soulspiritBody">
                 A playful testing program for customizing cocktails by mood and taste
                 preferences.
               </p>
-              <p class="project-note" data-i18n="soulspiritNote">
+<p class="project-note" data-i18n="soulspiritNote">
                 Currently used for idea testing and recipe prototyping.
               </p>
-              <div class="playground-media">
-                <img
-                  class="playground-preview"
-                  src="img/soulspirits.png"
-                  alt="SoulSpirit preview"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="card-actions">
+<div class="card-actions">
                 <a class="button button-sm" href="soulspirit.html" data-i18n="playgroundViewDetails">View details</a>
                 <a class="ghost button-sm" href="https://soulspirits.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="playgroundLaunch">Launch app</a>
               </div>
-            </article>
+</div>
+</article>
 
             <article class="card project-card" aria-label="CyberMaster">
-              <h4 data-i18n="cybermasterTitle">CyberMaster</h4>
-              <p class="project-tag" data-i18n="cybermasterTag">Cyber Fortune Teller</p>
-              <p data-i18n="cybermasterBody">
+<a class="playground-media case-cover cover-cybermaster" href="cybermaster.html" tabindex="-1" aria-hidden="true"><span class="cover-top">C / CYBERMASTER <span>ANCIENT × DIGITAL</span></span><div class="oracle-layout"><div class="oracle-type">问<br><em>卦</em></div><div class="hexagram"><i></i><i class="broken"></i><i></i><i class="broken"></i><i class="broken"></i><i></i></div><span class="oracle-caption">AN OLD QUESTION.<br>A NEW INTERFACE.</span></div><span class="cover-bottom">CHANCE, WITH CHARACTER. <span>FOR THE FUN OF IT ↗</span></span></a>
+<div class="project-info"><span class="folio" aria-hidden="true">05 / 05</span>
+<p class="project-tag" data-i18n="cybermasterTag">Cyber Fortune Teller</p>
+<h4><a href="cybermaster.html" data-i18n="cybermasterTitle">CyberMaster</a></h4>
+<p data-i18n="cybermasterBody">
                 A fun cyber divination app that generates themed fortunes and playful
                 personality readings.
               </p>
-              <p class="project-note" data-i18n="cybermasterNote">
+<p class="project-note" data-i18n="cybermasterNote">
                 Built as an entertainment-only experiment.
               </p>
-              <div class="playground-media">
-                <img
-                  class="playground-preview"
-                  src="img/cybermasyer.png"
-                  alt="CyberMaster preview"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div class="card-actions">
+<div class="card-actions">
                 <a class="button button-sm" href="cybermaster.html" data-i18n="playgroundViewDetails">View details</a>
                 <a class="ghost button-sm" href="https://cybermaster.xxxaurora.com" target="_blank" rel="noreferrer" data-i18n="playgroundLaunch">Launch app</a>
               </div>
-            </article>
+</div>
+</article>
           </div>
         </section>
 
-        <section id="contact" class="panel contact">
-          <h3 data-i18n="contactTitle">Contact</h3>
+        <section id="contact" class="panel contact"><span class="section-index">03 / SAY HELLO</span><span class="contact-arrow" aria-hidden="true">↗</span>
+          <h3 data-i18n="contactTitle">Let’s connect</h3>
           <p>
             <span data-i18n="contactLead">If you'd like to discuss projects, writing, or collaboration, email me at</span>
             <a href="mailto:yangyz23km@outlook.com">yangyz23km@outlook.com</a><span data-i18n="contactTail">.</span>
@@ -271,454 +188,10 @@
       </main>
     </div>
 
-    <script src="page-transition.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="welcome-intro.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
-    <script src="animations.js"></script>
-    <script>
-      (function () {
-        const i18n = {
-          en: {
-            pageTitle: "XXX Aurora",
-            pageDescription: "XXX Aurora personal gateway: project overview and contact.",
-            welcomeKicker: "Gateway Initializing",
-            welcomeSub: "Personal Gateway Interface",
-            welcomeLoad: "Synchronizing interface assets...",
-            welcomeHint: "Choose language to enter",
-            menuTitle: "Menu",
-            intro: "Hi, I'm xxxaurora.",
-            navHello: "Intro",
-            navProjects: "Projects",
-            navPlayground: "Playground",
-            navContact: "Contact",
-            status: "Currently building in public.",
-            githubHome: "My GitHub Homepage",
-            heroTitle: "Hi everyone, welcome to my website.",
-            heroBody:
-              "Hi everyone, welcome to my website. Here you can check out projects of all sizes, from AI to autonomous systems, plus some small websites I build just for fun. By the way, I'm Max, an Artificial Intelligence student at King's College London. Most of the time I turn ideas in my head into projects big and small, and make weird but fun experiments. I believe the best way to learn is build first, understand later.",
-            heroBtnProjects: "View projects",
-            heroBtnPlayground: "See playground",
-            projectsTitle: "Projects Overview",
-            projectsSub: "Short version on the homepage. Click any project to see the full details.",
-            potemkinTitle: "Project Potemkin",
-            potemkinTag: "AI Agent & Memory Systems",
-            potemkinBody:
-              "An AI companion system with persistent memory and autonomous behavior, exploring long-term human-AI interaction and intelligent agents that evolve over time.",
-            potemkinNote:
-              "Framed as an AI companion system that can grow with families, with unified memory and long-term interaction capabilities.",
-            starmaxTitle: "StarMax",
-            starmaxTag: "SC2 Macro Coach / Human-AI Collaboration",
-            starmaxBody:
-              "A human-AI collaborative macro coaching system for StarCraft II, focused on interpretable state abstractions and actionable suggestions.",
-            starmaxNote:
-              "The current repo already includes replay-to-dataset extraction, multi-label training, and live top-k in-game recommendations.",
-            quickAidTitle: "Quick-Aid",
-            quickAidTag: "Emergency Navigation AI",
-            quickAidBody:
-              "An emergency navigation app that helps users choose the fastest suitable A&E by combining urgency, insurance access, travel time, and expected waits.",
-            quickAidNote:
-              "Built for international students and newcomers navigating the UK emergency care system.",
-            viewDetails: "View details",
-            playgroundTitle: "Playground",
-            playgroundSub: "Small fun experiments and quirky tools built for testing ideas.",
-            playgroundHubTitle: "Project Redirects",
-            playgroundHubSub: "Direct jump to running apps on Cloudflare.",
-            jumpSoulspirit: "Open SoulSpirit",
-            jumpCybermaster: "Open CyberMaster",
-            soulspiritTitle: "SoulSpirit",
-            soulspiritTag: "Cocktail Test Lab",
-            soulspiritBody:
-              "A playful testing program for customizing cocktails by mood and taste preferences.",
-            soulspiritNote:
-              "Currently used for idea testing and recipe prototyping.",
-            cybermasterTitle: "CyberMaster",
-            cybermasterTag: "Cyber Fortune Teller",
-            cybermasterBody:
-              "A fun cyber divination app that generates themed fortunes and playful personality readings.",
-            cybermasterNote: "Built as an entertainment-only experiment.",
-            playgroundViewDetails: "View details",
-            playgroundLaunch: "Launch app",
-            contactTitle: "Contact",
-            contactLead: "If you'd like to discuss projects, writing, or collaboration, email me at",
-            contactTail: "."
-          },
-          zh: {
-            pageTitle: "XXX Aurora 个人导航",
-            pageDescription: "XXX Aurora 的个人导航页：项目总览与联系方式。",
-            welcomeKicker: "正在初始化入口",
-            welcomeSub: "个人导航接口",
-            welcomeLoad: "正在同步界面资源...",
-            welcomeHint: "选择语言进入",
-            menuTitle: "菜单",
-            intro: "大家好我是xxxaurora",
-            navHello: "简介",
-            navProjects: "项目",
-            navPlayground: "游乐场",
-            navContact: "联系",
-            status: "正在公开构建中。",
-            githubHome: "我的 GitHub 主页",
-            heroTitle: "大家好，欢迎来到我的网站。",
-            heroBody:
-              "大家好，欢迎来到我的网站，在这里你可以看到我的大大小小的项目，从 AI 到 autonomous，以及一些自己做着玩的小网站。对了我叫 Max，是一名 King's College London Artificial Intelligence 的学生，平时会把脑海里的一些想法做成大大小小的项目，搞一些奇奇怪怪但是有趣的实验。我相信最好的学习方式就是 build first, understand later。",
-            heroBtnProjects: "查看项目",
-            heroBtnPlayground: "查看游乐场",
-            projectsTitle: "项目总览",
-            projectsSub: "首页展示简短版，点击项目可进入详细介绍页面。",
-            potemkinTitle: "Project Potemkin",
-            potemkinTag: "AI Agent 与记忆系统",
-            potemkinBody:
-              "一个具有长期记忆能力与自主行为的 AI Agent 系统，探索人与 AI 的长期交互以及智能体随时间成长的可能性。",
-            potemkinNote:
-              "项目被描述为一个“随家庭成长的 AI 伴侣系统”，强调统一记忆与长期交互能力。",
-            starmaxTitle: "StarMax",
-            starmaxTag: "SC2 宏观教练 / 人机协作",
-            starmaxBody:
-              "一个面向星际争霸 II 的人机协作宏观教练系统，强调可解释的游戏状态抽象和可执行建议。",
-            starmaxNote:
-              "当前仓库已包含回放转数据集、多标签训练流程，以及实时对局 top-k 推荐能力。",
-            quickAidTitle: "Quick-Aid",
-            quickAidTag: "应急就医导航 AI",
-            quickAidBody:
-              "一个应急就医导航应用，综合紧急程度、保险可及性、路程时间与候诊时长，帮助用户更快选择合适的 A&E 医院。",
-            quickAidNote:
-              "面向国际学生和新移居人群，降低英国急诊体系的信息门槛。",
-            viewDetails: "查看详情",
-            playgroundTitle: "游乐场",
-            playgroundSub: "放一些好玩的实验程序和小工具，用来测试新想法。",
-            playgroundHubTitle: "项目跳转",
-            playgroundHubSub: "可直接跳转到 Cloudflare 上运行中的项目。",
-            jumpSoulspirit: "打开 SoulSpirit",
-            jumpCybermaster: "打开 CyberMaster",
-            soulspiritTitle: "SoulSpirit",
-            soulspiritTag: "定制鸡尾酒测试程序",
-            soulspiritBody:
-              "一个用于测试定制鸡尾酒的小程序，会根据心情和口味偏好生成玩法与配方方向。",
-            soulspiritNote:
-              "当前用于快速试验创意和配方原型。",
-            cybermasterTitle: "CyberMaster",
-            cybermasterTag: "赛博算命大师",
-            cybermasterBody:
-              "一个偏娱乐向的赛博算命程序，会生成主题化运势和趣味人格解读。",
-            cybermasterNote: "目前作为娱乐实验项目运行。",
-            playgroundViewDetails: "查看详情",
-            playgroundLaunch: "进入项目",
-            contactTitle: "联系",
-            contactLead: "如果你想交流项目、内容或合作，请发邮件到",
-            contactTail: "。"
-          }
-        };
-
-        const buttons = document.querySelectorAll("[data-lang-btn]");
-        const prefersReducedMotion = window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-        const navLinks = Array.from(
-          document.querySelectorAll(".sidebar nav a[href^='#']")
-        );
-
-        function setCurrentNav(id) {
-          navLinks.forEach((link) => {
-            const hash = link.getAttribute("href");
-            link.classList.toggle("is-current", hash === `#${id}`);
-          });
-        }
-
-        function initNavTracking() {
-          if (!navLinks.length) return;
-
-          const sectionMap = new Map();
-          navLinks.forEach((link) => {
-            const hash = link.getAttribute("href");
-            if (!hash) return;
-            const section = document.querySelector(hash);
-            if (!section) return;
-            sectionMap.set(section.id, section);
-            link.addEventListener("click", () => setCurrentNav(section.id));
-          });
-
-          const initialHash = (window.location.hash || "#hello").replace("#", "");
-          if (sectionMap.has(initialHash)) {
-            setCurrentNav(initialHash);
-          }
-
-          if (!("IntersectionObserver" in window)) return;
-
-          const observer = new IntersectionObserver(
-            (entries) => {
-              let topSection = null;
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                if (
-                  !topSection ||
-                  entry.intersectionRatio > topSection.intersectionRatio
-                ) {
-                  topSection = entry;
-                }
-              });
-
-              if (topSection?.target?.id) {
-                setCurrentNav(topSection.target.id);
-              }
-            },
-            {
-              threshold: [0.2, 0.35, 0.55],
-              rootMargin: "-36% 0px -44% 0px"
-            }
-          );
-
-          sectionMap.forEach((section) => observer.observe(section));
-        }
-
-        function initHeadingGlitch() {
-          const title = document.querySelector(".hero h2");
-          if (!title || prefersReducedMotion) return;
-
-          window.setInterval(() => {
-            title.classList.add("glitch-hit");
-            window.setTimeout(() => title.classList.remove("glitch-hit"), 220);
-          }, 5200);
-        }
-
-        function initModuleMotion() {
-          const targets = [
-            ...new Set(
-              Array.from(
-                document.querySelectorAll(
-                  ".content > .panel:not(.hero), .project-card, .quick-jump"
-                )
-              )
-            )
-          ];
-
-          if (!targets.length) return;
-
-          const hasGsap = !!window.gsap;
-
-          if (prefersReducedMotion) {
-            targets.forEach((node) => node.classList.add("is-visible"));
-            return;
-          }
-
-          if (!("IntersectionObserver" in window)) {
-            if (hasGsap) {
-              window.gsap.set(targets, { autoAlpha: 0, y: 16 });
-              window.gsap.to(targets, {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.58,
-                stagger: 0.06,
-                ease: "power3.out"
-              });
-            } else {
-              targets.forEach((node, index) => {
-                node.classList.add("reveal");
-                node.style.setProperty(
-                  "--reveal-delay",
-                  `${Math.min(index * 60, 360)}ms`
-                );
-                node.classList.add("is-visible");
-              });
-            }
-            return;
-          }
-
-          if (hasGsap) {
-            window.gsap.set(targets, { autoAlpha: 0, y: 20 });
-          } else {
-            targets.forEach((node, index) => {
-              node.classList.add("reveal");
-              node.style.setProperty(
-                "--reveal-delay",
-                `${Math.min(index * 60, 360)}ms`
-              );
-            });
-          }
-
-          const observer = new IntersectionObserver(
-            (entries, activeObserver) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-
-                if (hasGsap) {
-                  const index = targets.indexOf(entry.target);
-                  window.gsap.to(entry.target, {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 0.68,
-                    delay: Math.min(index * 0.04, 0.22),
-                    ease: "power3.out",
-                    clearProps: "transform,opacity,visibility"
-                  });
-                } else {
-                  entry.target.classList.add("is-visible");
-                }
-
-                activeObserver.unobserve(entry.target);
-              });
-            },
-            {
-              threshold: 0.18,
-              rootMargin: "0px 0px -10% 0px"
-            }
-          );
-
-          targets.forEach((node) => observer.observe(node));
-        }
-
-        function applyLang(lang) {
-          const dict = i18n[lang] || i18n.en;
-          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
-          document.title = dict.pageTitle;
-
-          const meta = document.getElementById("meta-description");
-          if (meta) {
-            meta.setAttribute("content", dict.pageDescription);
-          }
-
-          document.querySelectorAll("[data-i18n]").forEach((node) => {
-            const key = node.getAttribute("data-i18n");
-            if (dict[key]) {
-              node.textContent = dict[key];
-            }
-          });
-
-          buttons.forEach((btn) => {
-            const isActive = btn.getAttribute("data-lang-btn") === lang;
-            btn.classList.toggle("is-active", isActive);
-            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-          });
-        }
-
-        function persistLang(lang) {
-          try {
-            localStorage.setItem("site-lang", lang);
-          } catch (err) {
-            // Keep runtime language only when storage is blocked.
-          }
-        }
-
-        function setSiteLang(lang, options = {}) {
-          const persist = options.persist !== false;
-          applyLang(lang);
-          if (persist) {
-            persistLang(lang);
-          }
-        }
-
-        function initGsapFx() {
-          if (!window.gsap || prefersReducedMotion) return;
-          const gsap = window.gsap;
-          const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-          tl.from(".sidebar", { x: -24, autoAlpha: 0, duration: 0.66 })
-            .from(
-              ".sidebar nav a",
-              { x: -10, autoAlpha: 0, duration: 0.35, stagger: 0.06 },
-              "-=0.34"
-            )
-            .from(
-              ".lang-switch",
-              { y: -18, autoAlpha: 0, duration: 0.44, ease: "power2.out" },
-              "-=0.5"
-            )
-            .from(".hero", { y: 20, autoAlpha: 0, duration: 0.66 }, "-=0.2")
-            .from(
-              ".hero h2, .hero p, .hero-actions a",
-              { y: 14, autoAlpha: 0, duration: 0.5, stagger: 0.08 },
-              "-=0.46"
-            );
-        }
-
-        buttons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const lang = btn.getAttribute("data-lang-btn");
-            setSiteLang(lang);
-          });
-        });
-
-        let initialLang = "en";
-        try {
-          const stored = localStorage.getItem("site-lang");
-          if (stored === "zh" || stored === "en") {
-            initialLang = stored;
-          }
-        } catch (err) {
-          initialLang = "en";
-        }
-
-        function initMatrixRain() {
-          const canvas = document.getElementById('rain-canvas');
-          if (!canvas || prefersReducedMotion) return;
-          const ctx = canvas.getContext('2d');
-          const CHARS = '禹数码网信号奇影阵链岱连空零万亿0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*<>[]{}|';
-          const SZ = 13;
-          let cols, drops, raf;
-
-          function resize() {
-            canvas.width  = window.innerWidth;
-            canvas.height = window.innerHeight;
-            cols  = Math.floor(canvas.width / SZ);
-            drops = Array.from({ length: cols }, () => Math.random() * -(canvas.height / SZ));
-          }
-          resize();
-          window.addEventListener('resize', resize);
-
-          let last = 0;
-          function frame(ts) {
-            raf = requestAnimationFrame(frame);
-            if (ts - last < 50) return;
-            last = ts;
-            // 拖尾淡出 — 值越小拖尾越长
-            ctx.fillStyle = 'rgba(4, 8, 16, 0.16)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = SZ + 'px "IBM Plex Mono",monospace';
-            drops.forEach((y, i) => {
-              const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
-              // 列头字符更亮（新落下的第一格）
-              const isHead = y > 0 && drops[i] - 0.55 <= 0;
-              const alpha  = isHead
-                ? 0.55 + Math.random() * 0.2           // 列头：亮但不刺眼
-                : 0.08 + Math.random() * 0.14;          // 正文：暗，退到背景
-              ctx.fillStyle = isHead
-                ? 'rgba(200,255,255,' + alpha + ')'     // 列头：接近白色
-                : 'rgba(0,232,255,'  + alpha + ')';     // 正文：标准青色
-              ctx.fillText(ch, i * SZ, y * SZ);
-              if (y * SZ > canvas.height && Math.random() > 0.972) drops[i] = 0;
-              drops[i] += 0.58;
-            });
-          }
-          raf = requestAnimationFrame(frame);
-
-          // 雨从第一帧就开始跑，不等 home-entered
-        }
-
-        function startMainSiteFx(lang = initialLang) {
-          setSiteLang(lang);
-          document.body.classList.add("home-entered");
-          initNavTracking();
-          initModuleMotion();
-          initGsapFx();
-          initHeadingGlitch();
-        }
-
-        applyLang(initialLang);
-
-        // 代码雨立刻启动，不等欢迎页结束
-        initMatrixRain();
-
-        if (typeof window.initWelcomeIntro === "function") {
-          window.initWelcomeIntro({
-            prefersReducedMotion,
-            initialLang,
-            onLanguageSelect: (lang) => setSiteLang(lang),
-            onEnter: startMainSiteFx
-          });
-        } else {
-          document.body.classList.remove("welcome-active", "welcome-preloading", "welcome-intro-ready");
-          startMainSiteFx();
-        }
-      })();
-    </script>
+    <footer class="site-footer"><a href="#hello">XxXAurora <span>↗</span></a><span>BUILD FIRST. UNDERSTAND LATER.</span><button class="replay-intro" type="button">Replay intro / 重播开场 ↗</button><span>© 2026 Max</span></footer>
+    <script src="shared-i18n.js"></script>
+    <script src="home-i18n.js"></script>
+    <script src="home-intro.js"></script>
+    <script src="home-motion.js"></script>
   </body>
 </html>

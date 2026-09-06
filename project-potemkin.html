@@ -12,13 +12,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="gallery.css" />
   </head>
-  <body>
-    <div class="grain"></div>
+  <body class="detail-page">
+    <a class="detail-brand" href="index.html"><span>✳</span> XxXAurora<span>.</span></a>
 
     <div class="lang-switch" role="group" aria-label="Language selector">
       <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
@@ -39,6 +42,9 @@
             <a class="ghost" href="https://github.com/zwzheng45/Project-Potemkin" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </section>
+        <div class="detail-cover case-cover cover-potemkin" aria-hidden="true"><span class="cover-top">P / PROJECT POTEMKIN <span>MEMORY SYSTEMS</span></span>
+<div class="memory-editorial"><div class="cover-statement">More than<br>a conversation.<em>A continuum.</em></div><div class="memory-schema"><span class="memory-caption">A MEMORY THAT STAYS.</span><div class="memory-node node-recent"><span>01 / INPUT</span><b>Conversation</b></div><div class="memory-thread"></div><div class="memory-node node-core"><span>02 / CONTEXT</span><b>Short-term memory</b></div><div class="memory-thread"></div><div class="memory-node node-long"><span>03 / CONTINUITY</span><b>Long-term memory</b></div></div></div>
+<span class="cover-bottom">HUMAN ↔ AGENT <span>PERSISTENT BY DESIGN ↗</span></span></div>
 
         <section class="panel">
           <h3 data-i18n="overviewTitle">Overview</h3>
@@ -137,7 +143,7 @@
       </main>
     </div>
 
-    <script src="page-transition.js"></script>
+    <script src="shared-i18n.js"></script>
     <script>
       (function () {
         const i18n = {
@@ -187,43 +193,43 @@
           },
           zh: {
             pageTitle: "Project Potemkin | XXX Aurora",
-            pageDescription: "Project Potemkin：长期记忆 AI Agent 与长期人机交互探索。",
+            pageDescription: "Project Potemkin：长期记忆 人工智能体 与长期人机交互探索。",
             title: "Project Potemkin",
-            subtitle: "AI Agent 与记忆系统",
+            subtitle: "人工智能体 与记忆系统",
             intro:
-              "Project Potemkin 是一个实验性的 AI Agent 系统，重点研究长期记忆、自主交互以及长期用户关系。",
+              "Project Potemkin 是一个实验性的 人工智能体 系统，重点研究长期记忆、自主交互以及长期用户关系。",
             back: "返回项目总览",
             overviewTitle: "概览",
             overviewBody1:
-              "这个项目是我们参加 UK AI Agent Hackathon EP3 by ASI (Artificial Superintelligence Alliance) 时做的比赛项目，这也是欧洲规模很大的 Web3 x AI Hackathon。",
+              "这个项目是我们参加 UK 人工智能体 Hackathon EP3 by ASI (Artificial Superintelligence Alliance) 时做的比赛项目，这也是欧洲规模很大的 去中心化网络与人工智能黑客松。",
             overviewBody2:
-              "从最初构想到最终 demo 和宣传片落地，我们一共只用了一个星期。对我来说它非常有意义，因为它把我带进了 Web3 的大门，也逼着我在实战里学了很多 Web 开发知识。这里要重点感谢我的同学 Ryan，他在比赛过程中教会了我很多。",
+              "从最初构想到最终 演示 和宣传片落地，我们一共只用了一个星期。对我来说它非常有意义，因为它把我带进了 Web3 的大门，也逼着我在实战里学了很多 网页开发知识。这里要重点感谢我的同学 Ryan，他在比赛过程中教会了我很多。",
             overviewBody3:
-              "我个人真的觉得这个项目构想很妙（迷之自信）：自主 AI 行为 + 记忆上链，保证了用户对自己记忆 Agent 的完整主权，同时还能做去中心化的第三方共享。在当下我认为这是个不错的方向，当然项目还需要继续完善。这个项目在这次黑客松的 Unibase 赛道也获得了奖项。你可以在下方先看宣传片，再点 Demo 自己玩一下。",
+              "我个人真的觉得这个项目构想很妙（迷之自信）：智能体自主行为 + 记忆上链，保证了用户对自己记忆智能体 的完整主权，同时还能做去中心化的第三方共享。在当下我认为这是个不错的方向，当然项目还需要继续完善。这个项目在这次黑客松的 Unibase 赛道也获得了奖项。你可以在下方先看宣传片，再点 演示 自己玩一下。",
             partnersTitle: "项目合作伙伴",
             partnersBody: "合作伙伴：Zhewen (Ryan) Zhen, Shian (Andy) Ye。",
             ideasTitle: "核心思路",
             idea1: "持久化记忆架构",
-            idea2: "自主 Agent 行为",
+            idea2: "自主智能体 行为",
             idea3: "跨时间尺度的人机交互",
             idea4: "多会话上下文演化",
             highlightsTitle: "已实现亮点",
             highlight1: "以家庭为边界隔离身份与记忆存储，每个家庭独立空间。",
             highlight2: "每 16 条短期对话自动归纳长期记忆并更新家庭画像。",
             highlight3: "记忆分桶包含共享、重要事件、私密和用户授权公开记忆。",
-            highlight4: "支持注册登录、Bearer Token 鉴权和家庭多成员账户。",
+            highlight4: "支持注册登录、持有者令牌鉴权和家庭多成员账户。",
             highlight5: "支持家庭级语言设置，允许多语言输入。",
-            highlight6: "可选接入 BNB Testnet 链上空间和权限购买流程。",
+            highlight6: "可选接入 BNB 测试网 链上空间和权限购买流程。",
             memoryFlowTitle: "记忆与画像流程",
             memoryFlow1: "每轮对话写入短期记忆（SQLite + 向量检索存储）。",
             memoryFlow2: "每 16 轮自动汇总为长期记忆。",
             memoryFlow3: "长期归纳后同步刷新家庭画像。",
-            memoryFlow4: "可选 Hub 同步以支持跨设备复用。",
+            memoryFlow4: "可选 中心节点同步以支持跨设备复用。",
             linksTitle: "体验与链接",
-            demoLink: "打开在线 Demo",
+            demoLink: "打开在线 演示",
             repoLink: "打开 GitHub 仓库",
             techTitle: "技术栈",
-            techBody: "Python · LLM APIs · Memory Systems · Agent Architecture",
+            techBody: "Python · 大语言模型接口 · 记忆系统 · 智能体架构",
             videoTitle: "项目宣传片",
             videoSub: "Project Potemkin 的项目介绍视频。",
             videoLink: "在 YouTube 观看"
@@ -233,6 +239,7 @@
         const buttons = document.querySelectorAll("[data-lang-btn]");
 
         function applyLang(lang) {
+          window.applySharedLanguage(lang);
           const dict = i18n[lang] || i18n.en;
           document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
           document.title = dict.pageTitle;

@@ -12,13 +12,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="gallery.css" />
   </head>
-  <body>
-    <div class="grain"></div>
+  <body class="detail-page">
+    <a class="detail-brand" href="index.html"><span>✳</span> XxXAurora<span>.</span></a>
 
     <div class="lang-switch" role="group" aria-label="Language selector">
       <button class="lang-btn is-active" data-lang-btn="en" aria-pressed="true">EN</button>
@@ -46,6 +49,7 @@
             >
           </div>
         </section>
+        <div class="detail-cover case-cover cover-starmax" aria-hidden="true"><span class="cover-top">S / STARMAX <span>HUMAN + AI</span></span><div class="star-word">Think<br><em>one move</em><br>ahead<span>↗</span></div><div class="decision-strip"><span>REPLAY</span><i>→</i><span>STATE</span><i>→</i><span class="decision-active">NEXT ACTION</span></div><span class="cover-bottom">STARCRAFT II <span>MACRO COACHING</span></span></div>
 
         <section class="panel">
           <h3 data-i18n="overviewTitle">Project Overview</h3>
@@ -94,7 +98,7 @@
       </main>
     </div>
 
-    <script src="page-transition.js"></script>
+    <script src="shared-i18n.js"></script>
     <script>
       (function () {
         const i18n = {
@@ -132,40 +136,41 @@
           },
           zh: {
             pageTitle: "StarMax | XXX Aurora",
-            pageDescription: "StarMax：基于 SC2 API 的星际争霸 II 人机协作宏观教练系统。",
+            pageDescription: "StarMax：基于 星际争霸Ⅱ接口 的星际争霸 II 人机协作宏观教练系统。",
             title: "StarMax",
-            subtitle: "SC2 宏观教练系统",
+            subtitle: "星际争霸Ⅱ宏观教练系统",
             intro:
-              "StarMax 是一个基于 SC2 API 的星际争霸 II 人机协作宏观教练系统，重点在可解释的决策支持。",
+              "StarMax 是一个基于 星际争霸Ⅱ接口 的星际争霸 II 人机协作宏观教练系统，重点在可解释的决策支持。",
             back: "返回项目总览",
             overviewTitle: "项目概述",
             overviewBody1:
-              "这个项目是我的个人项目，想法来自于我和我的老师Dr Mike Cook，我们在讨论RTS游戏的时候我就产生了StarMax的想法（了解SC2的朋友应该知道这名字其实是抄AlphaStar）。",
+              "这个项目是我的个人项目，想法来自于我和我的老师Mike Cook 博士，我们在讨论即时战略游戏的时候我就产生了StarMax的想法（了解星际争霸Ⅱ的朋友应该知道这名字其实是抄AlphaStar）。",
             overviewBody2:
               "这个项目是我第一次训练自己的模型，我认为效果还算不错，主要使用的是多标签训练模型，现在模型已经能正确读取游戏状态，并且给出合理的宏观建议。",
             overviewBody3:
-              "做这个项目的时候我也学到了很多训练模型的相关知识，正如mike说的，很多东西是你干着干着学会的。这个项目还在开发中，感谢mike给了我很多指导，完成后我也会发布相关Demo演示。",
+              "做这个项目的时候我也学到了很多训练模型的相关知识，正如mike说的，很多东西是你干着干着学会的。这个项目还在开发中，感谢mike给了我很多指导，完成后我也会发布相关演示演示。",
             repoBtn: "打开 GitHub 仓库",
             pipelineTitle: "当前可用流程",
             pipeline1: "多标签宏观推荐（主流程）",
             pipeline2: "从 .SC2Replay 回放提取训练数据集",
             pipeline3: "模型训练与 joblib 导出",
-            pipeline4: "对局中实时 top-k 宏观建议",
-            pipeline5: "可选桌面 UI 实时显示建议",
+            pipeline4: "对局中实时 排名靠前的宏观建议",
+            pipeline5: "可选桌面界面 实时显示建议",
             notesTitle: "重要说明",
-            note1: "需要本地安装 StarCraft II 并有可用地图。",
-            note2: "SC2 路径可通过 SC2PATH 环境变量配置。",
+            note1: "需要本地安装 星际争霸Ⅱ 并有可用地图。",
+            note2: "星际争霸Ⅱ路径可通过 SC2PATH 环境变量配置。",
             note3: "仓库保留了单标签脚本用于兼容旧流程。",
             note4: "现阶段更适合研究与原型验证场景。",
             techTitle: "技术栈",
             techBody:
-              "Python · SC2 API · 多标签分类 · 回放数据流水线 · Joblib"
+              "Python · 星际争霸Ⅱ接口 · 多标签分类 · 回放数据流水线 · Joblib"
           }
         };
 
         const buttons = document.querySelectorAll("[data-lang-btn]");
 
         function applyLang(lang) {
+          window.applySharedLanguage(lang);
           const dict = i18n[lang] || i18n.en;
           document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
           document.title = dict.pageTitle;
